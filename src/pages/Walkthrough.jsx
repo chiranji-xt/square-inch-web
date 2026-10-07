@@ -9,16 +9,21 @@ import Footer from "../components/Footer.jsx";
 import { Cinematic, RevealMask, StaggerWords } from "../components/motion.jsx";
 import { PROCESS, WORLDS } from "../data/site.js";
 
+let heroSeen = false;
+
 function Hero() {
-  // The black loader card shows once per session; the photo reveal and
-  // title animation always play.
+  // The black loader card shows once per session and the intro plays once
+  // per session; on later visits (e.g. Back to home) the hero is already
+  // open so the page feels resumed, not restarted.
   const [done, setDone] = useState(() => {
     try {
-      return sessionStorage.getItem("sid-intro") === "1";
+      if (sessionStorage.getItem("sid-intro") === "1") return true;
     } catch {
-      return false;
+      /* private mode */
     }
+    return heroSeen;
   });
+  const [quick] = useState(done);
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "preload";
@@ -31,6 +36,7 @@ function Hero() {
   }, []);
   const finish = () => {
     setDone(true);
+    heroSeen = true;
     try {
       sessionStorage.setItem("sid-intro", "1");
     } catch {
@@ -47,17 +53,17 @@ function Hero() {
           </motion.div>
         </motion.div>
       )}
-      <motion.div initial={{ clipPath: "inset(0 46% 0 46%)" }} animate={{ clipPath: "inset(0 0% 0 0%)" }} transition={{ delay: 0.5, duration: 1, ease: [0.77, 0, 0.175, 1] }} className="absolute inset-0">
+      <motion.div initial={{ clipPath: quick.current ? "inset(0 0% 0 0%)" : "inset(0 46% 0 46%)" }} animate={{ clipPath: "inset(0 0% 0 0%)" }} transition={{ delay: quick.current ? 0 : 0.5, duration: quick.current ? 0 : 1, ease: [0.77, 0, 0.175, 1] }} className="absolute inset-0">
         <Cinematic scale={1.08} className="h-full">
           <Photo src="/photos/luxury-01.webp" label="LUXURY LIVING — 4255 SQFT" palette={["#0E1E3A", "#C9A86A"]} className="h-[100svh]" eager priority />
         </Cinematic>
       </motion.div>
       <div className="absolute inset-0 flex flex-col justify-end px-5 pt-5 md:p-10 pb-[calc(var(--bar-h)+1.25rem)] md:pb-10 pointer-events-none">
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }} className="text-xs tracking-mega text-bone/80">ROOM 01 — ENTER · INTERIOR DESIGN STUDIO · PUNE — SATARA · 20 YEARS</motion.p>
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: quick.current ? 0 : 0.9 }} className="text-xs tracking-mega text-bone/80">ROOM 01 — ENTER · INTERIOR DESIGN STUDIO · PUNE — SATARA · 20 YEARS</motion.p>
         <h1 aria-label="Every Inch Speaks." className="display leading-[0.85] text-[17vw] md:text-[11vw] mt-2">
           <span aria-hidden="true">
-            <StaggerWords text="EVERY" delay={0.9} /><br />
-            <span className="text-accent"><StaggerWords text="INCH" delay={1} /></span> <StaggerWords text="SPEAKS." delay={1.1} />
+            <StaggerWords text="EVERY" delay={quick.current ? 0 : 0.9} /><br />
+            <span className="text-accent"><StaggerWords text="INCH" delay={quick.current ? 0 : 1} /></span> <StaggerWords text="SPEAKS." delay={quick.current ? 0 : 1.1} />
           </span>
         </h1>
         <div className="flex flex-col gap-5 mt-5 md:flex-row md:justify-between md:items-end">

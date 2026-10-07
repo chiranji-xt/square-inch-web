@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import Photo from "./Photo.jsx";
@@ -17,6 +17,15 @@ export default function StoriesScroll() {
     const idx = Math.min(picks.length - 1, Math.max(0, Math.floor(v * picks.length)));
     setI((p) => (p === idx ? p : idx));
   });
+
+  // Sync on mount too, so a restored scroll position (browser Back)
+  // shows the right story immediately instead of waiting for a scroll.
+  useEffect(() => {
+    const v = scrollYProgress.get();
+    const idx = Math.min(picks.length - 1, Math.max(0, Math.floor(v * picks.length)));
+    setI(idx);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const s = picks[i];
 

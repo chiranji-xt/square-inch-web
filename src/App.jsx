@@ -83,21 +83,44 @@ function ScrollManager({ route }) {
       prevPath.current = key;
       return;
     }
-    // POP (back/forward) restores where you were; PUSH starts at top.
+    // POP (back/forward) restores where you were; PUSH starts at top —
+    // except home: returning to the walkthrough always resumes where you
+    // left it, however you got back (button, menu, logo or browser back).
     // A hash always jumps to its element.
-    const go = () => {
-      const hashEl = route.hash ? document.querySelector(route.hash) : null;
-      if (hashEl) {
-        if (lenis) lenis.scrollTo(hashEl);
-        else hashEl.scrollIntoView();
-      } else {
-        const y = navType === "POP" ? positions.current[key] ?? 0 : 0;
-        if (lenis) lenis.scrollTo(y, { immediate: true });
-        else window.scrollTo(0, y);
-      }
-      prevPath.current = key;
+    // Restored positions re-apply until the layout settles, because images
+    // below the fold still change the page height after mount. Any manual
+    // scroll by the visitor cancels the retries immediately.
+    let cancelled = false;
+    const cancel = () => {
+      cancelled = true;
     };
-    go();
+    window.addEventListener("wheel", cancel, { once: true, passive: true });
+    window.addEventListener("touchmove", cancel, { once: true, passive: true });
+    const settle = (targetY, tries = 0) => {
+      if (cancelled) return;
+      if (lenis) lenis.scrollTo(targetY, { immediate: true });
+      else window.scrollTo(0, targetY);
+      if (tries >= 25) return;
+      setTimeout(() => {
+        if (cancelled) return;
+        if (Math.abs(window.scrollY - targetY) > 40) settle(targetY, tries + 1);
+      }, 120);
+    };
+    const hashEl = route.hash ? document.querySelector(route.hash) : null;
+    if (hashEl) {
+      if (lenis) lenis.scrollTo(hashEl);
+      else hashEl.scrollIntoView();
+    } else {
+      const saved = positions.current[key];
+      const y = route.pathname === "/" && saved != null ? saved : navType === "POP" ? saved ?? 0 : 0;
+      settle(y);
+    }
+    prevPath.current = key;
+    return () => {
+      cancel();
+      window.removeEventListener("wheel", cancel);
+      window.removeEventListener("touchmove", cancel);
+    };
   }, [route.pathname, route.search, route.hash, navType, lenis]);
   return null;
 }
