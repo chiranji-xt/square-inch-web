@@ -3,7 +3,15 @@ import { useState, useEffect } from "react";
 // Image-first component. Renders /photos/* assets with lazy loading.
 // If a file is ever missing, it degrades to a quiet neutral block —
 // no developer messaging ever reaches visitors.
-export default function Photo({ src, label = "Square Inch Design", alt, palette = ["#222", "#E88932"], className = "", imgClass = "", eager = false }) {
+import VARIANTS from "../data/variants.json";
+
+function srcsetFor(src) {
+  const widths = VARIANTS[src];
+  if (!widths || !widths.length) return undefined;
+  return widths.map((w) => `${src.replace(/(\.[^.]+)$/, `-${w}$1`)} ${w}w`).join(", ");
+}
+
+export default function Photo({ src, label = "Square Inch Design", alt, palette = ["#222", "#E88932"], className = "", imgClass = "", eager = false, sizes = "100vw", width, height, priority = false }) {
   const [failed, setFailed] = useState(false);
   // A new src means a new image: never let one failure poison the next.
   useEffect(() => {
@@ -14,6 +22,12 @@ export default function Photo({ src, label = "Square Inch Design", alt, palette 
       <div className={`relative overflow-hidden bg-ink ${className}`}>
         <img
           src={src}
+          srcSet={srcsetFor(src)}
+          sizes={srcsetFor(src) ? sizes : undefined}
+          width={width}
+          height={height}
+          decoding="async"
+          fetchPriority={priority ? "high" : undefined}
           alt={alt ?? label}
           loading={eager ? "eager" : "lazy"}
           onError={() => setFailed(true)}

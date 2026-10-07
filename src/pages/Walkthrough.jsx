@@ -1,6 +1,6 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll } from "framer-motion";
+import { motion, useScroll, useReducedMotion, useInView } from "framer-motion";
 import Photo from "../components/Photo.jsx";
 import InchLens from "../components/InchLens.jsx";
 import Spotlight from "../components/Spotlight.jsx";
@@ -10,11 +10,37 @@ import { Cinematic, RevealMask, StaggerWords } from "../components/motion.jsx";
 import { PROCESS, WORLDS } from "../data/site.js";
 
 function Hero() {
-  const [done, setDone] = useState(false);
+  // The black loader card shows once per session; the photo reveal and
+  // title animation always play.
+  const [done, setDone] = useState(() => {
+    try {
+      return sessionStorage.getItem("sid-intro") === "1";
+    } catch {
+      return false;
+    }
+  });
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = "/photos/luxury-01.webp";
+    document.head.appendChild(link);
+    return () => {
+      link.remove();
+    };
+  }, []);
+  const finish = () => {
+    setDone(true);
+    try {
+      sessionStorage.setItem("sid-intro", "1");
+    } catch {
+      /* private mode */
+    }
+  };
   return (
     <section data-room="0" data-room-label="Enter" className="relative h-[100svh] bg-night text-bone overflow-hidden">
       {!done && (
-        <motion.div onAnimationComplete={() => setDone(true)} initial={{ opacity: 1 }} animate={{ opacity: 0 }} transition={{ delay: 0.45, duration: 0.4 }} className="absolute inset-0 z-20 bg-night flex items-center justify-center">
+        <motion.div onAnimationComplete={finish} initial={{ opacity: 1 }} animate={{ opacity: 0 }} transition={{ delay: 0.45, duration: 0.4 }} className="absolute inset-0 z-20 bg-night flex items-center justify-center">
           <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.45, ease: "easeInOut" }} className="flex items-center gap-3 origin-left">
             <span className="h-6 w-6 bg-accent inline-block" />
             <span className="tracking-[0.4em] text-sm">SQUARE INCH</span>
@@ -23,7 +49,7 @@ function Hero() {
       )}
       <motion.div initial={{ clipPath: "inset(0 46% 0 46%)" }} animate={{ clipPath: "inset(0 0% 0 0%)" }} transition={{ delay: 0.5, duration: 1, ease: [0.77, 0, 0.175, 1] }} className="absolute inset-0">
         <Cinematic scale={1.08} className="h-full">
-          <Photo src="/photos/luxury-01.webp" label="LUXURY LIVING — 4255 SQFT" palette={["#0E1E3A", "#C9A86A"]} className="h-[100svh]" eager />
+          <Photo src="/photos/luxury-01.webp" label="LUXURY LIVING — 4255 SQFT" palette={["#0E1E3A", "#C9A86A"]} className="h-[100svh]" eager priority />
         </Cinematic>
       </motion.div>
       <div className="absolute inset-0 flex flex-col justify-end px-5 pt-5 md:p-10 pb-[calc(var(--bar-h)+1.25rem)] md:pb-10 pointer-events-none">
@@ -80,21 +106,34 @@ function Twenty() {
 }
 
 function Strip() {
+  const reduce = useReducedMotion();
+  const ref = useRef(null);
+  const inView = useInView(ref, { amount: 0 });
+  const row = (hidden) =>
+    [...WORLDS, ...WORLDS].map((w, i) => {
+      const dup = hidden || i >= WORLDS.length;
+      const inner = (<>
+        <span className={i % 2 ? "outline-bone" : ""}>{w.name.toUpperCase()}</span>
+        <span className="h-3 w-3 bg-accent inline-block rotate-45" aria-hidden="true" />
+      </>);
+      return dup ? (
+        <span key={w.slug + i} aria-hidden="true" className="flex items-center gap-10">{inner}</span>
+      ) : (
+        <Link key={w.slug} to={`/world/${w.slug}`} aria-label={`Explore ${w.name} interiors`} className="flex items-center gap-10 hover:text-accent transition-colors">{inner}</Link>
+      );
+    });
+  // Reduced motion: a static row, no JS animation at all.
+  if (reduce) {
+    return (
+      <section aria-label="Design worlds" className="bg-ink text-bone overflow-hidden py-10 border-y border-white/10">
+        <div className="flex whitespace-nowrap gap-10 display text-4xl md:text-6xl overflow-x-auto no-scrollbar">{row(false).slice(0, WORLDS.length)}</div>
+      </section>
+    );
+  }
   return (
-    <section className="bg-ink text-bone overflow-hidden py-10 border-y border-white/10">
-      <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ repeat: Infinity, duration: 28, ease: "linear" }} className="flex whitespace-nowrap gap-10 display text-4xl md:text-6xl">
-        {[...WORLDS, ...WORLDS].map((w, i) => {
-          const dup = i >= WORLDS.length;
-          const inner = (<>
-            <span className={i % 2 ? "outline-bone" : ""}>{w.name.toUpperCase()}</span>
-            <span className="h-3 w-3 bg-accent inline-block rotate-45" aria-hidden="true" />
-          </>);
-          return dup ? (
-            <span key={w.slug + i} aria-hidden="true" className="flex items-center gap-10">{inner}</span>
-          ) : (
-            <Link key={w.slug} to={`/world/${w.slug}`} aria-label={`Explore ${w.name} interiors`} className="flex items-center gap-10 hover:text-accent transition-colors">{inner}</Link>
-          );
-        })}
+    <section ref={ref} aria-label="Design worlds" className="bg-ink text-bone overflow-hidden py-10 border-y border-white/10">
+      <motion.div animate={inView ? { x: ["0%", "-50%"] } : { x: "0%" }} transition={{ repeat: Infinity, duration: 28, ease: "linear" }} className="flex whitespace-nowrap gap-10 display text-4xl md:text-6xl">
+        {row(false)}
       </motion.div>
     </section>
   );
