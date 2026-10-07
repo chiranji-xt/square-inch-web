@@ -16,15 +16,15 @@ export default function Footer({ dark = false }) {
           <p className="text-xs tracking-mega opacity-60 mb-3">SATARA OFFICE</p><p className="opacity-80">{SITE.satara}</p>
           <p className="mt-3 opacity-80">
             {SITE.phones.map((p, k) => (
-              <span key={p}>{k > 0 && " · "}<a href={telHref(p)} className="underline underline-offset-4 hover:text-accent">{p}</a></span>
+              <span key={p}>{k > 0 && " · "}<a href={telHref(p)} className="inline-block py-1 underline underline-offset-4 hover:text-accent">{p}</a></span>
             ))}
-            <br /><a href={mailHref()} className="underline underline-offset-4 hover:text-accent">{SITE.email}</a>
+            <br /><a href={mailHref()} className="inline-block py-1 underline underline-offset-4 hover:text-accent">{SITE.email}</a>
             {whatsappHref() && <><br /><a href={whatsappHref(SITE.whatsappText)} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-accent">WhatsApp us</a></>}
           </p>
         </div>
         <nav aria-label="Footer" className="flex flex-col gap-2 text-sm">
           {NAV.map((n) => (
-            <Link key={n.to + n.label} to={n.to} className="hover:text-accent w-fit py-1 min-h-[36px]">{n.label} →</Link>
+            <Link key={n.to + n.label} to={n.to} className="hover:text-accent w-fit min-h-[44px] flex items-center">{n.label} →</Link>
           ))}
         </nav>
       </div>

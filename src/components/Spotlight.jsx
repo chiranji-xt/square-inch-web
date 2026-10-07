@@ -7,6 +7,7 @@ import Photo from "./Photo.jsx";
 // counter + VIEW pill. Square Inch dressing: orange inch square, dot progress.
 export default function Spotlight({ kicker, slides, dark = true, titleClass = "text-5xl md:text-8xl" }) {
   const [i, setI] = useState(0);
+  const [paused, setPaused] = useState(false);
   const reduce = useReducedMotion();
   const frameRef = useRef(null);
   const [inView, setInView] = useState(true);
@@ -27,16 +28,16 @@ export default function Spotlight({ kicker, slides, dark = true, titleClass = "t
     };
   }, []);
 
-  // Autoplay only while visible, tab active, and motion allowed.
+  // Autoplay only while visible, tab active, motion allowed, and not paused.
   useEffect(() => {
-    if (reduce || n < 2 || !inView || !tabLive) return;
+    if (reduce || paused || n < 2 || !inView || !tabLive) return;
     const t = setInterval(() => setI((p) => (p + 1) % n), 5200);
     return () => clearInterval(t);
-  }, [reduce, n, inView, tabLive, i]);
+  }, [reduce, paused, n, inView, tabLive, i]);
 
   const s = slides[i];
   return (
-    <div ref={frameRef} className={`relative h-[86svh] md:h-[92svh] overflow-hidden ${dark ? "bg-night text-bone" : "bg-bone text-ink"}`}>
+    <div ref={frameRef} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)} className={`relative h-[86svh] md:h-[92svh] overflow-hidden ${dark ? "bg-night text-bone" : "bg-bone text-ink"}`}>
       <AnimatePresence mode="popLayout">
         <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.9 }} className="absolute inset-0">
           <motion.div initial={{ scale: reduce ? 1 : 1.08 }} animate={{ scale: 1 }} transition={{ duration: 6, ease: "linear" }} className="h-full">
@@ -69,6 +70,14 @@ export default function Spotlight({ kicker, slides, dark = true, titleClass = "t
               </div>
               <div className="flex items-center gap-3 shrink-0">
                 <button onClick={() => go(-1)} aria-label="Previous" className="h-12 w-12 rounded-full border border-white/40 hover:bg-accent hover:text-ink hover:border-accent transition-colors">←</button>
+                <button
+                  onClick={() => setPaused((p) => !p)}
+                  aria-label={paused ? "Play slideshow" : "Pause slideshow"}
+                  aria-pressed={paused}
+                  className="h-12 w-12 rounded-full border border-white/40 hover:bg-accent hover:text-ink hover:border-accent transition-colors text-sm"
+                >
+                  {paused ? "▶" : "❚❚"}
+                </button>
                 <Link to={s.to} className="h-12 px-8 rounded-full bg-white/10 border border-white/40 backdrop-blur flex items-center text-sm tracking-mega hover:bg-accent hover:text-ink hover:border-accent transition-colors">{s.cta ?? "VIEW"}</Link>
                 <button onClick={() => go(1)} aria-label="Next" className="h-12 w-12 rounded-full border border-white/40 hover:bg-accent hover:text-ink hover:border-accent transition-colors">→</button>
               </div>
@@ -77,7 +86,9 @@ export default function Spotlight({ kicker, slides, dark = true, titleClass = "t
         </AnimatePresence>
         <div className="flex items-center gap-2 mt-6">
           {slides.map((_, d) => (
-            <button key={d} onClick={() => setI(d)} aria-label={`Slide ${d + 1}`} className={`h-2 w-2 rotate-45 transition-colors ${d === i ? "bg-accent" : "bg-white/30 hover:bg-white/60"}`} />
+            <button key={d} onClick={() => setI(d)} aria-label={`Go to slide ${d + 1}`} className="p-[18px] -m-[18px]">
+              <span className={`block h-2 w-2 rotate-45 transition-colors ${d === i ? "bg-accent" : "bg-white/30 hover:bg-white/60"}`} />
+            </button>
           ))}
         </div>
       </div>

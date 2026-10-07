@@ -322,9 +322,9 @@ export function Begin() {
             <a href={mapsHref(SITE.satara)} target="_blank" rel="noreferrer" className="inline-block mt-2 text-xs tracking-mega text-bone/60 border-b border-accent pb-1 hover:text-accent">OPEN IN MAPS →</a>
             <p className="mt-3 text-bone/80">
               {SITE.phones.map((p, k) => (
-                <span key={p}>{k > 0 && <br />}<a href={telHref(p)} className="underline underline-offset-4 hover:text-accent">{p}</a></span>
+                <span key={p}>{k > 0 && <br />}<a href={telHref(p)} className="inline-block py-1 underline underline-offset-4 hover:text-accent">{p}</a></span>
               ))}
-              <br /><a href={mailHref()} className="underline underline-offset-4 hover:text-accent">{SITE.email}</a>
+              <br /><a href={mailHref()} className="inline-block py-1 underline underline-offset-4 hover:text-accent">{SITE.email}</a>
             </p>
             {wa && <a href={wa} target="_blank" rel="noreferrer" className="inline-block mt-4 border border-bone/40 px-6 py-2.5 text-xs tracking-mega hover:bg-bone hover:text-ink transition-colors">WHATSAPP US →</a>}
           </div>

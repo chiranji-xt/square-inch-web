@@ -28,9 +28,11 @@ function Hero() {
       </motion.div>
       <div className="absolute inset-0 flex flex-col justify-end px-5 pt-5 md:p-10 pb-[calc(var(--bar-h)+1.25rem)] md:pb-10 pointer-events-none">
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }} className="text-xs tracking-mega text-bone/80">ROOM 01 — ENTER · INTERIOR DESIGN STUDIO · PUNE — SATARA · 20 YEARS</motion.p>
-        <h1 className="display leading-[0.85] text-[17vw] md:text-[11vw] mt-2">
-          <StaggerWords text="EVERY" delay={0.9} /><br />
-          <span className="text-accent"><StaggerWords text="INCH" delay={1} /></span> <StaggerWords text="SPEAKS." delay={1.1} />
+        <h1 aria-label="Every Inch Speaks." className="display leading-[0.85] text-[17vw] md:text-[11vw] mt-2">
+          <span aria-hidden="true">
+            <StaggerWords text="EVERY" delay={0.9} /><br />
+            <span className="text-accent"><StaggerWords text="INCH" delay={1} /></span> <StaggerWords text="SPEAKS." delay={1.1} />
+          </span>
         </h1>
         <div className="flex flex-col gap-5 mt-5 md:flex-row md:justify-between md:items-end">
           <div className="max-w-xs">
@@ -56,7 +58,7 @@ function Twenty() {
       </RevealMask>
       <div className="grid md:grid-cols-12 gap-6 mt-4">
         <div className="md:col-span-5">
-          <StaggerWords className="display text-3xl md:text-5xl leading-tight" text="OF CRAFTING SPACES THAT HOLD TIME." />
+          <h2 className="display text-3xl md:text-5xl leading-tight"><StaggerWords text="OF CRAFTING SPACES THAT HOLD TIME." /></h2>
           <p className="mt-6 text-ink/65 max-w-sm">Creativity with functionality. Residential + commercial, across Pune and Satara. Client taste first — satisfaction as the cornerstone.</p>
           <div className="mt-8 grid grid-cols-3 gap-4 border-t border-ink/15 pt-6 max-w-md">
             {[["20", "YRS OF PRACTICE"], ["08", "DESIGN WORLDS"], ["01", "NATIONAL HONOUR"]].map(([n, l]) => (
