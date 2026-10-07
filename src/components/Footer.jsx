@@ -29,7 +29,7 @@ export default function Footer({ dark = false }) {
         </nav>
       </div>
       <div className="mt-12 flex justify-between text-[11px] tracking-widest opacity-60">
-        <span>© 2026 {SITE.name.toUpperCase()} · {SITE.lead.toUpperCase()}</span>
+        <span>© {new Date().getFullYear()} {SITE.name.toUpperCase()} · {SITE.lead.toUpperCase()}</span>
         <span>{SITE.city.toUpperCase()}</span>
       </div>
     </footer>

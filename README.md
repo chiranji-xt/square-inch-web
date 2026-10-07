@@ -1,38 +1,35 @@
 # Square Inch Design — EVERY INCH SPEAKS
 
-Image-first cinematic exhibition site. 75% image / 15% type / 10% info.
+Image-first exhibition site for the interior design studio (Pune & Satara).
 
 ## Run
+
 ```
 npm install
-npm run dev
-npm run build
+npm run dev        # http://localhost:5173
+npm run build      # + postbuild: per-route meta shells, sitemap (needs domain)
 npm run preview
 ```
 
-## Drop real portfolio photos (no stock)
-Export individual photos from the 42-page PDF — NOT page screenshots.
-Save as WebP (~1600px wide, q78) into `public/photos/` with these exact names:
-
-- luxury-01..04 (4255 sqft residence — yellow chairs hero first)
-- abstract-01..03 (1000 sqft coffee house)
-- contemporary-01..02 (2000 sqft office)
-- fusion-01..03 (brick house)
-- traditional-01..03 (courtyard + blue door, night cafe)
-- minimal-01..02, rustic-01..02, artdeco-01..02 (1055 sqft studio)
-- studio-01..03, award-01..02, process-01..06
-
-Until files exist, the `Photo` component shows a labelled cinematic placeholder — so layout/animation can be approved without fake stock.
-
-## Edit content without code
-- `src/data/site.js` — phones, emails, addresses, process, worlds, stories
-- Add a project: append to `STORIES` with id/world/images/desc (only approved text)
+Copy `.env.example` to `.env` to configure the enquiry endpoint and site URL.
 
 ## Routes
-`/` walkthrough · `/worlds` · `/world/:slug` · `/story/:id` · `/studio` · `/how-we-build` · `/begin`
+
+`/` walkthrough · `/projects` (+`?sector=`) · `/worlds` · `/world/:slug` · `/story/:id` · `/studio` · `/how-we-build` · `/begin` (+`?project=`/`?world=`) · `/contact` and `/enquire` redirect to `/begin`
+
+## Edit content without code
+
+- `src/data/site.js` — phones, email, addresses, lead, `NAV`, `PROCESS`, `WORLDS`, `STORIES`
+- Add a project: append to `STORIES` with `id / world / sector / featured / type / area / city / award / title / meta / desc / images / alts` (only approved text; unknown facts stay `null` and are hidden)
+- Set WhatsApp: `SITE.whatsapp = "91XXXXXXXXXX"` (full international format, no `+`)
+- Set production domain: `SITE.url` or `VITE_SITE_URL`
+- Set response promise: `SITE.responseTime` (leave `null` unless approved)
+- Add services: `SITE.services` array (renders on Studio only when non-empty)
+
+## Photos
+
+Current files in `public/photos/` are temporary stand-ins. Replace any file with the real portfolio photo under the same name — no code change needed. After replacing, run `node scripts/make-responsive-images.mjs` to rebuild `-800`/`-1200` variants + `src/data/variants.json`. Run `node scripts/make-og.mjs` to rebuild the social cover + touch icon.
 
 ## Motion system
-Lenis smooth scroll + GSAP ScrollTrigger (slow zoom 1→1.08, parallax, clip reveals) + Framer Motion (masks, staggers). Respects `prefers-reduced-motion`. Mobile: no hover lens — touch lens + swipe lightbox + full-bleed images.
 
-## Originality
-No layout/nav/card/animation copied from SpazioLiv, PKD, DesignX. Signature: The Inch Lens (square follows cursor, sharp photo only inside).
+Lenis smooth scroll + GSAP ScrollTrigger (slow zoom, parallax, clip reveals) + Framer Motion (masks, staggers, pinned stories). Respects `prefers-reduced-motion`. Mobile: touch lens + swipe lightbox + sticky enquiry bar.
