@@ -28,12 +28,12 @@ export default function StoryDetail() {
   };
 
   return (
-    <main className="bg-bone pt-20" id="main" tabIndex={-1}>
-      <nav aria-label="Breadcrumb" className="px-5 md:px-10 pt-6 text-[11px] tracking-mega text-ink/60">
+    <main className="bg-ink pt-20" id="main" tabIndex={-1}>
+      <nav aria-label="Breadcrumb" className="px-5 md:px-10 pt-6 text-[11px] tracking-mega text-bone/60">
         <Link to="/worlds" className="hover:text-accent">WORLDS</Link>
         <span aria-hidden="true"> › </span>
         {world && <><Link to={`/world/${world.slug}`} className="hover:text-accent">{world.name.toUpperCase()}</Link><span aria-hidden="true"> › </span></>}
-        <span aria-current="page" className="text-ink">{s.title.toUpperCase()}</span>
+        <span aria-current="page" className="text-bone">{s.title.toUpperCase()}</span>
       </nav>
       <button onClick={(e) => openAt(e, 0)} aria-label={`Open photograph 1 of ${s.images.length}`} className="block w-full text-left mt-4">
         <Photo src={s.images[0]} label={s.title.toUpperCase()} palette={s.palette} className="h-[72vh] md:h-[92vh]" eager />
@@ -43,16 +43,16 @@ export default function StoryDetail() {
           <p className="text-accent text-xs tracking-mega">PROJECT {s.no} · {s.meta.toUpperCase()}</p>
           <h1 className="display text-5xl md:text-8xl leading-[0.9] mt-3"><StaggerWords text={s.title} /></h1>
           {facts.length > 0 && (
-            <dl className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs tracking-mega text-ink/65">
+            <dl className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs tracking-mega text-bone/65">
               <dt className="sr-only">Project facts</dt>
               {facts.map((f) => <dd key={f}>{f.toUpperCase()}</dd>)}
             </dl>
           )}
         </div>
         <div className="md:col-span-4 flex flex-col justify-end gap-3">
-          <p className="display text-8xl text-ink/10">{s.no}</p>
-          <Link to={`/begin?project=${s.id}`} className="w-fit bg-ink text-bone px-6 py-3 min-h-[48px] flex items-center text-sm tracking-widest hover:bg-accent hover:text-ink transition-colors">ENQUIRE ABOUT A PROJECT LIKE THIS →</Link>
-          <Link to="/projects" className="w-fit text-sm tracking-widest border-b border-ink/30 pb-1 hover:border-accent">← ALL PROJECTS</Link>
+          <p className="display text-8xl text-bone/10">{s.no}</p>
+          <Link to={`/begin?project=${s.id}`} className="w-fit bg-accent text-ink px-6 py-3 min-h-[48px] flex items-center text-sm tracking-widest hover:bg-bone transition-colors">ENQUIRE ABOUT A PROJECT LIKE THIS →</Link>
+          <Link to="/projects" className="w-fit text-sm tracking-widest border-b border-line/30 pb-1 hover:border-accent">← ALL PROJECTS</Link>
         </div>
       </div>
 
@@ -64,12 +64,12 @@ export default function StoryDetail() {
             </button>
           </RevealMask>
         ))}
-        <div className="grid md:grid-cols-12 gap-6 py-10 border-y border-ink/10">
-          <p className="text-xs tracking-mega md:col-span-3 text-warmgrey">PROJECT STORY</p>
+        <div className="grid md:grid-cols-12 gap-6 py-10 border-y border-line/10">
+          <p className="text-xs tracking-mega md:col-span-3 text-fog">PROJECT STORY</p>
           <p className="display text-2xl md:text-4xl md:col-span-9 leading-snug">{s.desc}</p>
         </div>
         <div className="mt-4">
-          <p className="text-[11px] tracking-mega text-ink/60 mb-4">RELATED PROJECTS</p>
+          <p className="text-[11px] tracking-mega text-bone/60 mb-4">RELATED PROJECTS</p>
           <div className="grid md:grid-cols-2 gap-4">
             {related.map((r) => (
               <Link key={r.id} to={`/story/${r.id}`} className="group grid grid-cols-5 gap-4 items-center bg-night text-bone p-4">
@@ -83,8 +83,8 @@ export default function StoryDetail() {
           </div>
         </div>
         <div className="flex justify-between text-xs tracking-mega pt-2">
-          <Link to={`/story/${prev.id}`} className="border-b border-ink/30 pb-1 hover:border-accent">← {prev.no} · {prev.title.toUpperCase()}</Link>
-          <Link to={`/story/${next.id}`} className="border-b border-ink/30 pb-1 hover:border-accent">{next.no} · {next.title.toUpperCase()} →</Link>
+          <Link to={`/story/${prev.id}`} className="border-b border-line/30 pb-1 hover:border-accent">← {prev.no} · {prev.title.toUpperCase()}</Link>
+          <Link to={`/story/${next.id}`} className="border-b border-line/30 pb-1 hover:border-accent">{next.no} · {next.title.toUpperCase()} →</Link>
         </div>
         <Link to={`/story/${next.id}`} className="group grid md:grid-cols-2 gap-4 items-center bg-night text-bone p-4 md:p-6">
           <Photo src={next.images[0]} label={next.title.toUpperCase()} palette={next.palette} className="h-[36vh]" />

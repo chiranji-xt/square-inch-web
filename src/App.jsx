@@ -147,7 +147,7 @@ function ScrollManager({ route }) {
 
 function RouteFallback() {
   return (
-    <div className="min-h-[80svh] bg-bone flex items-center justify-center gap-3" role="status" aria-label="Loading page">
+    <div className="min-h-[80svh] bg-ink text-bone flex items-center justify-center gap-3" role="status" aria-label="Loading page">
       <span className="h-5 w-5 bg-accent animate-pulse" aria-hidden="true" />
       <span className="tracking-[0.3em] text-xs">SQUARE INCH</span>
     </div>

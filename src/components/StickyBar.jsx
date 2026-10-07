@@ -23,7 +23,7 @@ export default function StickyBar() {
             key={a.label}
             href={a.href}
             {...(a.external ? { target: "_blank", rel: "noreferrer" } : {})}
-            className="bg-night/95 backdrop-blur text-bone text-[11px] tracking-mega text-center py-4 border-t border-r border-white/10 min-h-[52px] flex items-center justify-center active:bg-ink"
+            className="bg-night/95 backdrop-blur text-bone text-[11px] tracking-mega text-center py-4 border-t border-r border-bone/10 min-h-[52px] flex items-center justify-center active:bg-ink"
           >
             {a.label}
           </a>

@@ -4,7 +4,7 @@ import { telHref, mailHref, whatsappHref } from "../lib/contact.js";
 
 export default function Footer({ dark = false }) {
   return (
-    <footer className={`${dark ? "bg-night text-bone" : "bg-bone text-ink"} px-5 md:px-10 pt-16 pb-8 border-t border-current/10`}>      <div className="grid md:grid-cols-4 gap-10">
+    <footer className={`${dark ? "bg-night text-bone" : "bg-ink text-bone"} px-5 md:px-10 pt-16 pb-8 border-t border-current/10`}>      <div className="grid md:grid-cols-4 gap-10">
         <div>
           <div className="flex items-center gap-3"><span className="h-4 w-4 bg-accent inline-block" /><span className="tracking-[0.25em] text-sm">SQUARE INCH</span></div>
           <p className="mt-4 text-sm opacity-70 max-w-xs">Every Inch Speaks — a walkthrough exhibition of 20 years of spatial design. {SITE.city}.</p>

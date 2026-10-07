@@ -37,7 +37,7 @@ export default function Spotlight({ kicker, slides, dark = true, titleClass = "t
 
   const s = slides[i];
   return (
-    <div ref={frameRef} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)} className={`relative h-[86svh] md:h-[92svh] overflow-hidden ${dark ? "bg-night text-bone" : "bg-bone text-ink"}`}>
+    <div ref={frameRef} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)} className={`relative h-[86svh] md:h-[92svh] overflow-hidden ${dark ? "bg-night text-bone" : "bg-ink text-bone"}`}>
       <AnimatePresence mode="popLayout">
         <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.9 }} className="absolute inset-0">
           <motion.div initial={{ scale: reduce ? 1 : 1.08 }} animate={{ scale: 1 }} transition={{ duration: 6, ease: "linear" }} className="h-full">
@@ -45,7 +45,7 @@ export default function Spotlight({ kicker, slides, dark = true, titleClass = "t
           </motion.div>
         </motion.div>
       </AnimatePresence>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-black/30 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-ink/30 pointer-events-none" />
 
       {/* top row */}
       <div className="absolute top-0 inset-x-0 flex items-center justify-between px-5 md:px-10 py-5 text-[11px] tracking-mega">
@@ -66,20 +66,20 @@ export default function Spotlight({ kicker, slides, dark = true, titleClass = "t
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-5">
               <div className="max-w-5xl">
                 <h3 className={`display leading-[0.9] ${titleClass}`}>{s.title}</h3>
-                {s.sub && <p className="text-white/70 text-sm md:text-base mt-3 max-w-2xl">{s.sub}</p>}
+                {s.sub && <p className="text-bone/70 text-sm md:text-base mt-3 max-w-2xl">{s.sub}</p>}
               </div>
               <div className="flex items-center gap-3 shrink-0">
-                <button onClick={() => go(-1)} aria-label="Previous" className="h-12 w-12 rounded-full border border-white/40 hover:bg-accent hover:text-ink hover:border-accent transition-colors">←</button>
+                <button onClick={() => go(-1)} aria-label="Previous" className="h-12 w-12 rounded-full border border-bone/40 hover:bg-accent hover:text-ink hover:border-accent transition-colors">←</button>
                 <button
                   onClick={() => setPaused((p) => !p)}
                   aria-label={paused ? "Play slideshow" : "Pause slideshow"}
                   aria-pressed={paused}
-                  className="h-12 w-12 rounded-full border border-white/40 hover:bg-accent hover:text-ink hover:border-accent transition-colors text-sm"
+                  className="h-12 w-12 rounded-full border border-bone/40 hover:bg-accent hover:text-ink hover:border-accent transition-colors text-sm"
                 >
                   {paused ? "▶" : "❚❚"}
                 </button>
-                <Link to={s.to} className="h-12 px-8 rounded-full bg-white/10 border border-white/40 backdrop-blur flex items-center text-sm tracking-mega hover:bg-accent hover:text-ink hover:border-accent transition-colors">{s.cta ?? "VIEW"}</Link>
-                <button onClick={() => go(1)} aria-label="Next" className="h-12 w-12 rounded-full border border-white/40 hover:bg-accent hover:text-ink hover:border-accent transition-colors">→</button>
+                <Link to={s.to} className="h-12 px-8 rounded-full bg-bone/10 border border-bone/40 backdrop-blur flex items-center text-sm tracking-mega hover:bg-accent hover:text-ink hover:border-accent transition-colors">{s.cta ?? "VIEW"}</Link>
+                <button onClick={() => go(1)} aria-label="Next" className="h-12 w-12 rounded-full border border-bone/40 hover:bg-accent hover:text-ink hover:border-accent transition-colors">→</button>
               </div>
             </div>
           </motion.div>
@@ -87,7 +87,7 @@ export default function Spotlight({ kicker, slides, dark = true, titleClass = "t
         <div className="flex items-center gap-2 mt-6">
           {slides.map((_, d) => (
             <button key={d} onClick={() => setI(d)} aria-label={`Go to slide ${d + 1}`} className="p-[18px] -m-[18px]">
-              <span className={`block h-2 w-2 rotate-45 transition-colors ${d === i ? "bg-accent" : "bg-white/30 hover:bg-white/60"}`} />
+              <span className={`block h-2 w-2 rotate-45 transition-colors ${d === i ? "bg-accent" : "bg-bone/30 hover:bg-bone/60"}`} />
             </button>
           ))}
         </div>

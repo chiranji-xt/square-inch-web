@@ -7,10 +7,10 @@ import Photo from "./Photo.jsx";
 
 export const Topbar = forwardRef(function Topbar({ onMenu, menuOpen }, ref) {
   return (
-    <header className="fixed top-0 inset-x-0 z-40 mix-blend-difference text-[#F5F3EE]">
+    <header className="fixed top-0 inset-x-0 z-40 mix-blend-difference text-bone">
       <div className="flex items-center justify-between px-5 md:px-10 py-4">
         <Link to="/" className="flex items-center gap-3" aria-label="Square Inch Design — home">
-          <span className="h-4 w-4 bg-[#E88932] inline-block" aria-hidden="true" />
+          <span className="h-4 w-4 bg-accent inline-block" aria-hidden="true" />
           <span className="text-sm tracking-[0.25em] font-medium">SQUARE INCH</span>
         </Link>
         <div className="flex items-center gap-6">
@@ -155,10 +155,10 @@ export function ProgressDots() {
 
   if (pathname !== "/" || rooms.length < 2) return null;
   return (
-    <div className="fixed bottom-5 left-5 z-40 hidden md:flex items-center gap-2 mix-blend-difference text-white" role="status" aria-label={`Exhibition progress: ${rooms[active]}`}>
+    <div className="fixed bottom-5 left-5 z-40 hidden md:flex items-center gap-2 mix-blend-difference text-bone" role="status" aria-label={`Exhibition progress: ${rooms[active]}`}>
       <span className="text-[10px] tracking-mega mr-2" aria-hidden="true">08 WORLDS</span>
       {rooms.map((r, i) => (
-        <span key={r + i} aria-hidden="true" className={`h-2 w-2 rotate-45 ${i <= active ? "bg-[#E88932]" : "bg-white/30"}`} />
+        <span key={r + i} aria-hidden="true" className={`h-2 w-2 rotate-45 ${i <= active ? "bg-accent" : "bg-bone/30"}`} />
       ))}
     </div>
   );

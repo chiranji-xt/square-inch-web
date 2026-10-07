@@ -30,7 +30,7 @@ export default function StoriesScroll() {
   const s = picks[i];
 
   return (
-    <section data-room="3" data-room-label="Stories" className="bg-bone">
+    <section data-room="3" data-room-label="Stories" className="bg-ink">
       <div className="px-5 md:px-10 pt-16 pb-6 flex items-end justify-between gap-4">
         <div>
           <p className="text-[11px] tracking-mega text-accent">ROOM 04 — SELECTED STORIES</p>
@@ -56,7 +56,7 @@ export default function StoriesScroll() {
                   <Photo src={s.images[0]} label={s.title.toUpperCase()} palette={s.palette} className="h-full" eager />
                 </motion.div>
               </AnimatePresence>
-              <div className="absolute top-4 left-4 text-bone text-[11px] tracking-mega bg-black/45 px-3 py-1.5 backdrop-blur-sm">
+              <div className="absolute top-4 left-4 text-bone text-[11px] tracking-mega bg-ink/45 px-3 py-1.5 backdrop-blur-sm">
                 {s.meta.toUpperCase()}
               </div>
             </div>
@@ -71,10 +71,10 @@ export default function StoriesScroll() {
                   exit={reduce ? { opacity: 0 } : { y: -50, opacity: 0 }}
                   transition={{ duration: reduce ? 0.25 : 0.6, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <p className="display leading-none text-6xl md:text-9xl text-ink/10">{s.no}</p>
+                  <p className="display leading-none text-6xl md:text-9xl text-bone/10">{s.no}</p>
                   <h3 className="display text-3xl md:text-5xl leading-tight -mt-2 md:-mt-5">{s.title}</h3>
-                  <p className="text-ink/65 text-sm mt-2 md:mt-3 max-w-sm line-clamp-2 md:line-clamp-3">{s.desc}</p>
-                  <Link to={`/story/${s.id}`} className="inline-block mt-4 md:mt-5 min-h-[48px] leading-[48px] text-sm tracking-widest border border-ink px-6 hover:bg-ink hover:text-bone transition-colors">
+                  <p className="text-bone/65 text-sm mt-2 md:mt-3 max-w-sm line-clamp-2 md:line-clamp-3">{s.desc}</p>
+                  <Link to={`/story/${s.id}`} className="inline-block mt-4 md:mt-5 min-h-[48px] leading-[48px] text-sm tracking-widest border border-lineLight px-6 text-bone hover:border-accent hover:text-accent transition-colors">
                     OPEN STORY →
                   </Link>
                 </motion.div>

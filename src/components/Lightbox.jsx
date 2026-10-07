@@ -84,7 +84,7 @@ export default function Lightbox({ images, index, close, setIndex, label, opener
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[60] bg-black/95 text-bone flex flex-col"
+          className="fixed inset-0 z-[60] bg-ink/95 text-bone flex flex-col"
           onTouchStart={(e) => setSx(e.touches[0].clientX)} onTouchEnd={(e) => {
             if (sx === null) return; const dx = e.changedTouches[0].clientX - sx;
             if (dx < -40) setIndex((index + 1) % images.length);
@@ -97,7 +97,7 @@ export default function Lightbox({ images, index, close, setIndex, label, opener
           </div>
           <div className="flex-1 flex items-center justify-center px-4 min-h-0" data-lenis-prevent>
             {failed ? (
-              <div className="max-h-[72vh] w-full max-w-3xl bg-white/5 border border-white/10 flex items-center justify-center p-10" role="img" aria-label={label}>
+              <div className="max-h-[72vh] w-full max-w-3xl bg-bone/5 border border-bone/10 flex items-center justify-center p-10" role="img" aria-label={label}>
                 <p className="display text-2xl text-bone/70">{label}</p>
               </div>
             ) : (

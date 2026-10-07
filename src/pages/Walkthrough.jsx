@@ -53,17 +53,17 @@ function Hero() {
           </motion.div>
         </motion.div>
       )}
-      <motion.div initial={{ clipPath: quick.current ? "inset(0 0% 0 0%)" : "inset(0 46% 0 46%)" }} animate={{ clipPath: "inset(0 0% 0 0%)" }} transition={{ delay: quick.current ? 0 : 0.5, duration: quick.current ? 0 : 1, ease: [0.77, 0, 0.175, 1] }} className="absolute inset-0">
+      <motion.div initial={{ clipPath: quick ? "inset(0 0% 0 0%)" : "inset(0 46% 0 46%)" }} animate={{ clipPath: "inset(0 0% 0 0%)" }} transition={{ delay: quick ? 0 : 0.5, duration: quick ? 0 : 1, ease: [0.77, 0, 0.175, 1] }} className="absolute inset-0">
         <Cinematic scale={1.08} className="h-full">
           <Photo src="/photos/luxury-01.webp" label="LUXURY LIVING — 4255 SQFT" palette={["#0E1E3A", "#C9A86A"]} className="h-[100svh]" eager priority />
         </Cinematic>
       </motion.div>
       <div className="absolute inset-0 flex flex-col justify-end px-5 pt-5 md:p-10 pb-[calc(var(--bar-h)+1.25rem)] md:pb-10 pointer-events-none">
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: quick.current ? 0 : 0.9 }} className="text-xs tracking-mega text-bone/80">ROOM 01 — ENTER · INTERIOR DESIGN STUDIO · PUNE — SATARA · 20 YEARS</motion.p>
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: quick ? 0 : 0.9 }} className="text-xs tracking-mega text-bone/80">ROOM 01 — ENTER · INTERIOR DESIGN STUDIO · PUNE — SATARA · 20 YEARS</motion.p>
         <h1 aria-label="Every Inch Speaks." className="display leading-[0.85] text-[17vw] md:text-[11vw] mt-2">
           <span aria-hidden="true">
-            <StaggerWords text="EVERY" delay={quick.current ? 0 : 0.9} /><br />
-            <span className="text-accent"><StaggerWords text="INCH" delay={quick.current ? 0 : 1} /></span> <StaggerWords text="SPEAKS." delay={quick.current ? 0 : 1.1} />
+            <StaggerWords text="EVERY" delay={quick ? 0 : 0.9} /><br />
+            <span className="text-accent"><StaggerWords text="INCH" delay={quick ? 0 : 1} /></span> <StaggerWords text="SPEAKS." delay={quick ? 0 : 1.1} />
           </span>
         </h1>
         <div className="flex flex-col gap-5 mt-5 md:flex-row md:justify-between md:items-end">
@@ -83,7 +83,7 @@ function Hero() {
 
 function Twenty() {
   return (
-    <section data-room="1" data-room-label="Twenty years" className="bg-bone py-24 md:py-40 px-5 md:px-10">
+    <section data-room="1" data-room-label="Twenty years" className="bg-sand text-ink py-24 md:py-40 px-5 md:px-10">
       <p className="text-[11px] tracking-mega text-accent mb-4">ROOM 02 — TWENTY YEARS · WHY WE ENDURE</p>
       <RevealMask from="bottom">
         <p className="display leading-none text-[38vw] md:text-[24vw]">20<span className="text-accent text-[10vw] md:text-[6vw] align-top ml-4">YRS</span></p>
@@ -92,11 +92,11 @@ function Twenty() {
         <div className="md:col-span-5">
           <h2 className="display text-3xl md:text-5xl leading-tight"><StaggerWords text="OF CRAFTING SPACES THAT HOLD TIME." /></h2>
           <p className="mt-6 text-ink/65 max-w-sm">Creativity with functionality. Residential + commercial, across Pune and Satara. Client taste first — satisfaction as the cornerstone.</p>
-          <div className="mt-8 grid grid-cols-3 gap-4 border-t border-ink/15 pt-6 max-w-md">
+          <div className="mt-8 grid grid-cols-3 gap-4 border-t border-line/15 pt-6 max-w-md">
             {[["20", "YRS OF PRACTICE"], ["08", "DESIGN WORLDS"], ["01", "NATIONAL HONOUR"]].map(([n, l]) => (
               <div key={l}>
                 <p className="display text-3xl md:text-4xl">{n}</p>
-                <p className="text-[10px] tracking-mega text-warmgrey mt-1">{l}</p>
+                <p className="text-[10px] tracking-mega text-ink/60 mt-1">{l}</p>
               </div>
             ))}
           </div>
@@ -131,13 +131,13 @@ function Strip() {
   // Reduced motion: a static row, no JS animation at all.
   if (reduce) {
     return (
-      <section aria-label="Design worlds" className="bg-ink text-bone overflow-hidden py-10 border-y border-white/10">
+      <section aria-label="Design worlds" className="bg-ink text-bone overflow-hidden py-10 border-y border-bone/10">
         <div className="flex whitespace-nowrap gap-10 display text-4xl md:text-6xl overflow-x-auto no-scrollbar">{row(false).slice(0, WORLDS.length)}</div>
       </section>
     );
   }
   return (
-    <section ref={ref} aria-label="Design worlds" className="bg-ink text-bone overflow-hidden py-10 border-y border-white/10">
+    <section ref={ref} aria-label="Design worlds" className="bg-ink text-bone overflow-hidden py-10 border-y border-bone/10">
       <motion.div animate={inView ? { x: ["0%", "-50%"] } : { x: "0%" }} transition={{ repeat: Infinity, duration: 28, ease: "linear" }} className="flex whitespace-nowrap gap-10 display text-4xl md:text-6xl">
         {row(false)}
       </motion.div>
@@ -153,7 +153,7 @@ function ProcessTease() {
   const lineRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: lineRef, offset: ["start 0.8", "end 0.6"] });
   return (
-    <section className="bg-bone px-5 md:px-10 py-24 border-t border-ink/10 grid md:grid-cols-2 gap-10">
+    <section data-room="4" data-room-label="How we build" className="bg-sand text-ink px-5 md:px-10 py-24 border-t border-ink/10 grid md:grid-cols-2 gap-10">
       <div ref={lineRef} className="relative pl-8">
         <div className="absolute left-2 top-0 bottom-0 w-px bg-ink/15" />
         <motion.div style={{ scaleY: scrollYProgress }} className="absolute left-2 top-0 bottom-0 w-px bg-accent origin-top" />
@@ -167,7 +167,7 @@ function ProcessTease() {
         <p className="text-[11px] tracking-mega text-accent mb-3">ROOM 05 — HOW WE BUILD · SIX STEPS, ONE LINE</p>
         <h2 className="display text-5xl md:text-7xl">How we<br />build.</h2>
         <p className="mt-4 text-ink/65 max-w-sm">Six steps, one continuous line — from first enquiry to final handover.</p>
-        <Link to="/how-we-build" className="mt-6 w-fit bg-ink text-bone px-7 py-3 tracking-widest text-sm hover:bg-accent hover:text-ink transition-colors">FOLLOW THE LINE →</Link>
+        <Link to="/how-we-build" className="mt-6 w-fit border border-ink/30 text-ink px-7 py-3 tracking-widest text-sm hover:border-accent hover:text-accent transition-colors">FOLLOW THE LINE →</Link>
         <Cinematic className="mt-8"><Photo src="/photos/artdeco-01.webp" label="STUDIO DETAIL" palette={["#3A3A38", "#C9BFAE"]} className="h-[38vh]" /></Cinematic>
       </div>
     </section>
@@ -206,7 +206,7 @@ function Finale() {
       <Cinematic scale={1.12} className="absolute inset-0">
         <Photo src="/photos/traditional-02.webp" label="YOUR SPACE COULD BE NEXT" palette={["#2B2118", "#E88932"]} className="h-[92svh]" />
       </Cinematic>
-      <div className="absolute inset-0 bg-black/35" />
+      <div className="absolute inset-0 bg-ink/35" />
       <div className="absolute inset-0 flex flex-col justify-end px-5 pt-5 md:p-10 pb-[calc(var(--bar-h)+1.25rem)] md:pb-10 text-bone">
         <p className="text-[11px] tracking-mega text-bone/70 mb-3">ROOM 07 — BEGIN · YOUR TURN</p>
         <h2 className="display text-[13vw] md:text-[8vw] leading-[0.9]">YOUR SPACE.<br />OUR NEXT STORY.</h2>

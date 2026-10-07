@@ -9,7 +9,7 @@ import { WORLDS, STORIES } from "../data/site.js";
 
 export function Worlds() {
   return (
-    <main className="bg-bone pt-24" id="main" tabIndex={-1}>
+    <main className="bg-ink pt-24" id="main" tabIndex={-1}>
       <div className="px-5 md:px-10 py-10">
         <p className="text-xs tracking-mega text-accent">EIGHT WORLDS · CHOOSE ONE TO ENTER</p>
         <h1 className="display text-6xl md:text-9xl leading-[0.9]">Eight<br />worlds.</h1>
@@ -17,7 +17,7 @@ export function Worlds() {
       {WORLDS.map((w, i) => {
         const stories = STORIES.filter((s) => s.world === w.slug);
         return (
-          <Link key={w.slug} to={`/world/${w.slug}`} className="block border-t border-ink/10 group">
+          <Link key={w.slug} to={`/world/${w.slug}`} className="block border-t border-line/10 group">
             <div className="grid md:grid-cols-12 gap-0 items-stretch">
               <div className="md:col-span-7">
                 <RevealMask from={i % 2 ? "right" : "left"}>
@@ -25,9 +25,9 @@ export function Worlds() {
                 </RevealMask>
               </div>
               <div className="md:col-span-5 p-6 md:p-12 flex flex-col justify-center">
-                <p className="display text-8xl text-ink/10 leading-none">0{i + 1}</p>
+                <p className="display text-8xl text-bone/10 leading-none">0{i + 1}</p>
                 <h2 className="display text-5xl md:text-7xl -mt-6 group-hover:text-accent transition-colors">{w.name}</h2>
-                <p className="text-ink/65 mt-2 text-sm tracking-widest">{w.note.toUpperCase()}</p>
+                <p className="text-bone/65 mt-2 text-sm tracking-widest">{w.note.toUpperCase()}</p>
                 <p className="mt-4 text-sm">{stories.length ? `${stories.length} stor${stories.length > 1 ? "ies" : "y"} inside` : "Portfolio plates inside"} →</p>
               </div>
             </div>
@@ -78,8 +78,8 @@ export function WorldDetail({ slug }) {
       )}
       <div className="px-5 md:px-10 py-16">
         {stories.map((s, i) => (
-          <Link key={s.id} to={`/story/${s.id}`} className="grid md:grid-cols-12 gap-6 py-10 border-t border-white/10 group">
-            <span className="display text-6xl text-white/15 md:col-span-2">{s.no}</span>
+          <Link key={s.id} to={`/story/${s.id}`} className="grid md:grid-cols-12 gap-6 py-10 border-t border-bone/10 group">
+            <span className="display text-6xl text-bone/15 md:col-span-2">{s.no}</span>
             <div className="md:col-span-6">
               <Photo src={s.images[0]} label={s.title.toUpperCase()} palette={s.palette} className={`h-[40vh] md:h-[52vh] ${i % 2 ? "md:ml-10" : "md:mr-10"}`} />
             </div>
@@ -98,7 +98,7 @@ export function WorldDetail({ slug }) {
                 key={o.slug}
                 to={`/world/${o.slug}`}
                 aria-current={o.slug === w.slug ? "page" : undefined}
-                className={`shrink-0 border px-5 py-2.5 min-h-[48px] flex items-center text-xs tracking-mega transition-colors ${o.slug === w.slug ? "border-accent text-accent" : "border-white/20 text-bone/70 hover:border-bone/60 hover:text-bone"}`}
+                className={`shrink-0 border px-5 py-2.5 min-h-[48px] flex items-center text-xs tracking-mega transition-colors ${o.slug === w.slug ? "border-accent text-accent" : "border-bone/20 text-bone/70 hover:border-bone/60 hover:text-bone"}`}
               >
                 {o.name.toUpperCase()}
               </Link>

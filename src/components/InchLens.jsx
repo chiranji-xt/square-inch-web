@@ -66,14 +66,14 @@ export default function InchLens() {
       <div className="grid md:grid-cols-[280px_1fr] gap-6 px-5 md:px-10">
         <div className="flex md:flex-col gap-2 overflow-x-auto no-scrollbar" onKeyDown={onListKey}>
           {WORLDS.map((w, i) => (
-            <button key={w.slug} onMouseEnter={() => setActive(i)} onClick={() => setActive(i)} aria-pressed={i === active} className={`text-left shrink-0 px-3 py-2 min-h-[52px] border-l-2 ${i === active ? "border-accent text-bone" : "border-white/10 text-bone/40"}`}>
+            <button key={w.slug} onMouseEnter={() => setActive(i)} onClick={() => setActive(i)} aria-pressed={i === active} className={`text-left shrink-0 px-3 py-2 min-h-[52px] border-l-2 ${i === active ? "border-accent text-bone" : "border-bone/10 text-bone/40"}`}>
               <span className="text-[10px] tracking-mega">0{i + 1}</span>
               <span className="display block text-2xl md:text-3xl leading-none">{w.name}</span>
             </button>
           ))}
         </div>
 
-        <div className="relative h-[62vh] md:h-[78vh] overflow-hidden bg-black">
+        <div className="relative h-[62vh] md:h-[78vh] overflow-hidden bg-ink">
           <div
             ref={ref}
             onPointerMove={onPointerMove}
@@ -106,7 +106,7 @@ export default function InchLens() {
               )
             ))}
             {!explored && (
-              <div className="absolute z-10 left-1/2 top-5 -translate-x-1/2 bg-black/55 backdrop-blur px-4 py-2 text-[10px] tracking-mega text-bone pointer-events-none whitespace-nowrap">
+              <div className="absolute z-10 left-1/2 top-5 -translate-x-1/2 bg-ink/55 backdrop-blur px-4 py-2 text-[10px] tracking-mega text-bone pointer-events-none whitespace-nowrap">
                 MOVE / DRAG TO EXPLORE
               </div>
             )}
