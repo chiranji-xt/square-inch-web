@@ -22,7 +22,7 @@ export default function StoryDetail() {
   };
 
   return (
-    <main className="bg-bone pt-20">
+    <main className="bg-bone pt-20" id="main" tabIndex={-1}>
       <Photo src={s.images[0]} label={s.title.toUpperCase()} palette={s.palette} className="h-[72vh] md:h-[92vh]" eager />
       <div className="px-5 md:px-10 py-10 grid md:grid-cols-12 gap-6">
         <div className="md:col-span-8">

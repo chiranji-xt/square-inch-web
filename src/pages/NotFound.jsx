@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function NotFound() {
   return (
-    <main className="min-h-[100svh] bg-night text-bone flex flex-col justify-end px-5 md:px-10 pb-12 pt-32">
+    <main id="main" tabIndex={-1} className="min-h-[100svh] bg-night text-bone flex flex-col justify-end px-5 md:px-10 pb-12 pt-32">
       <p className="text-[11px] tracking-mega text-accent">ROOM NOT FOUND</p>
       <h1 className="display leading-[0.85] text-[32vw] md:text-[18vw] mt-2">404</h1>
       <p className="text-bone/70 text-sm max-w-sm mt-4">This room doesn't exist in the exhibition. The work is all still here, though.</p>

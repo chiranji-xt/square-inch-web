@@ -27,6 +27,17 @@ export const SITE = {
   url: "",
 };
 
+// Single source of truth for primary navigation (menu + footer).
+// `photo` drives the menu hover preview — local /public/photos only.
+export const NAV = [
+  { label: "Home", to: "/", photo: "/photos/luxury-01.webp", preview: "Luxury" },
+  { label: "Worlds", to: "/worlds", photo: "/photos/abstract-01.webp", preview: "Abstract" },
+  { label: "Projects", to: "/projects", photo: "/photos/fusion-01.webp", preview: "Fusion" },
+  { label: "Studio", to: "/studio", photo: "/photos/studio-01.webp", preview: "Studio" },
+  { label: "Process", to: "/how-we-build", photo: "/photos/process-01.webp", preview: "Process" },
+  { label: "Start a Project", to: "/begin", photo: "/photos/traditional-02.webp", preview: "Begin" },
+];
+
 export const PROCESS = [
   { n: "01", t: "Enquiry", d: "A conversation about your space, needs and way of life." },
   { n: "02", t: "Initial Meeting", d: "We listen to tastes, culture and daily routines." },
@@ -53,6 +64,7 @@ export const STORIES = [
   {
     id: "luxury-4255-residence",
     world: "luxury",
+    sector: "Residential",
     no: "01",
     title: "Stone, Colour & Gilded Light",
     meta: "Luxury · Residential · 4255 sqft",
@@ -63,6 +75,7 @@ export const STORIES = [
   {
     id: "abstract-coffee-house",
     world: "abstract",
+    sector: "Commercial",
     no: "02",
     title: "A 1000 sqft Coffee Journey",
     meta: "Abstract · Commercial · 1000 sqft",
@@ -73,6 +86,7 @@ export const STORIES = [
   {
     id: "contemporary-office-2000",
     world: "contemporary",
+    sector: "Commercial",
     no: "03",
     title: "Construction Office, Reworked",
     meta: "Contemporary · Workspace · 2000 sqft",
@@ -83,6 +97,7 @@ export const STORIES = [
   {
     id: "fusion-brick-house",
     world: "fusion",
+    sector: "Residential",
     no: "04",
     title: "Volumetric Fusion Home",
     meta: "Fusion · Residential · Single-storey unit",
@@ -93,6 +108,7 @@ export const STORIES = [
   {
     id: "traditional-blue-door",
     world: "traditional",
+    sector: "Residential",
     no: "05",
     title: "Courtyard, Blue Door, Light",
     meta: "Traditional · Courtyard House",
@@ -103,6 +119,7 @@ export const STORIES = [
   {
     id: "minimal-honest-home",
     world: "minimalistic",
+    sector: "Residential",
     no: "06",
     title: "Honest Minimalism",
     meta: "Minimalistic · Residential",
@@ -113,6 +130,7 @@ export const STORIES = [
   {
     id: "rustic-indigo-lounge",
     world: "rustic",
+    sector: "Residential",
     no: "07",
     title: "Rustic Indigo Night",
     meta: "Rustic · Lounge",
@@ -123,6 +141,7 @@ export const STORIES = [
   {
     id: "artdeco-studio-1055",
     world: "art-deco",
+    sector: "Commercial",
     no: "08",
     title: "The Awarded Studio — 1055 sqft",
     meta: "Art-Deco · Studio · 1055 sqft · IIID 2016 Runner-Up",

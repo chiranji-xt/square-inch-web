@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useMemo, Suspense, lazy } from "react";
-import { BrowserRouter, Routes, Route, useLocation, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useParams, useNavigationType } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import Lenis from "lenis";
 import LenisCtx, { useLenis, registerLenis } from "./lib/lenis.jsx";
@@ -15,6 +15,7 @@ const StoryPage = lazy(() => import("./pages/Story.jsx"));
 const StudioPage = lazy(() => import("./pages/More.jsx").then((m) => ({ default: m.Studio })));
 const BuildPage = lazy(() => import("./pages/More.jsx").then((m) => ({ default: m.HowWeBuild })));
 const BeginPage = lazy(() => import("./pages/More.jsx").then((m) => ({ default: m.Begin })));
+const ProjectsPage = lazy(() => import("./pages/Projects.jsx"));
 
 function RouteMeta({ route }) {
   const { title, desc, noindex } = useMemo(() => {
@@ -22,6 +23,7 @@ function RouteMeta({ route }) {
     const p = route.pathname;
     if (p === "/") return { title: `${base} — Every Inch Speaks | Interior Designer in Pune & Satara`, desc: "Square Inch Design — 20 years of residential and commercial interiors across 8 design worlds. Walk through our spaces. Pune & Satara.", noindex: false };
     if (p === "/worlds") return { title: `Eight Design Worlds | ${base}`, desc: "Abstract, Art-Deco, Contemporary, Fusion, Traditional, Luxury, Minimalistic, Rustic — eight visual worlds by Square Inch Design.", noindex: false };
+    if (p === "/projects") return { title: `All Projects | ${base}`, desc: "Every Square Inch Design project — residential and commercial interiors, Pune & Satara.", noindex: false };
     const wm = p.match(/^\/world\/([\w-]+)/);
     if (wm) {
       const w = WORLDS.find((x) => x.slug === wm[1]);
@@ -65,15 +67,35 @@ function RouteMeta({ route }) {
 
 function ScrollManager({ route }) {
   const lenis = useLenis();
+  const navType = useNavigationType();
+  const positions = useRef({});
+  const prevPath = useRef(route.pathname + route.search);
   const first = useRef(true);
+
   useEffect(() => {
+    const key = route.pathname + route.search;
+    positions.current[prevPath.current] = window.scrollY;
     if (first.current) {
       first.current = false;
+      prevPath.current = key;
       return;
     }
-    if (lenis) lenis.scrollTo(0, { immediate: true });
-    else window.scrollTo(0, 0);
-  }, [route.pathname, lenis]);
+    // POP (back/forward) restores where you were; PUSH starts at top.
+    // A hash always jumps to its element.
+    const go = () => {
+      const hashEl = route.hash ? document.querySelector(route.hash) : null;
+      if (hashEl) {
+        if (lenis) lenis.scrollTo(hashEl);
+        else hashEl.scrollIntoView();
+      } else {
+        const y = navType === "POP" ? positions.current[key] ?? 0 : 0;
+        if (lenis) lenis.scrollTo(y, { immediate: true });
+        else window.scrollTo(0, y);
+      }
+      prevPath.current = key;
+    };
+    go();
+  }, [route.pathname, route.search, route.hash, navType, lenis]);
   return null;
 }
 
@@ -141,8 +163,13 @@ function Shell() {
   }, []);
 
   // Delayed route swap so the wipe can cover the change.
+  // Cleanup cancels pending timers, so rapid successive navigations
+  // can never leave a stale route or a stuck overlay.
   useEffect(() => {
-    if (location.pathname === route.pathname) return;
+    if (location.pathname === route.pathname && location.search === route.search) {
+      if (phase !== "idle") setPhase("idle");
+      return;
+    }
     if (reduce) {
       setRoute(location);
       return;
@@ -157,10 +184,13 @@ function Shell() {
       clearTimeout(t1);
       clearTimeout(t2);
     };
-  }, [location, route.pathname, reduce]);
+  }, [location, route.pathname, route.search, reduce, phase]);
 
   return (
     <LenisCtx.Provider value={lenis}>
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[80] focus:bg-accent focus:text-ink focus:px-5 focus:py-3 focus:text-xs focus:tracking-mega">
+        Skip to content
+      </a>
       <Topbar ref={triggerRef} onMenu={() => setMenu(true)} menuOpen={menu} />
       <MenuOverlay open={menu} close={() => setMenu(false)} triggerRef={triggerRef} />
       <ProgressDots />
@@ -170,12 +200,15 @@ function Shell() {
       <Suspense fallback={<RouteFallback />}>
         <Routes location={route}>
           <Route path="/" element={<Walkthrough />} />
+          <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/worlds" element={<WorldsPage />} />
           <Route path="/world/:slug" element={<WorldRoute />} />
           <Route path="/story/:id" element={<StoryRoute />} />
           <Route path="/studio" element={<StudioPage />} />
           <Route path="/how-we-build" element={<BuildPage />} />
           <Route path="/begin" element={<BeginPage />} />
+          <Route path="/contact" element={<Navigate to="/begin" replace />} />
+          <Route path="/enquire" element={<Navigate to="/begin" replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

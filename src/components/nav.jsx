@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, forwardRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { SITE, WORLDS } from "../data/site.js";
+import { SITE, NAV } from "../data/site.js";
 import { lockScroll, unlockScroll } from "../lib/lenis.jsx";
 import Photo from "./Photo.jsx";
 
@@ -13,32 +13,46 @@ export const Topbar = forwardRef(function Topbar({ onMenu, menuOpen }, ref) {
           <span className="h-4 w-4 bg-[#E88932] inline-block" aria-hidden="true" />
           <span className="text-sm tracking-[0.25em] font-medium">SQUARE INCH</span>
         </Link>
-        <button
-          ref={ref}
-          onClick={onMenu}
-          aria-haspopup="dialog"
-          aria-expanded={menuOpen}
-          aria-controls="site-menu"
-          className="text-sm tracking-[0.25em] flex items-center gap-3 min-h-[44px]"
-        >
-          <span className="hidden md:inline text-xs opacity-70">{SITE.concept.toUpperCase()}</span> MENU ●
-        </button>
+        <div className="flex items-center gap-6">
+          <Link to="/begin" className="hidden md:flex text-sm tracking-[0.25em] min-h-[44px] items-center hover:opacity-70">
+            ENQUIRE
+          </Link>
+          <button
+            ref={ref}
+            onClick={onMenu}
+            aria-haspopup="dialog"
+            aria-expanded={menuOpen}
+            aria-controls="site-menu"
+            className="text-sm tracking-[0.25em] flex items-center gap-3 min-h-[44px]"
+          >
+            <span className="hidden md:inline text-xs opacity-70">{SITE.concept.toUpperCase()}</span> MENU ●
+          </button>
+        </div>
       </div>
     </header>
   );
 });
 
-const LINKS = [
-  ["Walkthrough", "/"],
-  ["Worlds", "/worlds"],
-  ["Stories", "/worlds"],
-  ["Studio", "/studio"],
-  ["How We Build", "/how-we-build"],
-  ["Begin", "/begin"],
-];
+function MenuLink({ item, index, onNavigate, onPreview }) {
+  const { pathname } = useLocation();
+  const current = pathname === item.to;
+  return (
+    <Link
+      to={item.to}
+      onClick={onNavigate}
+      onMouseEnter={() => onPreview(item)}
+      onFocus={() => onPreview(item)}
+      aria-current={current ? "page" : undefined}
+      className="group flex items-baseline gap-4 py-2"
+    >
+      <span className="text-accent text-xs" aria-hidden="true">0{index + 1}</span>
+      <span className="display text-4xl md:text-6xl group-hover:translate-x-3 group-hover:text-accent group-focus-visible:translate-x-3 group-focus-visible:text-accent transition-all">{item.label}</span>
+    </Link>
+  );
+}
 
 export function MenuOverlay({ open, close, triggerRef }) {
-  const [hover, setHover] = useState(WORLDS[5]);
+  const [hover, setHover] = useState(NAV[5]);
   const panelRef = useRef(null);
 
   useEffect(() => {
@@ -96,17 +110,14 @@ export function MenuOverlay({ open, close, triggerRef }) {
           <nav aria-label="Primary" className="p-8 pt-20 pb-12 md:p-16 flex flex-col justify-center gap-1 w-full">
             <button onClick={close} aria-label="Close menu" className="absolute top-5 right-6 md:right-10 text-sm tracking-mega min-h-[44px]">CLOSE ✕</button>
             <p className="text-xs tracking-mega text-bone/50 mb-6">EXHIBITION INDEX</p>
-            {LINKS.map(([t, to], i) => (
-              <Link key={to + t} to={to} onClick={close} onMouseEnter={() => setHover(WORLDS[i % WORLDS.length])} onFocus={() => setHover(WORLDS[i % WORLDS.length])} className="group flex items-baseline gap-4 py-2">
-                <span className="text-accent text-xs" aria-hidden="true">0{i + 1}</span>
-                <span className="display text-4xl md:text-6xl group-hover:translate-x-3 group-hover:text-accent group-focus-visible:translate-x-3 group-focus-visible:text-accent transition-all">{t}</span>
-              </Link>
+            {NAV.map((item, i) => (
+              <MenuLink key={item.to + item.label} item={item} index={i} onNavigate={close} onPreview={setHover} />
             ))}
             <div className="mt-10 text-sm text-bone/60">{SITE.pune}<br />{SITE.phones.join(" · ")}</div>
           </nav>
           <div className="hidden md:block relative" aria-hidden="true">
-            <Photo src={hover.photo} label={hover.name} palette={hover.fallback} className="h-full w-full" />
-            <div className="absolute bottom-8 left-8 display text-5xl">{hover.name}</div>
+            <Photo src={hover.photo} label={hover.preview} palette={["#222", "#E88932"]} className="h-full w-full" />
+            <div className="absolute bottom-8 left-8 display text-5xl">{hover.preview}</div>
           </div>
         </motion.div>
       )}

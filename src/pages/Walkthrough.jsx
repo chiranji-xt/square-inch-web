@@ -165,7 +165,7 @@ function Finale() {
 
 export default function Walkthrough() {
   return (
-    <main>
+    <main id="main" tabIndex={-1}>
       <Hero />
       <Twenty />
       <Strip />

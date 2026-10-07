@@ -10,7 +10,7 @@ import { telHref, mailHref, whatsappHref } from "../lib/contact.js";
 
 export function Studio() {
   return (
-    <main className="bg-bone pt-24">
+    <main className="bg-bone pt-24" id="main" tabIndex={-1}>
       <div className="px-5 md:px-10 py-10">
         <p className="text-xs tracking-mega text-accent">THE STUDIO · 20 YEARS</p>
         <h1 className="display text-6xl md:text-9xl">About,<br />visually.</h1>
@@ -53,7 +53,7 @@ export function HowWeBuild() {
   const lineRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: lineRef, offset: ["start 0.8", "end 0.6"] });
   return (
-    <main className="bg-bone pt-24">
+    <main className="bg-bone pt-24" id="main" tabIndex={-1}>
       <div className="px-5 md:px-10 py-10 flex flex-col md:flex-row justify-between gap-4">
         <h1 className="display text-6xl md:text-9xl">How we<br />build.</h1>
         <p className="max-w-xs text-ink/65 text-sm self-end">One orange line travels down as you scroll — a blueprint being drawn. Photography appears alongside each stage.</p>

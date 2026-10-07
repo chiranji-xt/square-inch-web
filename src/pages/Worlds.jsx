@@ -7,7 +7,7 @@ import { WORLDS, STORIES } from "../data/site.js";
 
 export function Worlds() {
   return (
-    <main className="bg-bone pt-24">
+    <main className="bg-bone pt-24" id="main" tabIndex={-1}>
       <div className="px-5 md:px-10 py-10">
         <p className="text-xs tracking-mega text-accent">08 WORLDS · NOT FILTERS</p>
         <h1 className="display text-6xl md:text-9xl leading-[0.9]">Eight<br />worlds.</h1>
@@ -42,7 +42,7 @@ export function WorldDetail({ slug }) {
   if (!w) return <NotFound />;
   const stories = STORIES.filter((s) => s.world === w.slug);
   return (
-    <main className="bg-night text-bone pt-24">
+    <main className="bg-night text-bone pt-24" id="main" tabIndex={-1}>
       <div className="px-5 md:px-10 py-10">
         <p className="text-xs tracking-mega text-accent">{w.count} · {w.note.toUpperCase()}</p>
         <h1 className="display text-[13vw] md:text-[11vw] leading-[0.85]">{w.name}</h1>
