@@ -116,7 +116,7 @@ export function MenuOverlay({ open, close, triggerRef }) {
             <div className="mt-10 text-sm text-bone/60">{SITE.pune}<br />{SITE.phones.join(" · ")}</div>
           </nav>
           <div className="hidden md:block relative" aria-hidden="true">
-            <Photo src={hover.photo} label={hover.preview} palette={["#222", "#E88932"]} className="h-full w-full" />
+            <Photo src={hover.photo} label={hover.preview} alt="" palette={["#222", "#E88932"]} className="h-full w-full" />
             <div className="absolute bottom-8 left-8 display text-5xl">{hover.preview}</div>
           </div>
         </motion.div>

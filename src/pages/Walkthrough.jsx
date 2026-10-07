@@ -120,10 +120,10 @@ function ProcessTease() {
 
 function Award() {
   const slides = [
-    { src: "/photos/award-01.webp", title: "Runner Up.", meta: "01 · IIID 2016 ANCHOR AWARD · THE CERTIFICATE", sub: "Zone Z2 Regional Awards — Commercial Workspace, Small. Presented to Square Inch Design.", tag: "ACHIEVEMENT — CERTIFICATE", to: "/studio", palette: ["#111", "#E88932"] },
-    { src: "/photos/award-03.webp", title: "Honoured.", meta: "02 · NATIONAL STAGE · ANCHOR BY PANASONIC", sub: "Instituted by the Institute of Indian Interior Designers — design excellence, recognised.", tag: "ACHIEVEMENT — THE HONOUR", to: "/studio", palette: ["#111", "#C9A86A"] },
-    { src: "/photos/studio-01.webp", title: "The Space That Won.", meta: "03 · 1055 SQ FT STUDIO · SATARA", sub: "Free-flowing plan with no partitions. Timber stair to an attic library. Honest local material.", tag: "ACHIEVEMENT — THE WINNING SPACE", to: "/studio", palette: ["#3A3A38", "#C9BFAE"] },
-    { src: "/photos/award-04.webp", title: "Local Flavour.", meta: "04 · JURY NOTE · HONEST MATERIALS", sub: "“Compact and friendly planning with an honest use of natural materials. A nice local flavour.”", tag: "ACHIEVEMENT — JURY NOTE", to: "/studio", palette: ["#2B2E33", "#E8E4DA"] },
+    { src: "/photos/award-01.webp", title: "Runner Up.", meta: "01 · IIID 2016 ANCHOR AWARD · THE CERTIFICATE", sub: "Zone Z2 Regional Awards — Commercial Workspace, Small. Presented to Square Inch Design.", tag: "ACHIEVEMENT — CERTIFICATE", to: "/studio", cta: "READ THE STORY", palette: ["#111", "#E88932"] },
+    { src: "/photos/award-03.webp", title: "Honoured.", meta: "02 · NATIONAL STAGE · ANCHOR BY PANASONIC", sub: "Instituted by the Institute of Indian Interior Designers — design excellence, recognised.", tag: "ACHIEVEMENT — THE HONOUR", to: "/studio", cta: "READ THE STORY", palette: ["#111", "#C9A86A"] },
+    { src: "/photos/studio-01.webp", title: "The Space That Won.", meta: "03 · 1055 SQ FT STUDIO · SATARA", sub: "Free-flowing plan with no partitions. Timber stair to an attic library. Honest local material.", tag: "ACHIEVEMENT — THE WINNING SPACE", to: "/studio", cta: "READ THE STORY", palette: ["#3A3A38", "#C9BFAE"] },
+    { src: "/photos/award-04.webp", title: "Local Flavour.", meta: "04 · JURY NOTE · HONEST MATERIALS", sub: "“Compact and friendly planning with an honest use of natural materials. A nice local flavour.”", tag: "ACHIEVEMENT — JURY NOTE", to: "/studio", cta: "READ THE STORY", palette: ["#2B2E33", "#E8E4DA"] },
   ];
   return (
     <section data-room="5" data-room-label="Recognition" className="bg-night text-bone">

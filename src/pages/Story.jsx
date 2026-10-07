@@ -5,7 +5,7 @@ import Footer from "../components/Footer.jsx";
 import Lightbox from "../components/Lightbox.jsx";
 import NotFound from "./NotFound.jsx";
 import { RevealMask, StaggerWords } from "../components/motion.jsx";
-import { STORIES } from "../data/site.js";
+import { STORIES, WORLDS } from "../data/site.js";
 
 export default function StoryDetail() {
   const { id } = useParams();
@@ -16,6 +16,12 @@ export default function StoryDetail() {
   const idx = STORIES.indexOf(s);
   const next = STORIES[(idx + 1) % STORIES.length];
   const prev = STORIES[(idx - 1 + STORIES.length) % STORIES.length];
+  const world = WORLDS.find((x) => x.slug === s.world);
+  const facts = [s.sector, s.type, s.area, s.city, s.award].filter(Boolean);
+  const related = [
+    ...STORIES.filter((x) => x.id !== s.id && x.sector === s.sector),
+    ...STORIES.filter((x) => x.id !== s.id && x.sector !== s.sector),
+  ].slice(0, 2);
   const openAt = (e, n) => {
     openerRef.current = e.currentTarget;
     setLb(n);
@@ -23,15 +29,30 @@ export default function StoryDetail() {
 
   return (
     <main className="bg-bone pt-20" id="main" tabIndex={-1}>
-      <Photo src={s.images[0]} label={s.title.toUpperCase()} palette={s.palette} className="h-[72vh] md:h-[92vh]" eager />
+      <nav aria-label="Breadcrumb" className="px-5 md:px-10 pt-6 text-[11px] tracking-mega text-ink/60">
+        <Link to="/worlds" className="hover:text-accent">WORLDS</Link>
+        <span aria-hidden="true"> › </span>
+        {world && <><Link to={`/world/${world.slug}`} className="hover:text-accent">{world.name.toUpperCase()}</Link><span aria-hidden="true"> › </span></>}
+        <span aria-current="page" className="text-ink">{s.title.toUpperCase()}</span>
+      </nav>
+      <button onClick={(e) => openAt(e, 0)} aria-label={`Open photograph 1 of ${s.images.length}`} className="block w-full text-left mt-4">
+        <Photo src={s.images[0]} label={s.title.toUpperCase()} palette={s.palette} className="h-[72vh] md:h-[92vh]" eager />
+      </button>
       <div className="px-5 md:px-10 py-10 grid md:grid-cols-12 gap-6">
         <div className="md:col-span-8">
           <p className="text-accent text-xs tracking-mega">PROJECT {s.no} · {s.meta.toUpperCase()}</p>
           <h1 className="display text-5xl md:text-8xl leading-[0.9] mt-3"><StaggerWords text={s.title} /></h1>
+          {facts.length > 0 && (
+            <dl className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs tracking-mega text-ink/65">
+              <dt className="sr-only">Project facts</dt>
+              {facts.map((f) => <dd key={f}>{f.toUpperCase()}</dd>)}
+            </dl>
+          )}
         </div>
-        <div className="md:col-span-4 flex flex-col justify-end">
+        <div className="md:col-span-4 flex flex-col justify-end gap-3">
           <p className="display text-8xl text-ink/10">{s.no}</p>
-          <Link to={`/begin?project=${s.id}`} className="mt-2 w-fit bg-ink text-bone px-6 py-3 min-h-[48px] flex items-center text-sm tracking-widest hover:bg-accent hover:text-ink transition-colors">ENQUIRE FOR THIS LANGUAGE →</Link>
+          <Link to={`/begin?project=${s.id}`} className="w-fit bg-ink text-bone px-6 py-3 min-h-[48px] flex items-center text-sm tracking-widest hover:bg-accent hover:text-ink transition-colors">ENQUIRE ABOUT A PROJECT LIKE THIS →</Link>
+          <Link to="/projects" className="w-fit text-sm tracking-widest border-b border-ink/30 pb-1 hover:border-accent">← ALL PROJECTS</Link>
         </div>
       </div>
 
@@ -46,6 +67,20 @@ export default function StoryDetail() {
         <div className="grid md:grid-cols-12 gap-6 py-10 border-y border-ink/10">
           <p className="text-xs tracking-mega md:col-span-3 text-warmgrey">PROJECT STORY</p>
           <p className="display text-2xl md:text-4xl md:col-span-9 leading-snug">{s.desc}</p>
+        </div>
+        <div className="mt-4">
+          <p className="text-[11px] tracking-mega text-ink/60 mb-4">RELATED PROJECTS</p>
+          <div className="grid md:grid-cols-2 gap-4">
+            {related.map((r) => (
+              <Link key={r.id} to={`/story/${r.id}`} className="group grid grid-cols-5 gap-4 items-center bg-night text-bone p-4">
+                <Photo src={r.images[0]} label={r.title.toUpperCase()} palette={r.palette} className="h-[22vh] col-span-2" />
+                <div className="col-span-3 p-1">
+                  <p className="text-accent text-[11px] tracking-mega">{r.sector?.toUpperCase()} · {r.no}</p>
+                  <p className="display text-2xl md:text-3xl leading-tight mt-1 group-hover:translate-x-2 transition-transform">{r.title}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
         <div className="flex justify-between text-xs tracking-mega pt-2">
           <Link to={`/story/${prev.id}`} className="border-b border-ink/30 pb-1 hover:border-accent">← {prev.no} · {prev.title.toUpperCase()}</Link>

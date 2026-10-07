@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 // Image-first component. Renders /photos/* assets with lazy loading.
 // If a file is ever missing, it degrades to a quiet neutral block —
 // no developer messaging ever reaches visitors.
-export default function Photo({ src, label = "Square Inch Design", palette = ["#222", "#E88932"], className = "", imgClass = "", eager = false }) {
+export default function Photo({ src, label = "Square Inch Design", alt, palette = ["#222", "#E88932"], className = "", imgClass = "", eager = false }) {
   const [failed, setFailed] = useState(false);
   // A new src means a new image: never let one failure poison the next.
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function Photo({ src, label = "Square Inch Design", palette = ["#
       <div className={`relative overflow-hidden bg-ink ${className}`}>
         <img
           src={src}
-          alt={label}
+          alt={alt ?? label}
           loading={eager ? "eager" : "lazy"}
           onError={() => setFailed(true)}
           className={`h-full w-full object-cover img-cine ${imgClass}`}

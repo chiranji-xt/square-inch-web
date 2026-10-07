@@ -69,7 +69,7 @@ export default function Spotlight({ kicker, slides, dark = true, titleClass = "t
               </div>
               <div className="flex items-center gap-3 shrink-0">
                 <button onClick={() => go(-1)} aria-label="Previous" className="h-12 w-12 rounded-full border border-white/40 hover:bg-accent hover:text-ink hover:border-accent transition-colors">←</button>
-                <Link to={s.to} className="h-12 px-8 rounded-full bg-white/10 border border-white/40 backdrop-blur flex items-center text-sm tracking-mega hover:bg-accent hover:text-ink hover:border-accent transition-colors">VIEW</Link>
+                <Link to={s.to} className="h-12 px-8 rounded-full bg-white/10 border border-white/40 backdrop-blur flex items-center text-sm tracking-mega hover:bg-accent hover:text-ink hover:border-accent transition-colors">{s.cta ?? "VIEW"}</Link>
                 <button onClick={() => go(1)} aria-label="Next" className="h-12 w-12 rounded-full border border-white/40 hover:bg-accent hover:text-ink hover:border-accent transition-colors">→</button>
               </div>
             </div>

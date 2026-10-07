@@ -86,7 +86,7 @@ export default function InchLens() {
               shown.includes(i) && (
                 <div key={w.slug} className={`absolute inset-0 transition-opacity duration-500 ${i === active ? "opacity-100" : "opacity-0"}`}>
                   {/* blurred ghost (decorative) */}
-                  <Photo src={w.photo} label="" palette={w.fallback} className="absolute inset-0 blur-md scale-110 opacity-60" />
+                  <Photo src={w.photo} label="" alt="" palette={w.fallback} className="absolute inset-0 blur-md scale-110 opacity-60" />
                   {/* sharp lens — clipped to the orange square's true size */}
                   <div
                     className="absolute inset-0"
@@ -100,7 +100,7 @@ export default function InchLens() {
                   {/* lens frame */}
                   <div className="absolute w-36 h-36 md:w-56 md:h-56 border border-accent pointer-events-none" style={{ left: `${pos.x}%`, top: `${pos.y}%`, transform: "translate(-50%,-50%)" }}>
                     <span className="absolute -top-6 left-0 text-[10px] tracking-mega text-accent">■ 1 INCH</span>
-                    <span className="absolute -bottom-6 left-0 text-[10px] tracking-mega text-bone/70">{w.count} · {w.note}</span>
+                    <span className="absolute -bottom-6 left-0 text-[10px] tracking-mega text-bone/70">{w.note}</span>
                   </div>
                 </div>
               )

@@ -7,7 +7,7 @@ import { STORIES } from "../data/site.js";
 // Scroll-pinned swap: the frame stays fixed while scrolling,
 // each new story wipes in over the exact spot of the previous one.
 export default function StoriesScroll() {
-  const picks = [STORIES[0], STORIES[1], STORIES[3], STORIES[4]];
+  const picks = STORIES.filter((x) => x.featured);
   const ref = useRef(null);
   const [i, setI] = useState(0);
   const reduce = useReducedMotion();
