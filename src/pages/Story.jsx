@@ -1,18 +1,25 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import Photo from "../components/Photo.jsx";
 import Footer from "../components/Footer.jsx";
 import Lightbox from "../components/Lightbox.jsx";
+import NotFound from "./NotFound.jsx";
 import { RevealMask, StaggerWords } from "../components/motion.jsx";
 import { STORIES } from "../data/site.js";
 
 export default function StoryDetail() {
   const { id } = useParams();
-  const s = STORIES.find((x) => x.id === id) ?? STORIES[0];
+  const [lb, setLb] = useState(null);
+  const openerRef = useRef(null);
+  const s = STORIES.find((x) => x.id === id);
+  if (!s) return <NotFound />;
   const idx = STORIES.indexOf(s);
   const next = STORIES[(idx + 1) % STORIES.length];
   const prev = STORIES[(idx - 1 + STORIES.length) % STORIES.length];
-  const [lb, setLb] = useState(null);
+  const openAt = (e, n) => {
+    openerRef.current = e.currentTarget;
+    setLb(n);
+  };
 
   return (
     <main className="bg-bone pt-20">
@@ -24,14 +31,14 @@ export default function StoryDetail() {
         </div>
         <div className="md:col-span-4 flex flex-col justify-end">
           <p className="display text-8xl text-ink/10">{s.no}</p>
-          <Link to="/begin" className="mt-2 w-fit bg-ink text-bone px-6 py-3 text-sm tracking-widest hover:bg-accent hover:text-ink transition-colors">ENQUIRE FOR THIS LANGUAGE →</Link>
+          <Link to={`/begin?project=${s.id}`} className="mt-2 w-fit bg-ink text-bone px-6 py-3 min-h-[48px] flex items-center text-sm tracking-widest hover:bg-accent hover:text-ink transition-colors">ENQUIRE FOR THIS LANGUAGE →</Link>
         </div>
       </div>
 
       <div className="px-5 md:px-10 pb-10 grid gap-8">
         {s.images.slice(1).map((src, i) => (
           <RevealMask key={src + i} from={i % 3 === 0 ? "left" : i % 3 === 1 ? "bottom" : "zoom"}>
-            <button onClick={() => setLb(i + 1)} className="block w-full text-left">
+            <button onClick={(e) => openAt(e, i + 1)} aria-label={`Open photograph ${i + 2} of ${s.images.length}`} className="block w-full text-left">
               <Photo src={src} label={`${s.title.toUpperCase()} — DETAIL 0${i + 1}`} palette={s.palette} className={`${i % 2 ? "h-[52vh] md:h-[72vh] md:ml-24" : "h-[52vh] md:h-[80vh] md:mr-24"}`} />
             </button>
           </RevealMask>
@@ -52,7 +59,7 @@ export default function StoryDetail() {
           </div>
         </Link>
       </div>
-      <Lightbox images={s.images} index={lb} label={s.title} close={() => setLb(null)} setIndex={setLb} />
+      <Lightbox images={s.images} index={lb} label={s.title} close={() => setLb(null)} setIndex={setLb} openerRef={openerRef} />
       <Footer />
     </main>
   );

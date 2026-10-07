@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 html { background: #F5F3EE; }
+
+/* Height of the mobile sticky enquiry bar; 0 on desktop. */
+:root { --bar-h: 52px; }
+@media (min-width: 768px) {
+  :root { --bar-h: 0px; }
+}
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, forwardRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { SITE, WORLDS } from "../data/site.js";
+import { lockScroll, unlockScroll } from "../lib/lenis.jsx";
 import Photo from "./Photo.jsx";
 
 export const Topbar = forwardRef(function Topbar({ onMenu, menuOpen }, ref) {
@@ -42,8 +43,7 @@ export function MenuOverlay({ open, close, triggerRef }) {
 
   useEffect(() => {
     if (!open) return;
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    lockScroll();
     // Move focus into the menu when it opens.
     const t = setTimeout(() => {
       panelRef.current?.querySelector("a, button")?.focus();
@@ -72,7 +72,7 @@ export function MenuOverlay({ open, close, triggerRef }) {
     return () => {
       clearTimeout(t);
       document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prevOverflow;
+      unlockScroll();
       triggerRef?.current?.focus();
     };
   }, [open, close, triggerRef]);
@@ -91,6 +91,7 @@ export function MenuOverlay({ open, close, triggerRef }) {
           exit={{ clipPath: "inset(0 0 100% 0)" }}
           transition={{ duration: 0.7, ease: [0.77, 0, 0.175, 1] }}
           className="fixed inset-0 z-50 bg-night text-bone grid md:grid-cols-2 overflow-y-auto"
+          data-lenis-prevent
         >
           <nav aria-label="Primary" className="p-8 pt-20 pb-12 md:p-16 flex flex-col justify-center gap-1 w-full">
             <button onClick={close} aria-label="Close menu" className="absolute top-5 right-6 md:right-10 text-sm tracking-mega min-h-[44px]">CLOSE ✕</button>

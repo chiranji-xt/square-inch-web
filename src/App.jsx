@@ -1,7 +1,8 @@
-import { useEffect, useState, useRef, useMemo, createContext, useContext, Suspense, lazy } from "react";
+import { useEffect, useState, useRef, useMemo, Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, useLocation, useParams } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import Lenis from "lenis";
+import LenisCtx, { useLenis, registerLenis } from "./lib/lenis.jsx";
 import Walkthrough from "./pages/Walkthrough.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import { Topbar, MenuOverlay, ProgressDots } from "./components/nav.jsx";
@@ -15,29 +16,28 @@ const StudioPage = lazy(() => import("./pages/More.jsx").then((m) => ({ default:
 const BuildPage = lazy(() => import("./pages/More.jsx").then((m) => ({ default: m.HowWeBuild })));
 const BeginPage = lazy(() => import("./pages/More.jsx").then((m) => ({ default: m.Begin })));
 
-const LenisCtx = createContext(null);
-export const useLenis = () => useContext(LenisCtx);
-
 function RouteMeta({ route }) {
-  const { title, desc } = useMemo(() => {
+  const { title, desc, noindex } = useMemo(() => {
     const base = "Square Inch Design";
     const p = route.pathname;
-    if (p === "/") return { title: `${base} — Every Inch Speaks | Interior Designer in Pune & Satara`, desc: "Square Inch Design — 20 years of residential and commercial interiors across 8 design worlds. Walk through our spaces. Pune & Satara." };
-    if (p === "/worlds") return { title: `Eight Design Worlds | ${base}`, desc: "Abstract, Art-Deco, Contemporary, Fusion, Traditional, Luxury, Minimalistic, Rustic — eight visual worlds by Square Inch Design." };
+    if (p === "/") return { title: `${base} — Every Inch Speaks | Interior Designer in Pune & Satara`, desc: "Square Inch Design — 20 years of residential and commercial interiors across 8 design worlds. Walk through our spaces. Pune & Satara.", noindex: false };
+    if (p === "/worlds") return { title: `Eight Design Worlds | ${base}`, desc: "Abstract, Art-Deco, Contemporary, Fusion, Traditional, Luxury, Minimalistic, Rustic — eight visual worlds by Square Inch Design.", noindex: false };
     const wm = p.match(/^\/world\/([\w-]+)/);
     if (wm) {
       const w = WORLDS.find((x) => x.slug === wm[1]);
-      return { title: `${w ? w.name : "World"} Interiors | ${base}`, desc: w ? `${w.name} interiors by Square Inch Design — ${w.note}. Pune & Satara.` : base };
+      if (!w) return { title: `Page Not Found | ${base}`, desc: base, noindex: true };
+      return { title: `${w.name} Interiors | ${base}`, desc: `${w.name} interiors by Square Inch Design — ${w.note}. Pune & Satara.`, noindex: false };
     }
     const sm = p.match(/^\/story\/([\w-]+)/);
     if (sm) {
       const s = STORIES.find((x) => x.id === sm[1]);
-      return { title: `${s ? s.title : "Project Story"} | ${base}`, desc: s ? `${s.meta} by Square Inch Design.` : base };
+      if (!s) return { title: `Page Not Found | ${base}`, desc: base, noindex: true };
+      return { title: `${s.title} | ${base}`, desc: `${s.meta} by Square Inch Design.`, noindex: false };
     }
-    if (p === "/studio") return { title: `Studio — 20 Years of Interior Design | ${base}`, desc: "SI Design: two decades of residential and commercial interiors, IIID 2016 Anchor Award runner-up. Led by Siddharth Kolhapure." };
-    if (p === "/how-we-build") return { title: `Our Process | ${base}`, desc: "Enquiry to finalization in six steps — how Square Inch Design builds interiors." };
-    if (p === "/begin") return { title: `Start a Project | ${base}`, desc: `Enquire about your residential or commercial interior. Offices in Pune and Satara. ${SITE.phones.join(", ")}.` };
-    return { title: `Page Not Found | ${base}`, desc: base };
+    if (p === "/studio") return { title: `Studio — 20 Years of Interior Design | ${base}`, desc: "SI Design: two decades of residential and commercial interiors, IIID 2016 Anchor Award runner-up. Led by Siddharth Kolhapure.", noindex: false };
+    if (p === "/how-we-build") return { title: `Our Process | ${base}`, desc: "Enquiry to finalization in six steps — how Square Inch Design builds interiors.", noindex: false };
+    if (p === "/begin") return { title: `Start a Project | ${base}`, desc: `Enquire about your residential or commercial interior. Offices in Pune and Satara. ${SITE.phones.join(", ")}.`, noindex: false };
+    return { title: `Page Not Found | ${base}`, desc: base, noindex: true };
   }, [route.pathname]);
 
   useEffect(() => {
@@ -48,7 +48,18 @@ function RouteMeta({ route }) {
     if (ogt) ogt.setAttribute("content", title);
     const ogd = document.querySelector('meta[property="og:description"]');
     if (ogd) ogd.setAttribute("content", desc);
-  }, [title, desc]);
+    let robots = document.querySelector('meta[name="robots"]');
+    if (noindex) {
+      if (!robots) {
+        robots = document.createElement("meta");
+        robots.setAttribute("name", "robots");
+        document.head.appendChild(robots);
+      }
+      robots.setAttribute("content", "noindex");
+    } else if (robots) {
+      robots.remove();
+    }
+  }, [title, desc, noindex]);
   return null;
 }
 
@@ -94,7 +105,12 @@ function RoomTransition({ phase }) {
 
 function WorldRoute() {
   const { slug } = useParams();
-  return <WorldDetailPage slug={slug} />;
+  return <WorldDetailPage key={slug} slug={slug} />;
+}
+
+function StoryRoute() {
+  const { id } = useParams();
+  return <StoryPage key={id} />;
 }
 
 function Shell() {
@@ -104,13 +120,12 @@ function Shell() {
   const [phase, setPhase] = useState("idle");
   const reduce = useReducedMotion();
   const triggerRef = useRef(null);
-  const lenisRef = useRef(null);
   const [lenis, setLenis] = useState(null);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const l = new Lenis({ duration: 1.15, smoothWheel: true });
-    lenisRef.current = l;
+    registerLenis(l);
     setLenis(l);
     let raf;
     const loop = (t) => {
@@ -121,7 +136,7 @@ function Shell() {
     return () => {
       cancelAnimationFrame(raf);
       l.destroy();
-      lenisRef.current = null;
+      registerLenis(null);
     };
   }, []);
 
@@ -157,7 +172,7 @@ function Shell() {
           <Route path="/" element={<Walkthrough />} />
           <Route path="/worlds" element={<WorldsPage />} />
           <Route path="/world/:slug" element={<WorldRoute />} />
-          <Route path="/story/:id" element={<StoryPage />} />
+          <Route path="/story/:id" element={<StoryRoute />} />
           <Route path="/studio" element={<StudioPage />} />
           <Route path="/how-we-build" element={<BuildPage />} />
           <Route path="/begin" element={<BeginPage />} />

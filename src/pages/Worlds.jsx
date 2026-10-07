@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Photo from "../components/Photo.jsx";
 import Footer from "../components/Footer.jsx";
+import NotFound from "./NotFound.jsx";
 import { RevealMask } from "../components/motion.jsx";
 import { WORLDS, STORIES } from "../data/site.js";
 
@@ -37,7 +38,8 @@ export function Worlds() {
 }
 
 export function WorldDetail({ slug }) {
-  const w = WORLDS.find((x) => x.slug === slug) ?? WORLDS[0];
+  const w = WORLDS.find((x) => x.slug === slug);
+  if (!w) return <NotFound />;
   const stories = STORIES.filter((s) => s.world === w.slug);
   return (
     <main className="bg-night text-bone pt-24">
@@ -77,7 +79,7 @@ export function WorldDetail({ slug }) {
         </div>
         <div className="flex justify-between mt-10 text-sm tracking-widest">
           <Link to="/worlds" className="border-b border-accent pb-1">← ALL WORLDS</Link>
-          <Link to="/begin" className="border-b border-accent pb-1">START A PROJECT →</Link>
+          <Link to={`/begin?world=${w.slug}`} className="border-b border-accent pb-1">START A PROJECT →</Link>
         </div>
       </div>
       <Footer dark />

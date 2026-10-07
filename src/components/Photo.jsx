@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Image-first component. Renders /photos/* assets with lazy loading.
 // If a file is ever missing, it degrades to a quiet neutral block —
 // no developer messaging ever reaches visitors.
 export default function Photo({ src, label = "Square Inch Design", palette = ["#222", "#E88932"], className = "", imgClass = "", eager = false }) {
   const [failed, setFailed] = useState(false);
+  // A new src means a new image: never let one failure poison the next.
+  useEffect(() => {
+    setFailed(false);
+  }, [src]);
   if (!failed) {
     return (
       <div className={`relative overflow-hidden bg-ink ${className}`}>

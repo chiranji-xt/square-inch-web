@@ -32,7 +32,7 @@ export default function StoriesScroll() {
 
       <div ref={ref} className="relative" style={{ height: `${picks.length * 140}vh` }}>
         <div className="sticky top-0 h-[100svh] overflow-hidden">
-          <div className="h-full grid md:grid-cols-12 gap-0 px-5 pr-14 md:px-10 py-14 md:py-24">
+          <div className="h-full grid md:grid-cols-12 gap-0 px-5 pr-14 md:px-10 pt-14 md:py-24 pb-[calc(var(--bar-h)+3rem)] md:pb-24">
             {/* image frame — new story wipes up over the old one, same spot */}
             <div className="relative md:col-span-7 h-[36svh] md:h-full overflow-hidden bg-ink">
               <AnimatePresence mode="popLayout">

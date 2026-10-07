@@ -26,7 +26,7 @@ function Hero() {
           <Photo src="/photos/luxury-01.webp" label="LUXURY LIVING — 4255 SQFT" palette={["#0E1E3A", "#C9A86A"]} className="h-[100svh]" eager />
         </Cinematic>
       </motion.div>
-      <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-10 pointer-events-none">
+      <div className="absolute inset-0 flex flex-col justify-end px-5 pt-5 md:p-10 pb-[calc(var(--bar-h)+1.25rem)] md:pb-10 pointer-events-none">
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }} className="text-xs tracking-mega text-bone/80">ROOM 01 — ENTER · INTERIOR DESIGN STUDIO · PUNE — SATARA · 20 YEARS</motion.p>
         <h1 className="display leading-[0.85] text-[17vw] md:text-[11vw] mt-2">
           <StaggerWords text="EVERY" delay={0.9} /><br />
@@ -151,7 +151,7 @@ function Finale() {
         <Photo src="/photos/traditional-02.webp" label="YOUR SPACE COULD BE NEXT" palette={["#2B2118", "#E88932"]} className="h-[92svh]" />
       </Cinematic>
       <div className="absolute inset-0 bg-black/35" />
-      <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-10 text-bone">
+      <div className="absolute inset-0 flex flex-col justify-end px-5 pt-5 md:p-10 pb-[calc(var(--bar-h)+1.25rem)] md:pb-10 text-bone">
         <p className="text-[11px] tracking-mega text-bone/70 mb-3">ROOM 07 — BEGIN · YOUR TURN</p>
         <h2 className="display text-[13vw] md:text-[8vw] leading-[0.9]">YOUR SPACE.<br />OUR NEXT STORY.</h2>
         <div className="flex flex-col md:flex-row gap-4 md:items-center justify-between mt-6">

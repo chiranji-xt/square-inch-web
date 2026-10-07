@@ -1,11 +1,11 @@
-import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useRef, useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { motion, useScroll } from "framer-motion";
 import Photo from "../components/Photo.jsx";
 import Footer from "../components/Footer.jsx";
 import { RevealMask } from "../components/motion.jsx";
-import { SITE } from "../data/site.js";
-import { submitEnquiry, validateEnquiry, hasEndpoint } from "../lib/enquiry.js";
+import { SITE, PROCESS, WORLDS, STORIES } from "../data/site.js";
+import { submitEnquiry, validateEnquiry, enquirySummary, STAGES } from "../lib/enquiry.js";
 import { telHref, mailHref, whatsappHref } from "../lib/contact.js";
 
 export function Studio() {
@@ -89,15 +89,44 @@ export function HowWeBuild() {
 const TYPES = ["Residential", "Commercial", "Hospitality", "Other"];
 const BUDGETS = ["Under ₹5L", "₹5–15L", "₹15–35L", "₹35L+", "Prefer to discuss"];
 
-const emptyForm = { name: "", phone: "", email: "", type: "", location: "", area: "", budget: "", message: "" };
+const emptyForm = { name: "", phone: "", email: "", type: "", location: "", area: "", budget: "", stage: "", message: "" };
 
-function EnquiryForm() {
-  const [v, setV] = useState(emptyForm);
+function CopyEnquiry({ values }) {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    const text = enquirySummary(values);
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+  return (
+    <button type="button" onClick={copy} className="border border-bone/40 px-5 py-2.5 min-h-[48px] text-[11px] tracking-mega hover:bg-bone hover:text-ink transition-colors">
+      {copied ? "COPIED ✓" : "COPY ENQUIRY TEXT"}
+    </button>
+  );
+}
+
+function EnquiryForm({ initialMessage = "", source = "" }) {
+  const [v, setV] = useState({ ...emptyForm, message: initialMessage });
+  const [company, setCompany] = useState(""); // honeypot — humans never fill this
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | handoff | error
   const [errorMsg, setErrorMsg] = useState("");
   const sending = useRef(false);
-  const endpoint = hasEndpoint();
+  const resultRef = useRef(null);
+
+  useEffect(() => {
+    if (status === "sent" || status === "handoff") resultRef.current?.focus();
+  }, [status]);
 
   const set = (k) => (e) => {
     setV((p) => ({ ...p, [k]: e.target.value }));
@@ -107,6 +136,11 @@ function EnquiryForm() {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (sending.current) return; // prevent duplicate submissions
+    if (company.trim()) {
+      // Spam bot: pretend success, send nothing.
+      setStatus("sent");
+      return;
+    }
     const errs = validateEnquiry(v);
     setErrors(errs);
     if (Object.keys(errs).length) {
@@ -118,8 +152,8 @@ function EnquiryForm() {
     setStatus("sending");
     setErrorMsg("");
     try {
-      await submitEnquiry(v);
-      setStatus("sent");
+      const res = await submitEnquiry({ ...v, source });
+      setStatus(res.channel === "endpoint" ? "sent" : "handoff");
     } catch (err) {
       setStatus("error");
       setErrorMsg(err.message || "Something went wrong. Please try again or call us directly.");
@@ -128,35 +162,44 @@ function EnquiryForm() {
     }
   };
 
-  if (status === "sent") {
+  if (status === "sent" || status === "handoff") {
+    const firstName = v.name.split(" ")[0] || "friend";
     return (
       <div className="border border-bone/20 p-8 md:p-10 max-w-xl" role="status">
-        <p className="text-accent text-[11px] tracking-mega">ENQUIRY RECEIVED</p>
-        <p className="display text-4xl md:text-5xl mt-3">Thank you, {v.name.split(" ")[0] || "friend"}.</p>
-        <p className="text-bone/70 text-sm mt-4">
-          {endpoint
-            ? "Your enquiry is with the studio. Expect a call within two working days."
-            : "Your email app should have opened with everything pre-filled — just press send and the studio has your enquiry."}
-        </p>
-        <p className="text-bone/60 text-sm mt-3">
+        <p className="text-accent text-[11px] tracking-mega">{status === "sent" ? "ENQUIRY RECEIVED" : "ONE STEP LEFT"}</p>
+        <h2 ref={resultRef} tabIndex={-1} className="display text-4xl md:text-5xl mt-3 outline-none">Thank you, {firstName}.</h2>
+        {status === "sent" ? (
+          <p className="text-bone/70 text-sm mt-4">
+            Your enquiry is with the studio.
+            {SITE.responseTime ? ` ${SITE.responseTime}` : ""}
+          </p>
+        ) : (
+          <div className="text-bone/70 text-sm mt-4 space-y-3">
+            <p>Your email app should have opened with everything pre-filled. Press send to complete your enquiry.</p>
+            <p>No email app? Copy the text and send it any way you like:</p>
+            <CopyEnquiry values={{ ...v, source }} />
+          </div>
+        )}
+        <p className="text-bone/60 text-sm mt-4">
           Prefer to talk now?{" "}
           <a className="underline underline-offset-4 hover:text-accent" href={telHref(SITE.phones[0])}>Call {SITE.phones[0]}</a>
+          {" · "}<a className="underline underline-offset-4 hover:text-accent" href={mailHref(`Project enquiry — ${v.name}`)}>Email us</a>
           {whatsappHref() && (
-            <> · <a className="underline underline-offset-4 hover:text-accent" href={whatsappHref(`Hello Square Inch Design, I'm ${v.name}. I'd like to discuss a project.`)} target="_blank" rel="noreferrer">WhatsApp us</a></>
+            <> · <a className="underline underline-offset-4 hover:text-accent" href={whatsappHref(SITE.whatsappText)} target="_blank" rel="noreferrer">WhatsApp us</a></>
           )}
         </p>
-        <button onClick={() => { setV(emptyForm); setStatus("idle"); }} className="mt-6 border border-bone/40 px-6 py-2.5 text-xs tracking-mega hover:bg-bone hover:text-ink transition-colors">
+        <button onClick={() => { setV({ ...emptyForm, message: initialMessage }); setStatus("idle"); }} className="mt-6 border border-bone/40 px-6 py-2.5 min-h-[48px] text-xs tracking-mega hover:bg-bone hover:text-ink transition-colors">
           SEND ANOTHER ENQUIRY
         </button>
       </div>
     );
   }
 
-  const field = (label, required, error, input) => (
+  const field = (id, label, required, error, input) => (
     <label className="block" data-error={error ? "true" : undefined}>
       <span className="text-[11px] tracking-mega text-bone/60">{label}{required ? " *" : " (OPTIONAL)"}</span>
       {input}
-      {error && <span className="block text-accent text-xs mt-1" role="alert">{error}</span>}
+      {error && <span id={`${id}-error`} className="block text-accent text-xs mt-1" role="alert">{error}</span>}
     </label>
   );
 
@@ -164,53 +207,59 @@ function EnquiryForm() {
 
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-5 max-w-xl">
-      {field("NAME", true, errors.name,
-        <input type="text" autoComplete="name" value={v.name} onChange={set("name")} placeholder="Your full name" aria-invalid={!!errors.name} className={inputCls(errors.name)} />)}
-      {field("PHONE", true, errors.phone,
-        <input type="tel" autoComplete="tel" value={v.phone} onChange={set("phone")} placeholder="10-digit mobile number" aria-invalid={!!errors.phone} className={inputCls(errors.phone)} />)}
-      {field("EMAIL", false, errors.email,
-        <input type="email" autoComplete="email" value={v.email} onChange={set("email")} placeholder="you@mail.com" aria-invalid={!!errors.email} className={inputCls(errors.email)} />)}
+      {/* Honeypot: invisible to humans, bots fill it and get a fake success. */}
+      <input type="text" name="company" value={company} onChange={(e) => setCompany(e.target.value)} tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute h-px w-px overflow-hidden opacity-0" />
+      {field("name", "NAME", true, errors.name,
+        <input name="name" type="text" autoComplete="name" value={v.name} onChange={set("name")} placeholder="Your full name" aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined} className={inputCls(errors.name)} />)}
+      {field("phone", "PHONE", true, errors.phone,
+        <input name="phone" type="tel" autoComplete="tel" value={v.phone} onChange={set("phone")} placeholder="10-digit mobile number" aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "phone-error" : undefined} className={inputCls(errors.phone)} />)}
+      {field("email", "EMAIL", false, errors.email,
+        <input name="email" type="email" autoComplete="email" value={v.email} onChange={set("email")} placeholder="you@mail.com" aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : undefined} className={inputCls(errors.email)} />)}
       <div className="grid sm:grid-cols-2 gap-5">
-        {field("PROJECT TYPE", true, errors.type,
-          <select value={v.type} onChange={set("type")} aria-invalid={!!errors.type} className={`${inputCls(errors.type)} bg-night`}>
+        {field("type", "PROJECT TYPE", true, errors.type,
+          <select name="type" value={v.type} onChange={set("type")} aria-invalid={!!errors.type} aria-describedby={errors.type ? "type-error" : undefined} className={`${inputCls(errors.type)} bg-night`}>
             <option value="" className="text-ink">Select…</option>
             {TYPES.map((t) => <option key={t} value={t} className="text-ink">{t}</option>)}
           </select>)}
-        {field("PROJECT LOCATION", true, errors.location,
-          <input type="text" value={v.location} onChange={set("location")} placeholder="Pune / Satara / …" aria-invalid={!!errors.location} className={inputCls(errors.location)} />)}
+        {field("location", "PROJECT LOCATION", true, errors.location,
+          <input name="location" type="text" value={v.location} onChange={set("location")} placeholder="Pune / Satara / …" aria-invalid={!!errors.location} aria-describedby={errors.location ? "location-error" : undefined} className={inputCls(errors.location)} />)}
       </div>
       <div className="grid sm:grid-cols-2 gap-5">
-        {field("APPROXIMATE AREA", false, null,
-          <input type="text" value={v.area} onChange={set("area")} placeholder="e.g. 1200 sqft" className={inputCls()} />)}
-        {field("BUDGET RANGE", false, null,
-          <select value={v.budget} onChange={set("budget")} className={`${inputCls()} bg-night`}>
+        {field("area", "APPROXIMATE AREA", false, null,
+          <input name="area" type="text" value={v.area} onChange={set("area")} placeholder="e.g. 1200 sqft" className={inputCls()} />)}
+        {field("budget", "BUDGET RANGE", false, null,
+          <select name="budget" value={v.budget} onChange={set("budget")} className={`${inputCls()} bg-night`}>
             <option value="" className="text-ink">Select…</option>
             {BUDGETS.map((b) => <option key={b} value={b} className="text-ink">{b}</option>)}
           </select>)}
       </div>
-      {field("PROJECT REQUIREMENTS", false, null,
-        <textarea rows={4} value={v.message} onChange={set("message")} placeholder="Rooms, style you like, timeline…" className={`${inputCls()} resize-y`} />)}
-      {!endpoint && (
-        <label className="block">
-          <span className="text-[11px] tracking-mega text-bone/60">REFERENCE IMAGE (SHARE AFTER SENDING)</span>
-          <input type="file" accept="image/*" aria-label="Reference image — share with the studio after sending" className="mt-3 text-sm text-bone/70" />
-        </label>
-      )}
+      {field("stage", "PROPERTY STAGE", false, null,
+        <select name="stage" value={v.stage} onChange={set("stage")} className={`${inputCls()} bg-night`}>
+          <option value="" className="text-ink">Select…</option>
+          {STAGES.map((s) => <option key={s} value={s} className="text-ink">{s}</option>)}
+        </select>)}
+      {field("message", "PROJECT REQUIREMENTS", false, null,
+        <textarea name="message" rows={4} value={v.message} onChange={set("message")} placeholder="Rooms, style you like, timeline…" className={`${inputCls()} resize-y`} />)}
       {status === "error" && <p className="text-accent text-sm" role="alert">{errorMsg}</p>}
       <div className="pt-2">
         <button type="submit" disabled={status === "sending"} className="bg-accent text-ink px-8 py-4 tracking-widest text-sm hover:bg-bone transition-colors disabled:opacity-60 disabled:cursor-wait min-h-[48px]">
           {status === "sending" ? "SENDING…" : "SEND ENQUIRY →"}
         </button>
-        <p className="text-bone/50 text-xs mt-3">Fields marked * are required. No spam, no sharing — the studio replies directly.</p>
+        <p className="text-bone/50 text-xs mt-3">Fields marked * are required. {SITE.privacyNote}</p>
       </div>
     </form>
   );
 }
 
 export function Begin() {
-  const wa = whatsappHref("Hello Square Inch Design, I'd like to discuss a project.");
+  const wa = whatsappHref(SITE.whatsappText);
+  const [params] = useSearchParams();
+  const storyCtx = STORIES.find((x) => x.id === params.get("project")) ?? null;
+  const worldCtx = !storyCtx ? WORLDS.find((x) => x.slug === params.get("world")) ?? null : null;
+  const contextTitle = storyCtx ? storyCtx.title : worldCtx ? `${worldCtx.name} interiors` : "";
+  const contextKey = storyCtx ? `project:${storyCtx.id}` : worldCtx ? `world:${worldCtx.slug}` : "none";
   return (
-    <main className="bg-night text-bone pt-24 dark">
+    <main className="bg-night text-bone pt-24 dark" id="main">
       <div className="relative h-[52vh] overflow-hidden">
         <Photo src="/photos/traditional-02.webp" label="LET'S CREATE SOMETHING" palette={["#2B2118", "#E88932"]} className="h-[52vh]" eager />
         <div className="absolute inset-0 bg-black/45 flex items-end p-5 md:p-10">
@@ -218,7 +267,20 @@ export function Begin() {
         </div>
       </div>
       <div className="grid md:grid-cols-2 gap-10 px-5 md:px-10 py-14">
-        <EnquiryForm />
+        <div>
+          <p className="text-[11px] tracking-mega text-accent mb-4">WHAT HAPPENS NEXT — {PROCESS[0].t.toUpperCase()} → {PROCESS[1].t.toUpperCase()}</p>
+          {contextTitle && (
+            <p className="text-sm text-bone/80 mb-5">
+              Enquiring about: <span className="text-bone">“{contextTitle}”</span>{" "}
+              <Link to="/begin" className="underline underline-offset-4 text-bone/60 hover:text-accent">change</Link>
+            </p>
+          )}
+          <EnquiryForm
+            key={contextKey}
+            initialMessage={contextTitle ? `I'd like a space inspired by: ${contextTitle}` : ""}
+            source={storyCtx ? `project:${storyCtx.id}` : worldCtx ? `world:${worldCtx.slug}` : ""}
+          />
+        </div>
         <div className="text-sm space-y-6">
           <div><p className="text-xs tracking-mega text-accent">PUNE OFFICE</p><p className="text-bone/80 mt-1">{SITE.pune}</p></div>
           <div>

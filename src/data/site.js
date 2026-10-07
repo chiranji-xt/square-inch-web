@@ -12,6 +12,17 @@ export const SITE = {
   // Set this only after the studio confirms which number takes WhatsApp.
   // Leave null and every WhatsApp option in the UI stays hidden.
   whatsapp: null,
+  // Shown under the enquiry submit button. Plain wording only.
+  privacyNote: "We use these details only to respond to your enquiry.",
+  // Optional single sentence shown after a successful endpoint submission
+  // (e.g. "We usually reply within two working days."). Leave null unless
+  // the studio approves a response-time promise.
+  responseTime: null,
+  // Default pre-filled WhatsApp greeting (used only when whatsapp is set).
+  whatsappText: "Hello Square Inch Design, I'd like to discuss a project.",
+  // Services list for the Studio page. Rendered only when non-empty —
+  // populate with client-approved services, e.g. ["Residential interiors"].
+  services: [],
   // Production domain, set at launch (used for canonical URLs + sitemap).
   url: "",
 };

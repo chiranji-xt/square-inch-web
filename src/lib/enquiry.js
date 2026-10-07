@@ -1,24 +1,35 @@
-import { SITE } from "../data/site.js";
 import { mailHref } from "./contact.js";
 
 // Backend-ready enquiry submission.
-// 1. If VITE_ENQUIRY_ENDPOINT is set (Formspree / Getform / custom API),
-//    the enquiry POSTs there as JSON: { name, phone, email, type, location,
-//    area, budget, message }.
-// 2. Otherwise it falls back to opening the visitor's email client addressed
-//    to the studio with the enquiry pre-filled — no fake "success".
-// To connect a provider later: set VITE_ENQUIRY_ENDPOINT in .env and, if the
-// provider needs a key, add it as VITE_ENQUIRY_KEY (sent as Bearer token).
-// No credentials are stored in this repo.
+// - If VITE_ENQUIRY_ENDPOINT is set (a Formspree / Getform / custom endpoint
+//   whose ID is public by design), the enquiry POSTs there as JSON.
+// - Otherwise the visitor's email app opens with everything pre-filled and
+//   the UI reports a HANDOFF, never a "received" success.
+// To connect a provider later: set VITE_ENQUIRY_ENDPOINT in .env (see
+// .env.example). NEVER put secrets in VITE_* vars — they ship in the bundle.
 
 const ENDPOINT = (import.meta.env.VITE_ENQUIRY_ENDPOINT || "").trim();
-const API_KEY = (import.meta.env.VITE_ENQUIRY_KEY || "").trim();
+
+export const STAGES = ["Not yet built", "Under construction", "Ready / possession taken", "Renovation", "Not sure"];
 
 export function validateEnquiry(v) {
   const errors = {};
   if (!v.name || v.name.trim().length < 2) errors.name = "Please tell us your name.";
-  const digits = (v.phone || "").replace(/\D/g, "").replace(/^(91)(?=\d{10}$)/, "");
-  if (digits.length !== 10) errors.phone = "Enter a valid 10-digit mobile number.";
+
+  const raw = (v.phone || "").trim();
+  const digits = raw.replace(/\D/g, "");
+  let phoneOk = false;
+  if (raw.startsWith("+")) {
+    // International format: + followed by 10–15 digits (covers +91 too).
+    phoneOk = digits.length >= 10 && digits.length <= 15;
+  } else {
+    let d = digits;
+    if (/^0\d{10}$/.test(d)) d = d.slice(1); // trunk prefix
+    if (/^91\d{10}$/.test(d)) d = d.slice(2); // country code without +
+    phoneOk = /^\d{10}$/.test(d);
+  }
+  if (!phoneOk) errors.phone = "Enter a valid mobile number (10 digits, or +country code).";
+
   if (v.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim()))
     errors.email = "That email doesn't look right.";
   if (!v.type) errors.type = "Choose a project type.";
@@ -26,7 +37,7 @@ export function validateEnquiry(v) {
   return errors;
 }
 
-function summary(v) {
+export function enquirySummary(v) {
   return [
     `Name: ${v.name}`,
     `Phone: ${v.phone}`,
@@ -35,49 +46,58 @@ function summary(v) {
     `Location: ${v.location}`,
     v.area ? `Approx. area: ${v.area}` : null,
     v.budget ? `Budget: ${v.budget}` : null,
+    v.stage ? `Property stage: ${v.stage}` : null,
+    v.source ? `Interested in: ${v.source}` : null,
     v.message ? `Requirements: ${v.message}` : null,
   ]
     .filter(Boolean)
     .join("\n");
 }
 
-export async function submitEnquiry(values, { signal } = {}) {
+export async function submitEnquiry(values) {
   const payload = {
     name: values.name.trim(),
     phone: values.phone.trim(),
-    email: values.email.trim(),
+    email: (values.email || "").trim(),
     type: values.type,
     location: values.location.trim(),
-    area: values.area.trim(),
-    budget: values.budget,
-    message: values.message.trim(),
+    area: (values.area || "").trim(),
+    budget: values.budget || "",
+    stage: values.stage || "",
+    message: (values.message || "").trim(),
+    source: values.source || "",
     page: window.location.href,
   };
 
   if (ENDPOINT) {
-    const res = await fetch(ENDPOINT, {
-      method: "POST",
-      signal,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        ...(API_KEY ? { Authorization: `Bearer ${API_KEY}` } : {}),
-      },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) throw new Error(`Enquiry service responded ${res.status}. Please try again or call us directly.`);
-    return { channel: "endpoint" };
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 12000);
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: "POST",
+        signal: ctrl.signal,
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(`bad status ${res.status}`);
+      return { channel: "endpoint", payload };
+    } catch (err) {
+      if (err?.name === "AbortError") throw new Error("The enquiry service took too long. Please try again, or call / email us directly.");
+      throw new Error("The enquiry service didn't respond. Please try again, or call / email us directly.");
+    } finally {
+      clearTimeout(timer);
+    }
   }
 
-  // No backend configured: hand the composed enquiry to the studio's inbox
-  // via the visitor's own email app. Reference images can't ride along here,
-  // so we say so honestly in the draft.
-  window.location.href = mailHref(`Project enquiry — ${payload.name} (${payload.type}, ${payload.location})`, `${summary(payload)}\nReference image: to be shared separately (attach it when you write to us).`);
-  return { channel: "email" };
+  // No backend: hand the composed enquiry to the studio's inbox via the
+  // visitor's own email app. Caller must show the HANDOFF state, not success.
+  window.location.href = mailHref(
+    `Project enquiry — ${payload.name} (${payload.type}, ${payload.location})`,
+    enquirySummary(payload)
+  );
+  return { channel: "email", payload };
 }
 
 export function hasEndpoint() {
   return Boolean(ENDPOINT);
 }
-
-export { SITE };

@@ -8,7 +8,7 @@ import { telHref, whatsappHref } from "../lib/contact.js";
 export default function StickyBar() {
   const { pathname } = useLocation();
   if (pathname === "/begin") return null;
-  const wa = whatsappHref("Hello Square Inch Design, I'd like to discuss a project.");
+  const wa = whatsappHref(SITE.whatsappText);
   const items = [
     { label: "CALL", href: telHref(SITE.phones[0]), external: false },
     ...(wa ? [{ label: "WHATSAPP", href: wa, external: true }] : []),
@@ -16,7 +16,7 @@ export default function StickyBar() {
   return (
     <>
       <div className="h-[52px] md:hidden" aria-hidden="true" />
-      <nav aria-label="Quick enquiry" className="fixed bottom-0 inset-x-0 z-40 md:hidden">
+      <nav aria-label="Quick enquiry" className="fixed bottom-0 inset-x-0 z-40 md:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
       <div className="grid" style={{ gridTemplateColumns: `repeat(${items.length + 1}, 1fr)` }}>
         {items.map((a) => (
           <a

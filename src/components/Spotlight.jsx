@@ -58,7 +58,7 @@ export default function Spotlight({ kicker, slides, dark = true, titleClass = "t
       </div>
 
       {/* bottom content */}
-      <div className="absolute bottom-0 inset-x-0 px-5 md:px-10 pb-8 md:pb-10">
+      <div className="absolute bottom-0 inset-x-0 px-5 md:px-10 pb-[calc(var(--bar-h)+2rem)] md:pb-10">
         <AnimatePresence mode="wait">
           <motion.div key={i} initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }} transition={{ duration: 0.6 }}>
             <p className="text-accent text-[11px] tracking-mega">{s.meta}</p>

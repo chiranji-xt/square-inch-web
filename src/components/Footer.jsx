@@ -20,7 +20,7 @@ export default function Footer({ dark = false }) {
               <span key={p}>{k > 0 && " · "}<a href={telHref(p)} className="underline underline-offset-4 hover:text-accent">{p}</a></span>
             ))}
             <br /><a href={mailHref()} className="underline underline-offset-4 hover:text-accent">{SITE.email}</a>
-            {whatsappHref() && <><br /><a href={whatsappHref("Hello Square Inch Design, I'd like to discuss a project.")} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-accent">WhatsApp us</a></>}
+            {whatsappHref() && <><br /><a href={whatsappHref(SITE.whatsappText)} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-accent">WhatsApp us</a></>}
           </p>
         </div>
         <div className="flex flex-col gap-2 text-sm">
