@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { background: #F5F3EE; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+body {
+  @apply bg-bone text-ink font-sans antialiased;
+  overflow-x: hidden;
+}
+
+::selection { background: #E88932; color: #111; }
+
+.display { font-family: Fraunces, Georgia, serif; }
+
+.outline-text {
+  -webkit-text-stroke: 1px rgba(17,17,17,.35);
+  color: transparent;
+}
+.outline-bone {
+  -webkit-text-stroke: 1px rgba(245,243,238,.4);
+  color: transparent;
+}
+
+.img-cine { will-change: transform; transform-origin: center; }
+.vertical-word { writing-mode: vertical-rl; }
+
+:focus-visible { outline: 2px solid #E88932; outline-offset: 3px; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+input, select, textarea {
+  background: transparent;
+  outline: none;
+}
+.field {
+  border-bottom: 1px solid rgba(17,17,17,.25);
+  padding: 0.9rem 0;
+  width: 100%;
+  font-size: 1.05rem;
+}
+.field:focus { border-color: #E88932; }
+.dark .field { border-color: rgba(245,243,238,.3); color: #F5F3EE; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
