@@ -8,7 +8,8 @@ import { mailHref } from "./contact.js";
 // To connect a provider later: set VITE_ENQUIRY_ENDPOINT in .env (see
 // .env.example). NEVER put secrets in VITE_* vars — they ship in the bundle.
 
-const ENDPOINT = (import.meta.env.VITE_ENQUIRY_ENDPOINT || "").trim();
+const ENV = (import.meta.env || {});
+const ENDPOINT = (ENV.VITE_ENQUIRY_ENDPOINT || "").trim();
 
 export const STAGES = ["Not yet built", "Under construction", "Ready / possession taken", "Renovation", "Not sure"];
 
