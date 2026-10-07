@@ -6,7 +6,7 @@ import Footer from "../components/Footer.jsx";
 import { RevealMask } from "../components/motion.jsx";
 import { SITE, PROCESS, WORLDS, STORIES } from "../data/site.js";
 import { submitEnquiry, validateEnquiry, enquirySummary, STAGES } from "../lib/enquiry.js";
-import { telHref, mailHref, whatsappHref } from "../lib/contact.js";
+import { telHref, mailHref, whatsappHref, mapsHref } from "../lib/contact.js";
 
 export function Studio() {
   return (
@@ -21,12 +21,49 @@ export function Studio() {
         <div className="md:col-span-8">
           <p className="display text-2xl md:text-4xl leading-snug">SI Design — trailblazer for 20 years. Creativity and functionality for residential and commercial clients. Visions into captivating realities.</p>
           <p className="mt-6 text-ink/65 max-w-2xl">Personalized approach: understanding each client's tastes and preferences. Client satisfaction as the cornerstone — not a goal. Led by {SITE.lead}.</p>
+          {SITE.services.length > 0 && (
+            <div className="mt-8">
+              <p className="text-[11px] tracking-mega text-ink/60 mb-3">WHAT THE STUDIO DOES</p>
+              <ul className="grid sm:grid-cols-2 gap-2 max-w-2xl">
+                {SITE.services.map((sv) => (
+                  <li key={sv} className="border border-ink/15 px-4 py-3 min-h-[48px] flex items-center text-sm"><span className="h-2 w-2 bg-accent inline-block rotate-45 mr-3 shrink-0" aria-hidden="true" />{sv}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           <div className="grid grid-cols-2 gap-4 mt-8">
             <Photo src="/photos/studio-02.webp" label="MATERIAL TABLE" palette={["#8A867F", "#111"]} className="h-[32vh]" />
             <Photo src="/photos/studio-03.webp" label="SITE / CRAFT" palette={["#111", "#C9A86A"]} className="h-[32vh] mt-8" />
           </div>
         </div>
       </div>
+      <section className="px-5 md:px-10 py-16 border-t border-ink/10">
+        <p className="text-[11px] tracking-mega text-ink/60 mb-6">FIND THE STUDIO</p>
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl">
+          {[["PUNE OFFICE", SITE.pune], ["SATARA OFFICE", SITE.satara]].map(([t, a]) => (
+            <div key={t} className="border border-ink/15 p-6">
+              <p className="text-xs tracking-mega text-accent">{t}</p>
+              <p className="text-sm mt-2 text-ink/80">{a}</p>
+              <a href={mapsHref(a)} target="_blank" rel="noreferrer" className="inline-block mt-4 text-xs tracking-mega border-b border-accent pb-1 hover:text-accent">OPEN IN MAPS →</a>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="px-5 md:px-10 py-16 border-t border-ink/10">
+        <div className="flex items-end justify-between gap-4 mb-8">
+          <h2 className="display text-4xl md:text-6xl">Recent<br />projects.</h2>
+          <Link to="/projects" className="text-sm tracking-widest border-b border-accent pb-1 shrink-0">ALL PROJECTS →</Link>
+        </div>
+        <div className="grid sm:grid-cols-3 gap-4">
+          {STORIES.filter((x) => x.featured).slice(0, 3).map((s) => (
+            <Link key={s.id} to={`/story/${s.id}`} className="group">
+              <Photo src={s.images[0]} label={s.title.toUpperCase()} palette={s.palette} className="h-[30vh] md:h-[36vh]" />
+              <p className="text-accent text-[11px] tracking-mega mt-3">{s.sector?.toUpperCase()} · {s.no}</p>
+              <p className="display text-2xl leading-tight mt-1 group-hover:translate-x-1 transition-transform">{s.title}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
       <section className="bg-night text-bone px-5 md:px-10 py-20">
         <p className="text-accent text-xs tracking-mega">AWARD · IIID 2016 ANCHOR</p>
         <h2 className="display text-4xl md:text-6xl mt-3 max-w-4xl">Commercial Workspace — Small. Runner Up. 1055 sq ft of honest local material.</h2>
@@ -42,43 +79,35 @@ export function Studio() {
 }
 
 export function HowWeBuild() {
-  const steps = [
-    ["01", "Enquiry", "A conversation about your space, needs and way of life."],
-    ["02", "Initial Meeting", "We listen to tastes, culture and daily routines."],
-    ["03", "Basic Plan / Working", "Volumetric thinking — spatial dynamics before decoration."],
-    ["04", "Technical Meeting", "Drawings, services and constructability resolved."],
-    ["05", "Material Selection Assistance", "Stone, wood, light and colour — honest materials."],
-    ["06", "Finalization", "Crafted handover. A space that holds time."],
-  ];
   const lineRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: lineRef, offset: ["start 0.8", "end 0.6"] });
   return (
     <main className="bg-bone pt-24" id="main" tabIndex={-1}>
       <div className="px-5 md:px-10 py-10 flex flex-col md:flex-row justify-between gap-4">
         <h1 className="display text-6xl md:text-9xl">How we<br />build.</h1>
-        <p className="max-w-xs text-ink/65 text-sm self-end">One orange line travels down as you scroll — a blueprint being drawn. Photography appears alongside each stage.</p>
+        <p className="max-w-xs text-ink/65 text-sm self-end">Six steps, in order — from first enquiry to final handover.</p>
       </div>
       <div className="px-5 md:px-10 pb-20 grid md:grid-cols-[1fr_380px] gap-10">
         <div ref={lineRef} className="relative pl-10">
           <div className="absolute left-3 top-0 bottom-0 w-px bg-ink/15" />
           <motion.div style={{ scaleY: scrollYProgress }} className="absolute left-3 top-0 bottom-0 w-px bg-accent origin-top" aria-hidden="true" />
-          {steps.map(([n, t, d], i) => (
-            <RevealMask key={n} from={i % 2 ? "right" : "left"}>
+          {PROCESS.map((p, i) => (
+            <RevealMask key={p.n} from={i % 2 ? "right" : "left"}>
               <div className="py-10 border-b border-ink/10 grid md:grid-cols-2 gap-4 items-center">
                 <div>
-                  <p className="display text-7xl md:text-8xl text-ink/10">{n}</p>
-                  <h2 className="display text-4xl md:text-5xl -mt-6">{t}</h2>
-                  <p className="text-ink/65 mt-2 max-w-sm">{d}</p>
+                  <p className="display text-7xl md:text-8xl text-ink/10">{p.n}</p>
+                  <h2 className="display text-4xl md:text-5xl -mt-6">{p.t}</h2>
+                  <p className="text-ink/65 mt-2 max-w-sm">{p.d}</p>
                 </div>
-                <Photo src={`/photos/process-0${i + 1}.webp`} label={t.toUpperCase()} palette={["#222", "#E88932"]} className="h-[30vh]" />
+                <Photo src={`/photos/process-0${i + 1}.webp`} label={p.t.toUpperCase()} palette={["#222", "#E88932"]} className="h-[30vh]" />
               </div>
             </RevealMask>
           ))}
         </div>
         <aside className="md:sticky md:top-24 h-fit border border-ink/15 p-6">
-          <p className="text-xs tracking-mega text-accent">BLUEPRINT NOTE</p>
-          <p className="display text-2xl mt-2">Scroll slowly. Each stage arrives like a drawing layer.</p>
-          <Link to="/begin" className="inline-block mt-6 bg-ink text-bone px-6 py-3 text-sm tracking-widest hover:bg-accent hover:text-ink">BEGIN WITH 01 →</Link>
+          <p className="text-xs tracking-mega text-accent">A NOTE</p>
+          <p className="display text-2xl mt-2">Enquiry to handover — the whole journey, nothing hidden.</p>
+          <Link to="/begin" className="inline-block mt-6 bg-ink text-bone px-6 py-3 min-h-[48px] text-sm tracking-widest hover:bg-accent hover:text-ink">BEGIN WITH 01 →</Link>
         </aside>
       </div>
       <Footer />
@@ -282,10 +311,15 @@ export function Begin() {
           />
         </div>
         <div className="text-sm space-y-6">
-          <div><p className="text-xs tracking-mega text-accent">PUNE OFFICE</p><p className="text-bone/80 mt-1">{SITE.pune}</p></div>
+          <div>
+            <p className="text-xs tracking-mega text-accent">PUNE OFFICE</p>
+            <p className="text-bone/80 mt-1">{SITE.pune}</p>
+            <a href={mapsHref(SITE.pune)} target="_blank" rel="noreferrer" className="inline-block mt-2 text-xs tracking-mega text-bone/60 border-b border-accent pb-1 hover:text-accent">OPEN IN MAPS →</a>
+          </div>
           <div>
             <p className="text-xs tracking-mega text-accent">SATARA OFFICE</p>
             <p className="text-bone/80 mt-1">{SITE.satara}</p>
+            <a href={mapsHref(SITE.satara)} target="_blank" rel="noreferrer" className="inline-block mt-2 text-xs tracking-mega text-bone/60 border-b border-accent pb-1 hover:text-accent">OPEN IN MAPS →</a>
             <p className="mt-3 text-bone/80">
               {SITE.phones.map((p, k) => (
                 <span key={p}>{k > 0 && <br />}<a href={telHref(p)} className="underline underline-offset-4 hover:text-accent">{p}</a></span>

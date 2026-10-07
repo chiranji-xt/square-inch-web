@@ -24,7 +24,7 @@ export default function StoriesScroll() {
     <section data-room="3" data-room-label="Stories" className="bg-bone">
       <div className="px-5 md:px-10 pt-16 pb-6 flex items-end justify-between gap-4">
         <div>
-          <p className="text-[11px] tracking-mega text-accent">ROOM 04 — STORIES · KEEP SCROLLING — EACH STORY TAKES THE SAME FRAME</p>
+          <p className="text-[11px] tracking-mega text-accent">ROOM 04 — SELECTED STORIES</p>
           <h2 className="display text-4xl md:text-6xl leading-[0.95] mt-2">Stories,<br />not cards.</h2>
         </div>
         <Link to="/worlds" className="text-sm tracking-widest border-b border-accent pb-1 shrink-0">ALL 8 WORLDS →</Link>

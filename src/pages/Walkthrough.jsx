@@ -81,9 +81,18 @@ function Strip() {
   return (
     <section className="bg-ink text-bone overflow-hidden py-10 border-y border-white/10">
       <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ repeat: Infinity, duration: 28, ease: "linear" }} className="flex whitespace-nowrap gap-10 display text-4xl md:text-6xl">
-        {[...WORLDS, ...WORLDS].map((w, i) => (
-          <span key={i} className="flex items-center gap-10"><span className={i % 2 ? "outline-bone" : ""}>{w.name.toUpperCase()}</span><span className="h-3 w-3 bg-accent inline-block rotate-45" /></span>
-        ))}
+        {[...WORLDS, ...WORLDS].map((w, i) => {
+          const dup = i >= WORLDS.length;
+          const inner = (<>
+            <span className={i % 2 ? "outline-bone" : ""}>{w.name.toUpperCase()}</span>
+            <span className="h-3 w-3 bg-accent inline-block rotate-45" aria-hidden="true" />
+          </>);
+          return dup ? (
+            <span key={w.slug + i} aria-hidden="true" className="flex items-center gap-10">{inner}</span>
+          ) : (
+            <Link key={w.slug} to={`/world/${w.slug}`} aria-label={`Explore ${w.name} interiors`} className="flex items-center gap-10 hover:text-accent transition-colors">{inner}</Link>
+          );
+        })}
       </motion.div>
     </section>
   );
@@ -110,7 +119,7 @@ function ProcessTease() {
       <div className="flex flex-col justify-center">
         <p className="text-[11px] tracking-mega text-accent mb-3">ROOM 05 — HOW WE BUILD · SIX STEPS, ONE LINE</p>
         <h2 className="display text-5xl md:text-7xl">How we<br />build.</h2>
-        <p className="mt-4 text-warmgrey max-w-sm">Not six cards. One line travelling down — like a blueprint being drawn as you scroll.</p>
+        <p className="mt-4 text-ink/65 max-w-sm">Six steps, one continuous line — from first enquiry to final handover.</p>
         <Link to="/how-we-build" className="mt-6 w-fit bg-ink text-bone px-7 py-3 tracking-widest text-sm hover:bg-accent hover:text-ink transition-colors">FOLLOW THE LINE →</Link>
         <Cinematic className="mt-8"><Photo src="/photos/artdeco-01.webp" label="STUDIO DETAIL" palette={["#3A3A38", "#C9BFAE"]} className="h-[38vh]" /></Cinematic>
       </div>

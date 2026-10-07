@@ -23,3 +23,8 @@ export function whatsappHref(text = "") {
   const q = text ? `?text=${encodeURIComponent(text)}` : "";
   return `https://wa.me/${SITE.whatsapp}${q}`;
 }
+
+// Google Maps search link for a verified office address.
+export function mapsHref(address) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+}

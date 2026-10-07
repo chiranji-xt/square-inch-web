@@ -57,7 +57,7 @@ export default function InchLens() {
     <section data-room="2" data-room-label="Eight worlds" className="bg-night text-bone py-24 md:py-36">
       <div className="px-5 md:px-10 mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <p className="text-xs tracking-mega text-accent">ROOM 03 — EIGHT WORLDS · SIGNATURE · HOLD TO SEE EVERY INCH</p>
+          <p className="text-xs tracking-mega text-accent">ROOM 03 — EIGHT WORLDS · MOVE ACROSS THE WORK</p>
           <h2 className="display text-5xl md:text-8xl leading-[0.9] mt-3">Move the<br />square inch.</h2>
         </div>
         <p className="max-w-xs text-bone/60 text-sm">Only inside the orange square is the work sharp. Outside is memory. Eight worlds live under your hand.</p>

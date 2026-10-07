@@ -11,7 +11,7 @@ export function Worlds() {
   return (
     <main className="bg-bone pt-24" id="main" tabIndex={-1}>
       <div className="px-5 md:px-10 py-10">
-        <p className="text-xs tracking-mega text-accent">08 WORLDS · NOT FILTERS</p>
+        <p className="text-xs tracking-mega text-accent">EIGHT WORLDS · CHOOSE ONE TO ENTER</p>
         <h1 className="display text-6xl md:text-9xl leading-[0.9]">Eight<br />worlds.</h1>
       </div>
       {WORLDS.map((w, i) => {
