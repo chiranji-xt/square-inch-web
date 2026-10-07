@@ -74,6 +74,26 @@ function ScrollManager({ route }) {
   const positions = useRef({});
   const prevPath = useRef(route.pathname + route.search);
   const first = useRef(true);
+  const liveKey = useRef(route.pathname + route.search);
+  liveKey.current = route.pathname + route.search;
+
+  // Continuously remember where the visitor is on each route, so going
+  // back never depends on catching the exact navigation instant.
+  useEffect(() => {
+    let ticking = false;
+    const save = () => {
+      ticking = false;
+      positions.current[liveKey.current] = window.scrollY;
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(save);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const key = route.pathname + route.search;
