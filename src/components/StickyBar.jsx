@@ -28,7 +28,7 @@ export default function StickyBar() {
             {a.label}
           </a>
         ))}
-        <Link to="/begin" className="bg-accent text-ink text-[11px] tracking-mega text-center py-4 min-h-[52px] flex items-center justify-center font-medium">
+        <Link to="/begin" className="bg-accent text-bone text-[11px] tracking-mega text-center py-4 min-h-[52px] flex items-center justify-center font-medium">
           ENQUIRE
         </Link>
       </div>

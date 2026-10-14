@@ -234,7 +234,7 @@ function Shell() {
 
   return (
     <LenisCtx.Provider value={lenis}>
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[80] focus:bg-accent focus:text-ink focus:px-5 focus:py-3 focus:text-xs focus:tracking-mega">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[80] focus:bg-accent focus:text-bone focus:px-5 focus:py-3 focus:text-xs focus:tracking-mega">
         Skip to content
       </a>
       <Topbar ref={triggerRef} onMenu={() => setMenu(true)} menuOpen={menu} />

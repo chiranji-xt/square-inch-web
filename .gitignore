@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+*.pt
+yolov8n.pt
 
 # Editor directories and files
 .vscode/*

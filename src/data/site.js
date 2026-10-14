@@ -7,7 +7,7 @@ export const SITE = {
   email: "squareinchedesign@yahoo.com",
   pune: "Plot No 11, Prabha Co-operative Housing Society, Mayur Colony, Paud Road, Pune 411038.",
   satara: "'Parijat', 509 A Camp, Satara.",
-  lead: "Siddharth Kolhapure",
+  lead: "Siddhart Kolhapure",
   // WhatsApp number in full international format WITHOUT "+" (e.g. "919823333400").
   // Set this only after the studio confirms which number takes WhatsApp.
   // Leave null and every WhatsApp option in the UI stays hidden.
@@ -22,7 +22,7 @@ export const SITE = {
   whatsappText: "Hello Square Inch Design, I'd like to discuss a project.",
   // Services list for the Studio page. Rendered only when non-empty —
   // populate with client-approved services, e.g. ["Residential interiors"].
-  services: [],
+  services: ["Turnkey Projects", "Civil Work", "Interior Designing", "Architecture Consultation"],
   // Production domain, set at launch (used for canonical URLs + sitemap).
   url: "",
 };
@@ -36,6 +36,29 @@ export const NAV = [
   { label: "Studio", to: "/studio", photo: "/photos/studio-01.webp", preview: "Studio" },
   { label: "Process", to: "/how-we-build", photo: "/photos/process-01.webp", preview: "Process" },
   { label: "Start a Project", to: "/begin", photo: "/photos/traditional-02.webp", preview: "Begin" },
+];
+
+export const TEAM = [
+  { name: "Siddhart Kolhapure", role: "Principal Designer & Co-Founder" },
+  { name: "Prachee Kolhapure", role: "Interior Consultant" },
+];
+
+export const VOICES = [
+  {
+    quote: "Good design according to theme and requirements… Every visitor gives very good reviews about the office look and structure. That's what we required and it's fulfilled.",
+    name: "Dhiraj Khivensara",
+    role: "Civil Developer",
+  },
+  {
+    quote: "Extremely talented team and their aesthetic fit our exact style and budget. Thank you for helping us decor such a beautiful house — highly recommend!",
+    name: "N. R. Bhide",
+    role: "GM, Siemens Ltd.",
+  },
+  {
+    quote: "Very creative, trustworthy and professional. We approached them for our commercial interior project — it was a dream come true.",
+    name: "Adv. Vikram More",
+    role: "Lawyer",
+  },
 ];
 
 export const PROCESS = [

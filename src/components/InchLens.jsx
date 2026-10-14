@@ -117,7 +117,7 @@ export default function InchLens() {
               style={{ left: `${pos.x}%`, top: `${pos.y}%`, transition: "left 120ms ease-out, top 120ms ease-out" }}
             />
           </div>
-          <Link to={`/world/${WORLDS[active].slug}`} className="absolute bottom-6 right-6 z-10 bg-bone text-ink px-6 min-h-[48px] flex items-center text-sm tracking-widest hover:bg-accent transition-colors">ENTER {WORLDS[active].name.toUpperCase()} →</Link>
+          <Link to={`/world/${WORLDS[active].slug}`} className="absolute bottom-6 right-6 z-10 bg-bone text-ink px-6 min-h-[48px] flex items-center text-sm tracking-widest hover:bg-accent hover:text-bone transition-colors">ENTER {WORLDS[active].name.toUpperCase()} →</Link>
         </div>
       </div>
     </section>

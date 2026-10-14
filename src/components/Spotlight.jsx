@@ -69,17 +69,17 @@ export default function Spotlight({ kicker, slides, dark = true, titleClass = "t
                 {s.sub && <p className="text-bone/70 text-sm md:text-base mt-3 max-w-2xl">{s.sub}</p>}
               </div>
               <div className="flex items-center gap-3 shrink-0">
-                <button onClick={() => go(-1)} aria-label="Previous" className="h-12 w-12 rounded-full border border-bone/40 hover:bg-accent hover:text-ink hover:border-accent transition-colors">←</button>
+                <button onClick={() => go(-1)} aria-label="Previous" className="h-12 w-12 border border-bone/40 hover:bg-accent hover:text-bone hover:border-accent transition-colors">←</button>
                 <button
                   onClick={() => setPaused((p) => !p)}
                   aria-label={paused ? "Play slideshow" : "Pause slideshow"}
                   aria-pressed={paused}
-                  className="h-12 w-12 rounded-full border border-bone/40 hover:bg-accent hover:text-ink hover:border-accent transition-colors text-sm"
+                  className="h-12 w-12 border border-bone/40 hover:bg-accent hover:text-bone hover:border-accent transition-colors text-sm"
                 >
                   {paused ? "▶" : "❚❚"}
                 </button>
-                <Link to={s.to} className="h-12 px-8 rounded-full bg-bone/10 border border-bone/40 backdrop-blur flex items-center text-sm tracking-mega hover:bg-accent hover:text-ink hover:border-accent transition-colors">{s.cta ?? "VIEW"}</Link>
-                <button onClick={() => go(1)} aria-label="Next" className="h-12 w-12 rounded-full border border-bone/40 hover:bg-accent hover:text-ink hover:border-accent transition-colors">→</button>
+                <Link to={s.to} className="h-12 px-8 bg-bone/10 border border-bone/40 backdrop-blur flex items-center text-sm tracking-mega hover:bg-accent hover:text-bone hover:border-accent transition-colors">{s.cta ?? "VIEW"}</Link>
+                <button onClick={() => go(1)} aria-label="Next" className="h-12 w-12 border border-bone/40 hover:bg-accent hover:text-bone hover:border-accent transition-colors">→</button>
               </div>
             </div>
           </motion.div>

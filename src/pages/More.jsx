@@ -4,74 +4,114 @@ import { motion, useScroll } from "framer-motion";
 import Photo from "../components/Photo.jsx";
 import Footer from "../components/Footer.jsx";
 import { RevealMask } from "../components/motion.jsx";
-import { SITE, PROCESS, WORLDS, STORIES } from "../data/site.js";
+import { SITE, PROCESS, WORLDS, STORIES, TEAM, VOICES } from "../data/site.js";
 import { submitEnquiry, validateEnquiry, enquirySummary, STAGES } from "../lib/enquiry.js";
 import { telHref, mailHref, whatsappHref, mapsHref } from "../lib/contact.js";
 
 export function Studio() {
   return (
-    <main className="bg-sand text-ink pt-24" id="main" tabIndex={-1}>
-      <div className="px-5 md:px-10 py-10">
-        <p className="text-xs tracking-mega text-accent">THE STUDIO · 20 YEARS</p>
-        <h1 className="display text-6xl md:text-9xl">About,<br />visually.</h1>
-      </div>
-      <RevealMask from="left"><Photo src="/photos/studio-01.webp" label="SI DESIGN STUDIO — SATARA" palette={["#3A3A38", "#E88932"]} className="h-[60vh] md:h-[80vh]" eager /></RevealMask>
-      <div className="px-5 md:px-10 py-14 grid md:grid-cols-12 gap-8">
-        <p className="display text-8xl md:text-9xl md:col-span-4 text-ink/10 leading-none">20</p>
-        <div className="md:col-span-8">
-          <p className="display text-2xl md:text-4xl leading-snug">SI Design — trailblazer for 20 years. Creativity and functionality for residential and commercial clients. Visions into captivating realities.</p>
-          <p className="mt-6 text-ink/65 max-w-2xl">Personalized approach: understanding each client's tastes and preferences. Client satisfaction as the cornerstone — not a goal. Led by {SITE.lead}.</p>
+    <main className="bg-[#F4EDDE] text-[#1F2C46] pt-28 md:pt-32" id="main" tabIndex={-1}>
+      <div className="px-5 md:px-10 pt-8 md:pt-10 pb-14 grid md:grid-cols-12 gap-8">
+        <div className="md:col-span-4">
+          <h2 className="display leading-[0.98] text-6xl md:text-[4.8vw]">
+            <span className="block">About</span>
+            <span className="block italic text-[#E76B46]">Square Inch</span>
+            <span className="block italic text-[#E76B46]">Design.</span>
+          </h2>
+          <div className="relative mt-8 w-full max-w-[300px]">
+            <svg viewBox="0 0 300 200" className="block h-auto w-full" role="img" aria-label="Square Inch mark — red square with inch marks">
+              <rect x="8" y="8" width="184" height="184" fill="#F0442E" />
+              <polygon points="222,8 252,8 226,86 196,86" fill="#F0442E" />
+              <polygon points="262,8 292,8 266,86 236,86" fill="#F0442E" />
+            </svg>
+          </div>
+        </div>
+        <div className="md:col-span-8 md:border-l md:border-[#1F2C46]/15 md:pl-10">
+          <p className="display text-[1.7rem] md:text-[2.55rem] leading-[1.18]">Transforming spaces, elevating lifestyles — <span className="italic text-[#E76B46]">where creativity meets comfort,</span> and your vision becomes home.</p>
+          <div className="mt-6 grid sm:grid-cols-[1.15fr_1fr] gap-6 md:gap-8 max-w-3xl">
+            <p className="leading-[1.75] text-[16.5px] md:text-[17px] text-[#1F2C46]/75">At Square Inch Design, we believe every space should <strong className="font-semibold text-[#1F2C46]">tell a unique story</strong> — blending <strong className="font-semibold text-[#1F2C46]">modern aesthetics</strong> with <strong className="font-semibold text-[#1F2C46]">personalised touches,</strong> from <strong className="font-semibold text-[#1F2C46]">custom furniture</strong> to <strong className="font-semibold text-[#1F2C46]">innovative layouts.</strong> Every detail is thoughtfully crafted to suit the client's vision: <strong className="font-semibold text-[#1F2C46]">visually striking, functional and inviting.</strong></p>
+            <p className="leading-[1.75] text-[16.5px] md:text-[17px] text-[#1F2C46]/75 sm:border-l sm:border-[#1F2C46]/15 sm:pl-6 md:pl-8">A personalised approach — thoroughly understanding each client's <strong className="font-semibold text-[#1F2C46]">unique tastes and preferences.</strong> At SI Design, client satisfaction is not just a goal; it's the <strong className="font-semibold text-[#1F2C46]">cornerstone of our design philosophy.</strong> Led by {SITE.lead}.</p>
+          </div>
           {SITE.services.length > 0 && (
             <div className="mt-8">
-              <p className="text-[11px] tracking-mega text-ink/60 mb-3">WHAT THE STUDIO DOES</p>
-              <ul className="grid sm:grid-cols-2 gap-2 max-w-2xl">
+              <p className="flex items-center gap-4 text-[11px] tracking-mega text-[#1F2C46]/60 mb-3">WHAT THE STUDIO DOES <span aria-hidden="true" className="h-px w-24 md:w-28 bg-[#1F2C46]/25" /></p>
+              <ul className="grid sm:grid-cols-2 gap-3 md:gap-4 max-w-3xl">
                 {SITE.services.map((sv) => (
-                  <li key={sv} className="border border-line/15 px-4 py-3 min-h-[48px] flex items-center text-sm"><span className="h-2 w-2 bg-accent inline-block rotate-45 mr-3 shrink-0" aria-hidden="true" />{sv}</li>
+                  <li key={sv} className="border border-[#1F2C46]/15 bg-white/50 px-5 py-4 min-h-[60px] md:min-h-[68px] flex items-center justify-between gap-3 text-[15px] md:text-base text-[#1F2C46]/90 transition-colors hover:border-[#E76B46]"><span className="flex items-center"><span className="h-2 w-2 bg-[#E76B46] inline-block rotate-45 mr-3 shrink-0" aria-hidden="true" />{sv}</span><span aria-hidden="true" className="text-[#1F2C46]/45">→</span></li>
                 ))}
               </ul>
             </div>
           )}
-          <div className="grid grid-cols-2 gap-4 mt-8">
-            <Photo src="/photos/studio-02.webp" label="MATERIAL TABLE" palette={["#8A867F", "#111"]} className="h-[32vh]" />
-            <Photo src="/photos/studio-03.webp" label="SITE / CRAFT" palette={["#111", "#C9A86A"]} className="h-[32vh] mt-8" />
-          </div>
         </div>
       </div>
-      <section className="px-5 md:px-10 py-16 border-t border-ink/10">
-        <p className="text-[11px] tracking-mega text-ink/60 mb-6">FIND THE STUDIO</p>
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl">
-          {[["PUNE OFFICE", SITE.pune], ["SATARA OFFICE", SITE.satara]].map(([t, a]) => (
-            <div key={t} className="border border-ink/15 p-6">
-              <p className="text-xs tracking-mega text-accent">{t}</p>
-              <p className="text-sm mt-2 text-ink/80">{a}</p>
-              <a href={mapsHref(a)} target="_blank" rel="noreferrer" className="inline-block mt-4 text-xs tracking-mega border-b border-accent pb-1 hover:text-accent">OPEN IN MAPS →</a>
+      <section className="bg-[#E76B46] text-[#F4EDDE] px-5 md:px-10 pt-14 md:pt-20 pb-20 md:pb-28 relative z-10 -mt-8 md:-mt-12 rounded-t-[24px] md:rounded-t-[32px]">
+        <p className="display text-3xl md:text-5xl leading-[1.05] max-w-4xl">“Every space should tell a <span className="italic text-[#1F2C46]">unique story</span> — visually striking, functional and inviting.”</p>
+        <p className="mt-5 text-[11px] tracking-mega text-[#F4EDDE]/80">SQUARE INCH DESIGN · PUNE — SATARA</p>
+      </section>
+      <section className="px-5 md:px-10 pt-16 pb-24 md:pb-28 border-t border-[#1F2C46]/10">
+        <p className="text-[11px] tracking-mega text-[#E76B46] mb-2">THE TEAM</p>
+        <h2 className="display text-4xl md:text-6xl leading-[0.95]">Two people,<br /><span className="italic text-[#E76B46]">one cornerstone.</span></h2>
+        <div className="grid sm:grid-cols-2 gap-4 mt-8 max-w-4xl">
+          {TEAM.map((m, ti) => (
+            <div key={m.name} className="group border border-[#1F2C46]/15 bg-white/40 p-6 transition-colors hover:border-[#E76B46]">
+              <p className="text-[11px] tracking-mega text-[#E76B46]">0{ti + 1}</p>
+              <p className="display text-2xl leading-tight mt-3">{m.name}</p>
+              <p className="text-[11px] tracking-mega text-[#1F2C46]/60 mt-2">{m.role.toUpperCase()}</p>
             </div>
           ))}
         </div>
       </section>
-      <section className="px-5 md:px-10 py-16 border-t border-ink/10">
+      <section className="bg-[#1F2C46] text-[#F4EDDE] px-5 md:px-10 pt-16 md:pt-20 pb-24 md:pb-28 relative z-10 -mt-8 md:-mt-12 rounded-t-[24px] md:rounded-t-[32px]">
+        <p className="text-[11px] tracking-mega text-[#E76B46] mb-2">CLIENT WORDS</p>
+        <h2 className="display text-4xl md:text-6xl leading-[0.95]">What our<br /><span className="italic text-[#E76B46]">clients say.</span></h2>
+        <div className="grid md:grid-cols-3 gap-4 mt-8">
+          {VOICES.map((v) => (
+            <figure key={v.name} className="border border-[#F4EDDE]/15 p-6 flex flex-col bg-white/[0.04] transition-colors hover:border-[#E76B46]">
+              <span aria-hidden="true" className="display text-5xl leading-[0.6] text-[#E76B46]">“</span>
+              <blockquote className="mt-3 text-sm leading-relaxed text-[#F4EDDE]/80">{v.quote}</blockquote>
+              <figcaption className="mt-5 pt-4 border-t border-[#F4EDDE]/10">
+                <p className="font-medium text-sm">{v.name}</p>
+                <p className="text-[11px] tracking-mega text-[#F4EDDE]/55 mt-1">{v.role.toUpperCase()}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+      <section className="bg-[#F4EDDE] px-5 md:px-10 pt-16 md:pt-20 pb-16 relative z-20 -mt-8 md:-mt-12 rounded-t-[24px] md:rounded-t-[32px]">
+        <p className="text-[11px] tracking-mega text-[#1F2C46]/60 mb-6">FIND THE STUDIO</p>
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl">
+          {[["PUNE OFFICE", SITE.pune], ["SATARA OFFICE", SITE.satara]].map(([t, a]) => (
+            <div key={t} className="border border-[#1F2C46]/15 bg-white/40 p-6">
+              <p className="text-xs tracking-mega text-[#E76B46]">{t}</p>
+              <p className="text-sm mt-2 text-[#1F2C46]/80">{a}</p>
+              <a href={mapsHref(a)} target="_blank" rel="noreferrer" className="inline-block mt-4 text-xs tracking-mega text-[#1F2C46] border-b border-[#E76B46] pb-1 hover:text-[#E76B46]">OPEN IN MAPS →</a>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="px-5 md:px-10 py-16 border-t border-[#1F2C46]/10">
         <div className="flex items-end justify-between gap-4 mb-8">
-          <h2 className="display text-4xl md:text-6xl">Recent<br />projects.</h2>
-          <Link to="/projects" className="text-sm tracking-widest border-b border-accent pb-1 shrink-0 text-ink">ALL PROJECTS →</Link>
+          <h2 className="display text-4xl md:text-6xl leading-[0.95]">Recent<br /><span className="italic text-[#E76B46]">projects.</span></h2>
+          <Link to="/projects" className="text-sm tracking-widest border-b border-[#E76B46] pb-1 shrink-0 text-[#1F2C46] hover:text-[#E76B46] transition-colors">ALL PROJECTS →</Link>
         </div>
         <div className="grid sm:grid-cols-3 gap-4">
           {STORIES.filter((x) => x.featured).slice(0, 3).map((s) => (
-            <Link key={s.id} to={`/story/${s.id}`} className="group text-ink">
+            <Link key={s.id} to={`/story/${s.id}`} className="group text-[#1F2C46]">
               <Photo src={s.images[0]} label={s.title.toUpperCase()} palette={s.palette} className="h-[30vh] md:h-[36vh]" />
-              <p className="text-accent text-[11px] tracking-mega mt-3">{s.sector?.toUpperCase()} · {s.no}</p>
+              <p className="text-[#E76B46] text-[11px] tracking-mega mt-3">{s.sector?.toUpperCase()} · {s.no}</p>
               <p className="display text-2xl leading-tight mt-1 group-hover:translate-x-1 transition-transform">{s.title}</p>
             </Link>
           ))}
         </div>
       </section>
-      <section className="bg-night text-bone px-5 md:px-10 py-20">
-        <p className="text-accent text-xs tracking-mega">AWARD · IIID 2016 ANCHOR</p>
-        <h2 className="display text-4xl md:text-6xl mt-3 max-w-4xl">Commercial Workspace — Small. Runner Up. 1055 sq ft of honest local material.</h2>
+      <section className="bg-[#1F2C46] text-[#F4EDDE] px-5 md:px-10 py-20">
+        <p className="text-[#E76B46] text-xs tracking-mega">AWARD · IIID 2016 ANCHOR</p>
+        <h2 className="display text-4xl md:text-6xl mt-3 max-w-4xl leading-[1.02]">Commercial Workspace — Small. <span className="italic text-[#E76B46]">Runner Up.</span> 1055 sq ft of honest local material.</h2>
         <div className="grid md:grid-cols-2 gap-6 mt-8">
           <Photo src="/photos/award-01.webp" label="CERTIFICATE" palette={["#111", "#E88932"]} className="h-[40vh]" />
           <Photo src="/photos/award-02.webp" label="PUBLISHED FEATURE" palette={["#2B2E33", "#E8E4DA"]} className="h-[40vh]" />
         </div>
-        <Link to="/begin" className="inline-block mt-8 bg-accent text-ink px-7 py-3 text-sm tracking-widest">WORK WITH THE STUDIO →</Link>
+        <Link to="/begin" className="inline-block mt-8 bg-[#E76B46] text-[#1F2C46] px-7 py-3 text-sm tracking-widest hover:bg-[#F4EDDE] transition-colors">WORK WITH THE STUDIO →</Link>
       </section>
       <Footer />
     </main>
@@ -271,7 +311,7 @@ function EnquiryForm({ initialMessage = "", source = "" }) {
         <textarea name="message" rows={4} value={v.message} onChange={set("message")} placeholder="Rooms, style you like, timeline…" className={`${inputCls()} resize-y`} />)}
       {status === "error" && <p className="text-accent text-sm" role="alert">{errorMsg}</p>}
       <div className="pt-2">
-        <button type="submit" disabled={status === "sending"} className="bg-accent text-ink px-8 py-4 tracking-widest text-sm hover:bg-bone transition-colors disabled:opacity-60 disabled:cursor-wait min-h-[48px]">
+        <button type="submit" disabled={status === "sending"} className="bg-accent text-bone px-8 py-4 tracking-widest text-sm hover:bg-bone hover:text-ink transition-colors disabled:opacity-60 disabled:cursor-wait min-h-[48px]">
           {status === "sending" ? "SENDING…" : "SEND ENQUIRY →"}
         </button>
         <p className="text-ink/60 text-xs mt-3">Fields marked * are required. {SITE.privacyNote}</p>

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-html { background: #181715; }
+html { background: #1B1A18; }
 
 /* Height of the mobile sticky enquiry bar; 0 on desktop. */
 :root { --bar-h: 52px; }
@@ -50,11 +50,11 @@ input, select, textarea {
 }
 .field:focus { border-color: #F0442E; }
 .dark .field { border-color: rgba(241,236,227,.3); color: #F1ECE3; }
-select.field option { color: #181715; }
+select.field option { color: #1B1A18; }
 
-/* Light editorial rooms (warm greige): dark-ink form controls. */
-.form-light .field { border-color: rgba(24,23,21,.35); color: #181715; }
-.form-light .field::placeholder { color: rgba(24,23,21,.45); }
+/* Light editorial rooms (warm ivory): dark-ink form controls. */
+.form-light .field { border-color: rgba(27,26,24,.35); color: #1B1A18; }
+.form-light .field::placeholder { color: rgba(27,26,24,.45); }
 .form-light .field:focus { border-color: #F0442E; }
 
 @media (prefers-reduced-motion: reduce) {

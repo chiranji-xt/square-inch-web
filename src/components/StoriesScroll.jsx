@@ -85,12 +85,12 @@ export default function StoriesScroll() {
           {/* right rail: counter + dots + scroll progress */}
           <div className="absolute right-5 md:right-10 top-1/2 -translate-y-1/2 flex flex-col items-center gap-3">
             <span className="display text-xl md:text-2xl">{String(i + 1).padStart(2, "0")}</span>
-            <div className="relative w-px h-24 bg-ink/15">
+            <div className="relative w-px h-24 bg-bone/15">
               <motion.div style={{ scaleY: scrollYProgress }} className="absolute inset-0 bg-accent origin-top" />
             </div>
             <div className="flex flex-col gap-2">
               {picks.map((p, d) => (
-                <span key={p.id} className={`h-2 w-2 rotate-45 ${d === i ? "bg-accent" : "bg-ink/20"}`} />
+                <span key={p.id} className={`h-2 w-2 rotate-45 ${d === i ? "bg-accent" : "bg-bone/20"}`} />
               ))}
             </div>
             <span className="display text-xl md:text-2xl opacity-40">{String(picks.length).padStart(2, "0")}</span>

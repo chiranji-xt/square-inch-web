@@ -25,7 +25,7 @@ export default function Projects() {
               key={c}
               onClick={() => setParams(c === "All" ? {} : { sector: c })}
               aria-pressed={sector === c}
-              className={`border px-5 py-2.5 min-h-[48px] text-xs tracking-mega transition-colors ${sector === c ? "bg-accent border-accent text-ink" : "border-line/20 text-bone/70 hover:border-line/60 hover:text-bone"}`}
+              className={`border px-5 py-2.5 min-h-[48px] text-xs tracking-mega transition-colors ${sector === c ? "bg-accent border-accent text-bone" : "border-line/20 text-bone/70 hover:border-line/60 hover:text-bone"}`}
             >
               {c.toUpperCase()}
             </button>

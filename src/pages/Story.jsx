@@ -51,7 +51,7 @@ export default function StoryDetail() {
         </div>
         <div className="md:col-span-4 flex flex-col justify-end gap-3">
           <p className="display text-8xl text-bone/10">{s.no}</p>
-          <Link to={`/begin?project=${s.id}`} className="w-fit bg-accent text-ink px-6 py-3 min-h-[48px] flex items-center text-sm tracking-widest hover:bg-bone transition-colors">ENQUIRE ABOUT A PROJECT LIKE THIS →</Link>
+          <Link to={`/begin?project=${s.id}`} className="w-fit bg-accent text-bone px-6 py-3 min-h-[48px] flex items-center text-sm tracking-widest hover:bg-bone hover:text-ink transition-colors">ENQUIRE ABOUT A PROJECT LIKE THIS →</Link>
           <Link to="/projects" className="w-fit text-sm tracking-widest border-b border-line/30 pb-1 hover:border-accent">← ALL PROJECTS</Link>
         </div>
       </div>

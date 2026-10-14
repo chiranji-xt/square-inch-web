@@ -4,22 +4,28 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Primary surfaces: deep warm charcoals, never flat black.
-        ink: "#181715",
-        night: "#211F1B",
-        surface: "#2A2722",
-        // Light side: warm paper tones for text and light accents.
+        // STRICT THEME — Dark charcoal surfaces.
+        ink: "#1B1A18",
+        night: "#25231F",
+        surface: "#302B25",
+        // STRICT THEME — Warm ivory / stone light side.
         bone: "#F1ECE3",
-        sand: "#D8D0C3",
-        // Text hierarchy on dark.
-        fog: "#AAA196",
-        warmgrey: "#777168",
+        ivory: "#F0EBE2",
+        sand: "#E9E3D8",
+        stone: "#CFC5B7",
+        beige: "#A99E91",
+        // Text hierarchy.
+        // On dark: body #B8AEA2, muted #8C8379. On light: body #6D665E, muted #847B71.
+        fog: "#B8AEA2",
+        mist: "#8C8379",
+        warmgrey: "#6D665E",
+        taupe: "#847B71",
         // Brand vermilion — architectural marking, used sparingly.
         accent: "#F0442E",
         ember: "#C93828",
-        // Hairline borders.
+        // Hairline borders: dark bg #3A3630, light bg #B9B0A5.
         line: "#3A3630",
-        lineLight: "#615A51",
+        lineLight: "#B9B0A5",
       },
       fontFamily: {
         display: ["Fraunces", "Georgia", "serif"],

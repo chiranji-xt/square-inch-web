@@ -7,7 +7,7 @@ export default function NotFound() {
       <h1 className="display leading-[0.85] text-[32vw] md:text-[18vw] mt-2">404</h1>
       <p className="text-bone/70 text-sm max-w-sm mt-4">This room doesn't exist in the exhibition. The work is all still here, though.</p>
       <div className="flex flex-wrap gap-3 mt-8">
-        <Link to="/" className="bg-accent text-ink px-7 py-3.5 min-h-[48px] flex items-center text-xs tracking-mega hover:bg-bone transition-colors">BACK TO THE ENTRANCE</Link>
+        <Link to="/" className="bg-accent text-bone px-7 py-3.5 min-h-[48px] flex items-center text-xs tracking-mega hover:bg-bone hover:text-ink transition-colors">BACK TO THE ENTRANCE</Link>
         <Link to="/worlds" className="border border-bone/60 px-7 py-3.5 min-h-[48px] flex items-center text-xs tracking-mega hover:bg-bone hover:text-ink transition-colors">EXPLORE THE WORK</Link>
       </div>
     </main>
