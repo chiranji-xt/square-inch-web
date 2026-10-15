@@ -122,22 +122,22 @@ export function HowWeBuild() {
   const lineRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: lineRef, offset: ["start 0.8", "end 0.6"] });
   return (
-    <main className="bg-sand text-ink pt-24" id="main" tabIndex={-1}>
+    <main className="bg-[#F4EDDE] text-[#1F2C46] pt-28 md:pt-32" id="main" tabIndex={-1}>
       <div className="px-5 md:px-10 py-10 flex flex-col md:flex-row justify-between gap-4">
-        <h1 className="display text-6xl md:text-9xl">How we<br />build.</h1>
-        <p className="max-w-xs text-ink/65 text-sm self-end">Six steps, in order — from first enquiry to final handover.</p>
+        <h1 className="display text-6xl md:text-9xl">How we<br /><span className="italic text-[#E76B46]">build.</span></h1>
+        <p className="max-w-xs text-[#1F2C46]/65 text-sm self-end">Six steps, in order — from first enquiry to final handover.</p>
       </div>
       <div className="px-5 md:px-10 pb-20 grid md:grid-cols-[1fr_380px] gap-10">
         <div ref={lineRef} className="relative pl-10">
           <div className="absolute left-3 top-0 bottom-0 w-px bg-ink/15" />
-          <motion.div style={{ scaleY: scrollYProgress }} className="absolute left-3 top-0 bottom-0 w-px bg-accent origin-top" aria-hidden="true" />
+          <motion.div style={{ scaleY: scrollYProgress }} className="absolute left-3 top-0 bottom-0 w-px bg-[#E76B46] origin-top" aria-hidden="true" />
           {PROCESS.map((p, i) => (
             <RevealMask key={p.n} from={i % 2 ? "right" : "left"}>
               <div className="py-10 border-b border-ink/10 grid md:grid-cols-2 gap-4 items-center">
                 <div>
-                  <p className="display text-7xl md:text-8xl text-ink/10">{p.n}</p>
+                  <p className="display text-7xl md:text-8xl text-[#1F2C46]/10">{p.n}</p>
                   <h2 className="display text-4xl md:text-5xl -mt-6">{p.t}</h2>
-                  <p className="text-ink/65 mt-2 max-w-sm">{p.d}</p>
+                  <p className="text-[#1F2C46]/65 mt-2 max-w-sm">{p.d}</p>
                 </div>
                 <Photo src={`/photos/process-0${i + 1}.webp`} label={p.t.toUpperCase()} palette={["#222", "#E88932"]} className="h-[30vh]" />
               </div>
@@ -145,9 +145,9 @@ export function HowWeBuild() {
           ))}
         </div>
         <aside className="md:sticky md:top-24 h-fit border border-ink/15 p-6">
-          <p className="text-xs tracking-mega text-accent">A NOTE</p>
+          <p className="text-xs tracking-mega text-[#E76B46]">A NOTE</p>
           <p className="display text-2xl mt-2">Enquiry to handover — the whole journey, nothing hidden.</p>
-          <Link to="/begin" className="inline-block mt-6 border border-ink/30 text-ink px-6 py-3 min-h-[48px] text-sm tracking-widest hover:border-accent hover:text-accent transition-colors">BEGIN WITH 01 →</Link>
+          <Link to="/begin" className="inline-block mt-6 border border-ink/30 text-[#1F2C46] px-6 py-3 min-h-[48px] text-sm tracking-widest hover:border-[#E76B46] hover:text-[#E76B46] transition-colors">BEGIN WITH 01 →</Link>
         </aside>
       </div>
       <Footer />
@@ -235,26 +235,26 @@ function EnquiryForm({ initialMessage = "", source = "" }) {
     const firstName = v.name.split(" ")[0] || "friend";
     return (
       <div className="border border-ink/20 p-8 md:p-10 max-w-xl" role="status">
-        <p className="text-accent text-[11px] tracking-mega">{status === "sent" ? "ENQUIRY RECEIVED" : "ONE STEP LEFT"}</p>
+        <p className="text-[#E76B46] text-[11px] tracking-mega">{status === "sent" ? "ENQUIRY RECEIVED" : "ONE STEP LEFT"}</p>
         <h2 ref={resultRef} tabIndex={-1} className="display text-4xl md:text-5xl mt-3 outline-none">Thank you, {firstName}.</h2>
         {status === "sent" ? (
-          <p className="text-ink/70 text-sm mt-4">
+          <p className="text-[#1F2C46]/70 text-sm mt-4">
             Your enquiry is with the studio.
             {SITE.responseTime ? ` ${SITE.responseTime}` : ""}
           </p>
         ) : (
-          <div className="text-ink/70 text-sm mt-4 space-y-3">
+          <div className="text-[#1F2C46]/70 text-sm mt-4 space-y-3">
             <p>Your email app should have opened with everything pre-filled. Press send to complete your enquiry.</p>
             <p>No email app? Copy the text and send it any way you like:</p>
             <CopyEnquiry values={{ ...v, source }} />
           </div>
         )}
-        <p className="text-ink/60 text-sm mt-4">
+        <p className="text-[#1F2C46]/60 text-sm mt-4">
           Prefer to talk now?{" "}
-          <a className="underline underline-offset-4 hover:text-accent" href={telHref(SITE.phones[0])}>Call {SITE.phones[0]}</a>
-          {" · "}<a className="underline underline-offset-4 hover:text-accent" href={mailHref(`Project enquiry — ${v.name}`)}>Email us</a>
+          <a className="underline underline-offset-4 hover:text-[#E76B46]" href={telHref(SITE.phones[0])}>Call {SITE.phones[0]}</a>
+          {" · "}<a className="underline underline-offset-4 hover:text-[#E76B46]" href={mailHref(`Project enquiry — ${v.name}`)}>Email us</a>
           {whatsappHref() && (
-            <> · <a className="underline underline-offset-4 hover:text-accent" href={whatsappHref(SITE.whatsappText)} target="_blank" rel="noreferrer">WhatsApp us</a></>
+            <> · <a className="underline underline-offset-4 hover:text-[#E76B46]" href={whatsappHref(SITE.whatsappText)} target="_blank" rel="noreferrer">WhatsApp us</a></>
           )}
         </p>
         <button onClick={() => { setV({ ...emptyForm, message: initialMessage }); setStatus("idle"); }} className="mt-6 border border-ink/40 px-6 py-2.5 min-h-[48px] text-xs tracking-mega hover:bg-ink hover:text-bone transition-colors">
@@ -266,13 +266,13 @@ function EnquiryForm({ initialMessage = "", source = "" }) {
 
   const field = (id, label, required, error, input) => (
     <label className="block" data-error={error ? "true" : undefined}>
-      <span className="text-[11px] tracking-mega text-ink/60">{label}{required ? " *" : " (OPTIONAL)"}</span>
+      <span className="text-[11px] tracking-mega text-[#1F2C46]/60">{label}{required ? " *" : " (OPTIONAL)"}</span>
       {input}
-      {error && <span id={`${id}-error`} className="block text-accent text-xs mt-1" role="alert">{error}</span>}
+      {error && <span id={`${id}-error`} className="block text-[#E76B46] text-xs mt-1" role="alert">{error}</span>}
     </label>
   );
 
-  const inputCls = (bad) => `field placeholder:text-ink/40 ${bad ? "border-accent" : ""}`;
+  const inputCls = (bad) => `field placeholder:text-[#1F2C46]/40 ${bad ? "border-[#E76B46]" : ""}`;
 
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-5 max-w-xl form-light">
@@ -287,8 +287,8 @@ function EnquiryForm({ initialMessage = "", source = "" }) {
       <div className="grid sm:grid-cols-2 gap-5">
         {field("type", "PROJECT TYPE", true, errors.type,
           <select name="type" value={v.type} onChange={set("type")} aria-invalid={!!errors.type} aria-describedby={errors.type ? "type-error" : undefined} className={inputCls(errors.type)}>
-            <option value="" className="text-ink">Select…</option>
-            {TYPES.map((t) => <option key={t} value={t} className="text-ink">{t}</option>)}
+            <option value="" className="text-[#1F2C46]">Select…</option>
+            {TYPES.map((t) => <option key={t} value={t} className="text-[#1F2C46]">{t}</option>)}
           </select>)}
         {field("location", "PROJECT LOCATION", true, errors.location,
           <input name="location" type="text" value={v.location} onChange={set("location")} placeholder="Pune / Satara / …" aria-invalid={!!errors.location} aria-describedby={errors.location ? "location-error" : undefined} className={inputCls(errors.location)} />)}
@@ -298,23 +298,23 @@ function EnquiryForm({ initialMessage = "", source = "" }) {
           <input name="area" type="text" value={v.area} onChange={set("area")} placeholder="e.g. 1200 sqft" className={inputCls()} />)}
         {field("budget", "BUDGET RANGE", false, null,
           <select name="budget" value={v.budget} onChange={set("budget")} className={inputCls()}>
-            <option value="" className="text-ink">Select…</option>
-            {BUDGETS.map((b) => <option key={b} value={b} className="text-ink">{b}</option>)}
+            <option value="" className="text-[#1F2C46]">Select…</option>
+            {BUDGETS.map((b) => <option key={b} value={b} className="text-[#1F2C46]">{b}</option>)}
           </select>)}
       </div>
       {field("stage", "PROPERTY STAGE", false, null,
         <select name="stage" value={v.stage} onChange={set("stage")} className={inputCls()}>
-          <option value="" className="text-ink">Select…</option>
-          {STAGES.map((s) => <option key={s} value={s} className="text-ink">{s}</option>)}
+          <option value="" className="text-[#1F2C46]">Select…</option>
+          {STAGES.map((s) => <option key={s} value={s} className="text-[#1F2C46]">{s}</option>)}
         </select>)}
       {field("message", "PROJECT REQUIREMENTS", false, null,
         <textarea name="message" rows={4} value={v.message} onChange={set("message")} placeholder="Rooms, style you like, timeline…" className={`${inputCls()} resize-y`} />)}
-      {status === "error" && <p className="text-accent text-sm" role="alert">{errorMsg}</p>}
+      {status === "error" && <p className="text-[#E76B46] text-sm" role="alert">{errorMsg}</p>}
       <div className="pt-2">
-        <button type="submit" disabled={status === "sending"} className="bg-accent text-bone px-8 py-4 tracking-widest text-sm hover:bg-bone hover:text-ink transition-colors disabled:opacity-60 disabled:cursor-wait min-h-[48px]">
+        <button type="submit" disabled={status === "sending"} className="bg-[#E76B46] text-bone px-8 py-4 tracking-widest text-sm hover:bg-[#1F2C46] hover:text-[#F4EDDE] transition-colors disabled:opacity-60 disabled:cursor-wait min-h-[48px]">
           {status === "sending" ? "SENDING…" : "SEND ENQUIRY →"}
         </button>
-        <p className="text-ink/60 text-xs mt-3">Fields marked * are required. {SITE.privacyNote}</p>
+        <p className="text-[#1F2C46]/60 text-xs mt-3">Fields marked * are required. {SITE.privacyNote}</p>
       </div>
     </form>
   );
@@ -328,20 +328,20 @@ export function Begin() {
   const contextTitle = storyCtx ? storyCtx.title : worldCtx ? `${worldCtx.name} interiors` : "";
   const contextKey = storyCtx ? `project:${storyCtx.id}` : worldCtx ? `world:${worldCtx.slug}` : "none";
   return (
-    <main className="bg-sand text-ink pt-24" id="main">
+    <main className="bg-[#F4EDDE] text-[#1F2C46] pt-28 md:pt-32" id="main">
       <div className="relative h-[52vh] overflow-hidden">
         <Photo src="/photos/traditional-02.webp" label="LET'S CREATE SOMETHING" palette={["#2B2118", "#E88932"]} className="h-[52vh]" eager />
         <div className="absolute inset-0 bg-ink/45 flex items-end p-5 md:p-10 text-bone">
-          <h1 className="display text-6xl md:text-9xl leading-[0.9]">Let's<br />create.</h1>
+          <h1 className="display text-6xl md:text-9xl leading-[0.9]">Let's<br /><span className="italic text-[#E76B46]">create.</span></h1>
         </div>
       </div>
       <div className="grid md:grid-cols-2 gap-10 px-5 md:px-10 py-14">
         <div>
-          <p className="text-[11px] tracking-mega text-accent mb-4">WHAT HAPPENS NEXT — {PROCESS[0].t.toUpperCase()} → {PROCESS[1].t.toUpperCase()}</p>
+          <p className="text-[11px] tracking-mega text-[#E76B46] mb-4">WHAT HAPPENS NEXT — {PROCESS[0].t.toUpperCase()} → {PROCESS[1].t.toUpperCase()}</p>
           {contextTitle && (
-            <p className="text-sm text-ink/80 mb-5">
-              Enquiring about: <span className="text-ink">“{contextTitle}”</span>{" "}
-              <Link to="/begin" className="underline underline-offset-4 text-ink/60 hover:text-accent">change</Link>
+            <p className="text-sm text-[#1F2C46]/80 mb-5">
+              Enquiring about: <span className="text-[#1F2C46]">“{contextTitle}”</span>{" "}
+              <Link to="/begin" className="underline underline-offset-4 text-[#1F2C46]/60 hover:text-[#E76B46]">change</Link>
             </p>
           )}
           <EnquiryForm
@@ -352,19 +352,19 @@ export function Begin() {
         </div>
         <div className="text-sm space-y-6">
           <div>
-            <p className="text-xs tracking-mega text-accent">PUNE OFFICE</p>
-            <p className="text-ink/80 mt-1">{SITE.pune}</p>
-            <a href={mapsHref(SITE.pune)} target="_blank" rel="noreferrer" className="inline-block mt-2 text-xs tracking-mega text-ink/60 border-b border-accent pb-1 hover:text-accent">OPEN IN MAPS →</a>
+            <p className="text-xs tracking-mega text-[#E76B46]">PUNE OFFICE</p>
+            <p className="text-[#1F2C46]/80 mt-1">{SITE.pune}</p>
+            <a href={mapsHref(SITE.pune)} target="_blank" rel="noreferrer" className="inline-block mt-2 text-xs tracking-mega text-[#1F2C46]/60 border-b border-[#E76B46] pb-1 hover:text-[#E76B46]">OPEN IN MAPS →</a>
           </div>
           <div>
-            <p className="text-xs tracking-mega text-accent">SATARA OFFICE</p>
-            <p className="text-ink/80 mt-1">{SITE.satara}</p>
-            <a href={mapsHref(SITE.satara)} target="_blank" rel="noreferrer" className="inline-block mt-2 text-xs tracking-mega text-ink/60 border-b border-accent pb-1 hover:text-accent">OPEN IN MAPS →</a>
-            <p className="mt-3 text-ink/80">
+            <p className="text-xs tracking-mega text-[#E76B46]">SATARA OFFICE</p>
+            <p className="text-[#1F2C46]/80 mt-1">{SITE.satara}</p>
+            <a href={mapsHref(SITE.satara)} target="_blank" rel="noreferrer" className="inline-block mt-2 text-xs tracking-mega text-[#1F2C46]/60 border-b border-[#E76B46] pb-1 hover:text-[#E76B46]">OPEN IN MAPS →</a>
+            <p className="mt-3 text-[#1F2C46]/80">
               {SITE.phones.map((p, k) => (
-                <span key={p}>{k > 0 && <br />}<a href={telHref(p)} className="inline-block py-1 underline underline-offset-4 hover:text-accent">{p}</a></span>
+                <span key={p}>{k > 0 && <br />}<a href={telHref(p)} className="inline-block py-1 underline underline-offset-4 hover:text-[#E76B46]">{p}</a></span>
               ))}
-              <br /><a href={mailHref()} className="inline-block py-1 underline underline-offset-4 hover:text-accent">{SITE.email}</a>
+              <br /><a href={mailHref()} className="inline-block py-1 underline underline-offset-4 hover:text-[#E76B46]">{SITE.email}</a>
             </p>
             {wa && <a href={wa} target="_blank" rel="noreferrer" className="inline-block mt-4 border border-ink/40 px-6 py-2.5 text-xs tracking-mega hover:bg-ink hover:text-bone transition-colors">WHATSAPP US →</a>}
           </div>
