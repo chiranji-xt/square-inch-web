@@ -371,7 +371,7 @@ export function Begin() {
             </p>
             {wa && <a href={wa} target="_blank" rel="noreferrer" className="inline-block mt-4 border border-ink/40 px-6 py-2.5 text-xs tracking-mega hover:bg-ink hover:text-bone transition-colors">WHATSAPP US →</a>}
           </div>
-          <Photo src="/photos/luxury-02.webp" label="DETAIL — GILDED FIXTURE" palette={["#0E1E3A", "#C9A86A"]} className="h-[30vh]" />
+          <Photo src="/photos/luxury-02.webp" label="LUXURY INTERIOR" palette={["#0E1E3A", "#C9A86A"]} className="h-[30vh]" />
         </div>
       </div>
       <Footer dark />

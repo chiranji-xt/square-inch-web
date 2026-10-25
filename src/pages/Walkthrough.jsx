@@ -58,7 +58,7 @@ function Hero() {
         <Cinematic scale={1.06} className="w-full h-full">
           <Photo
             src="/photos/luxury-01.webp"
-            label="Grey sofa with brass arc lamp — Square Inch interior"
+            label="Living room with yellow lounge chairs — Square Inch interior"
             palette={["#0E1E3A", "#C9A86A"]}
             className="w-full h-full"
             imgClass="object-cover saturate-[1.06]"
@@ -158,7 +158,7 @@ function Hero() {
         <div className="absolute bottom-0 inset-x-0 px-5 md:px-7 pb-5 md:pb-7 flex items-end justify-between gap-3">
           <div className="bg-ink/55 backdrop-blur border border-bone/25 px-4 py-3">
             <p className="text-[9px] tracking-[0.3em] uppercase text-bone/60">Now showing</p>
-            <p className="display text-lg md:text-xl leading-tight mt-1 text-bone">Grey sofa lounge — brass arc light</p>
+            <p className="display text-lg md:text-xl leading-tight mt-1 text-bone">Living room — yellow lounge chairs</p>
           </div>
           <div className="hidden sm:flex flex-col items-center gap-2">
             <span className="text-[9px] tracking-mega text-bone/85">SCROLL</span>
@@ -230,12 +230,12 @@ function Twenty() {
           {/* tall sunlit strip */}
           <div className="absolute right-0 md:right-auto md:left-[40%] top-[8%] md:top-[5%] w-[34%] md:w-[29%] h-[68%] md:h-[82%] overflow-hidden">
             <Cinematic className="h-full">
-              <Photo src="/photos/luxury-02.webp" label="STONE AND GILDED LIGHT" palette={["#0E1E3A", "#C9A86A"]} className="h-full" sizes="(max-width: 768px) 34vw, 25vw" />
+              <Photo src="/photos/luxury-02.webp" label="LUXURY LIVING ROOM" palette={["#0E1E3A", "#C9A86A"]} className="h-full" sizes="(max-width: 768px) 34vw, 25vw" />
             </Cinematic>
           </div>
           {/* dark texture chip */}
           <div className="absolute left-[52%] md:left-[55%] bottom-[2%] md:bottom-[4%] w-[30%] md:w-[19%] h-[24%] md:h-[26%] overflow-hidden border-[5px] md:border-[7px] border-[#EEE7D6]">
-            <Photo src="/photos/rustic-01.webp" label="RUSTIC NIGHT" palette={["#101418", "#2E4A6B"]} className="h-full" sizes="(max-width: 768px) 30vw, 18vw" />
+            <Photo src="/photos/rustic-01.webp" label="RUSTIC DOORWAY" palette={["#101418", "#2E4A6B"]} className="h-full" sizes="(max-width: 768px) 30vw, 18vw" />
           </div>
           {/* beige detail card */}
           <div className="hidden md:flex absolute right-0 top-[16%] w-[24%] flex-col">
