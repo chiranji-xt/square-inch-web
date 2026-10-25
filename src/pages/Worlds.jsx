@@ -210,7 +210,7 @@ function WorldHero({ w, t, layout, gallery, count }) {
       <div className="relative">
         <Photo src={w.photo} label={w.name.toUpperCase() + " WORLD"} palette={w.fallback} className="h-[66vh] md:h-[90vh]" eager sizes="100vw" />
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent px-5 md:px-10 pt-16 pb-6">
-          <p className="text-bone text-[11px] tracking-mega">{count} STORIES INSIDE THIS WORLD</p>
+          <p className="text-bone text-[11px] tracking-mega">{count} {count === 1 ? "STORY" : "STORIES"} INSIDE THIS WORLD</p>
         </div>
       </div>
     );
@@ -266,7 +266,7 @@ function LuxuryCarousel({ items, t, onAt }) {
             className="snap-start shrink-0 w-[76vw] sm:w-[46vw] lg:w-[31%] rounded-2xl overflow-hidden border"
             style={{ background: "#16294D", borderColor: "rgba(201,168,106,.35)" }}
           >
-            <button onClick={(e) => onAt(e, k + 1)} aria-label={`Open plate ${k + 1} of ${items.length} — ${it.title}`} className="block w-full text-left">
+            <button onClick={(e) => onAt(e, k)} aria-label={`Open plate ${k + 1} of ${items.length} — ${it.title}`} className="block w-full text-left">
               <Photo src={it.src} label={it.title.toUpperCase()} palette={it.palette} className="h-[30vh] md:h-[36vh]" sizes="(max-width: 1024px) 76vw, 31vw" />
             </button>
             <div className="p-5 md:p-6">
@@ -371,7 +371,7 @@ function ImmersiveHero({ w, t, count }) {
       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent px-5 md:px-10 pb-8 pt-28">
         <p className="text-[11px] tracking-mega" style={{ color: t.accent }}>{w.note.toUpperCase()}</p>
         <h1 className="display text-bone leading-[0.85] text-[16vw] md:text-[9vw]">{w.name}<span style={{ color: t.accent }}>.</span></h1>
-        <p className="mt-3 text-[11px] tracking-mega text-bone/75">{count} STORIES INSIDE THIS WORLD</p>
+        <p className="mt-3 text-[11px] tracking-mega text-bone/75">{count} {count === 1 ? "STORY" : "STORIES"} INSIDE THIS WORLD</p>
       </div>
     </div>
   );

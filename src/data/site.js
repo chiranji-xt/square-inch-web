@@ -71,7 +71,7 @@ export const PROCESS = [
 ];
 
 // Drop real extracted PDF photos into /public/photos/ with these exact names.
-// Until then the Photo component renders a cinematic placeholder (no stock).
+// If a file is missing, the Photo component falls back to a neutral palette block.
 export const WORLDS = [
   { slug: "abstract", name: "Abstract", note: "Playful colour, art walls", photo: "/photos/abstract-01.webp", fallback: ["#D8A24A", "#111111"] },
   { slug: "art-deco", name: "Art-Deco", note: "Craft details, shadow", photo: "/photos/artdeco-01.webp", fallback: ["#3A3A38", "#C9BFAE"] },
@@ -93,8 +93,6 @@ export const STORIES = [
     area: "4255 sqft",
     city: null,
     award: null,
-    // TODO client review: one short factual alt per image, same order as images.
-    alts: [],
     no: "01",
     title: "Stone, Colour & Gilded Light",
     meta: "Luxury · Residential · 4255 sqft",
@@ -111,8 +109,6 @@ export const STORIES = [
     area: "1000 sqft",
     city: null,
     award: null,
-    // TODO client review: one short factual alt per image, same order as images.
-    alts: [],
     no: "02",
     title: "A 1000 sqft Coffee Journey",
     meta: "Abstract · Commercial · 1000 sqft",
@@ -129,8 +125,6 @@ export const STORIES = [
     area: "2000 sqft",
     city: null,
     award: null,
-    // TODO client review: one short factual alt per image, same order as images.
-    alts: [],
     no: "03",
     title: "Construction Office, Reworked",
     meta: "Contemporary · Workspace · 2000 sqft",
@@ -147,8 +141,6 @@ export const STORIES = [
     area: null,
     city: null,
     award: null,
-    // TODO client review: one short factual alt per image, same order as images.
-    alts: [],
     no: "04",
     title: "Volumetric Fusion Home",
     meta: "Fusion · Residential · Single-storey unit",
@@ -165,8 +157,6 @@ export const STORIES = [
     area: null,
     city: null,
     award: null,
-    // TODO client review: one short factual alt per image, same order as images.
-    alts: [],
     no: "05",
     title: "Courtyard, Blue Door, Light",
     meta: "Traditional · Courtyard House",
@@ -183,8 +173,6 @@ export const STORIES = [
     area: null,
     city: null,
     award: null,
-    // TODO client review: one short factual alt per image, same order as images.
-    alts: [],
     no: "06",
     title: "Honest Minimalism",
     meta: "Minimalistic · Residential",
@@ -201,8 +189,6 @@ export const STORIES = [
     area: null,
     city: null,
     award: null,
-    // TODO client review: one short factual alt per image, same order as images.
-    alts: [],
     no: "07",
     title: "Rustic Indigo Night",
     meta: "Rustic · Lounge",
@@ -219,8 +205,6 @@ export const STORIES = [
     area: "1055 sqft",
     city: "Satara",
     award: "IIID 2016 Anchor Award — Runner Up",
-    // TODO client review: one short factual alt per image, same order as images.
-    alts: [],
     no: "08",
     title: "The Awarded Studio — 1055 sqft",
     meta: "Art-Deco · Studio · 1055 sqft · IIID 2016 Runner-Up",

@@ -13,11 +13,11 @@ export function Studio() {
     <main className="bg-[#F4EDDE] text-[#1F2C46] pt-28 md:pt-32" id="main" tabIndex={-1}>
       <div className="px-5 md:px-10 pt-8 md:pt-10 pb-14 grid md:grid-cols-12 gap-8">
         <div className="md:col-span-4">
-          <h2 className="display leading-[0.98] text-6xl md:text-[4.8vw]">
+          <h1 className="display leading-[0.98] text-6xl md:text-[4.8vw]">
             <span className="block">About</span>
             <span className="block italic text-[#E76B46]">Square Inch</span>
             <span className="block italic text-[#E76B46]">Design.</span>
-          </h2>
+          </h1>
           <div className="relative mt-8 w-full max-w-[300px]">
             <svg viewBox="0 0 300 200" className="block h-auto w-full" role="img" aria-label="Square Inch mark — red square with inch marks">
               <rect x="8" y="8" width="184" height="184" fill="#F0442E" />
@@ -328,7 +328,7 @@ export function Begin() {
   const contextTitle = storyCtx ? storyCtx.title : worldCtx ? `${worldCtx.name} interiors` : "";
   const contextKey = storyCtx ? `project:${storyCtx.id}` : worldCtx ? `world:${worldCtx.slug}` : "none";
   return (
-    <main className="bg-[#F4EDDE] text-[#1F2C46] pt-28 md:pt-32" id="main">
+    <main className="bg-[#F4EDDE] text-[#1F2C46] pt-28 md:pt-32" id="main" tabIndex={-1}>
       <div className="relative h-[52vh] overflow-hidden">
         <Photo src="/photos/traditional-02.webp" label="LET'S CREATE SOMETHING" palette={["#2B2118", "#E88932"]} className="h-[52vh]" eager />
         <div className="absolute inset-0 bg-ink/45 flex items-end p-5 md:p-10 text-bone">
@@ -360,7 +360,10 @@ export function Begin() {
             <p className="text-xs tracking-mega text-[#E76B46]">SATARA OFFICE</p>
             <p className="text-[#1F2C46]/80 mt-1">{SITE.satara}</p>
             <a href={mapsHref(SITE.satara)} target="_blank" rel="noreferrer" className="inline-block mt-2 text-xs tracking-mega text-[#1F2C46]/60 border-b border-[#E76B46] pb-1 hover:text-[#E76B46]">OPEN IN MAPS →</a>
-            <p className="mt-3 text-[#1F2C46]/80">
+          </div>
+          <div>
+            <p className="text-xs tracking-mega text-[#E76B46]">CALL · EMAIL</p>
+            <p className="mt-1 text-[#1F2C46]/80">
               {SITE.phones.map((p, k) => (
                 <span key={p}>{k > 0 && <br />}<a href={telHref(p)} className="inline-block py-1 underline underline-offset-4 hover:text-[#E76B46]">{p}</a></span>
               ))}

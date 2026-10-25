@@ -43,10 +43,9 @@ export default function StoryDetail() {
           <p className="text-[#E76B46] text-xs tracking-mega">PROJECT {s.no} · {s.meta.toUpperCase()}</p>
           <h1 className="display text-5xl md:text-8xl leading-[0.9] mt-3"><StaggerWords text={s.title} /></h1>
           {facts.length > 0 && (
-            <dl className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs tracking-mega text-[#1F2C46]/65">
-              <dt className="sr-only">Project facts</dt>
-              {facts.map((f) => <dd key={f}>{f.toUpperCase()}</dd>)}
-            </dl>
+            <ul aria-label="Project facts" className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs tracking-mega text-[#1F2C46]/65">
+              {facts.map((f) => <li key={f}>{f.toUpperCase()}</li>)}
+            </ul>
           )}
         </div>
         <div className="md:col-span-4 flex flex-col justify-end gap-3">
@@ -82,7 +81,7 @@ export default function StoryDetail() {
             ))}
           </div>
         </div>
-        <div className="flex justify-between text-xs tracking-mega pt-2">
+        <div className="flex flex-col sm:flex-row sm:justify-between gap-4 text-xs tracking-mega pt-2">
           <Link to={`/story/${prev.id}`} className="border-b border-line/30 pb-1 hover:border-[#E76B46]">← {prev.no} · {prev.title.toUpperCase()}</Link>
           <Link to={`/story/${next.id}`} className="border-b border-line/30 pb-1 hover:border-[#E76B46]">{next.no} · {next.title.toUpperCase()} →</Link>
         </div>

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion, useReducedMotion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useInView } from "framer-motion";
 import Photo from "../components/Photo.jsx";
 import InchLens from "../components/InchLens.jsx";
 import Spotlight from "../components/Spotlight.jsx";
@@ -204,7 +204,7 @@ function Twenty() {
           <div className="mt-8 md:mt-10 border-t border-ink/15 pt-6 max-w-md">
             <p className="text-sm md:text-[15px] leading-relaxed text-ink/65">Creativity with functionality. Residential + commercial, across Pune and Satara. Client taste first — satisfaction as the cornerstone.</p>
             <div className="mt-6 grid grid-cols-3 gap-4">
-              {[["20", "YRS OF PRACTICE"], ["08", "DESIGN WORLDS"], ["01", "NATIONAL HONOUR"]].map(([n, l]) => (
+              {[["20", "YRS OF PRACTICE"], ["08", "DESIGN WORLDS"], ["01", "IIID AWARD"]].map(([n, l]) => (
                 <div key={l}>
                   <p className="display text-3xl md:text-4xl text-[#161310]">{n}</p>
                   <p className="text-[10px] tracking-mega text-ink/55 mt-1">{l}</p>
@@ -283,7 +283,7 @@ function Strip() {
   }
   return (
     <section ref={ref} aria-label="Design worlds" className="bg-ink text-bone overflow-hidden py-10 border-y border-bone/10">
-      <motion.div animate={inView ? { x: ["0%", "-50%"] } : { x: "0%" }} transition={{ repeat: Infinity, duration: 28, ease: "linear" }} className="flex whitespace-nowrap gap-10 display text-4xl md:text-6xl">
+      <motion.div animate={inView ? { x: ["0%", "-50%"] } : { x: "0%" }} transition={{ repeat: Infinity, duration: 28, ease: "linear" }} className="flex whitespace-nowrap gap-10 pr-10 display text-4xl md:text-6xl">
         {row(false)}
       </motion.div>
     </section>
@@ -452,8 +452,8 @@ function Award() {
         <span className="h-4 w-4 bg-accent inline-block mb-2 md:mb-3 shrink-0" />
         <p className="display leading-none text-6xl md:text-8xl">2016</p>
         <div className="pb-1 md:pb-2">
-          <p className="text-accent text-[11px] tracking-mega">ROOM 06 — RECOGNITION · REAL, NOT INVENTED</p>
-          <p className="text-bone/70 text-sm mt-1 max-w-md">One national honour, earned by the Satara studio — recognised for honest local material.</p>
+          <p className="text-accent text-[11px] tracking-mega">ROOM 06 — RECOGNITION</p>
+          <p className="text-bone/70 text-sm mt-1 max-w-md">An IIID regional award, earned by the Satara studio — recognised for honest local material.</p>
         </div>
       </div>
       <Spotlight kicker="■ IIID 2016 · ANCHOR AWARD" slides={slides} titleClass="text-5xl md:text-9xl" />

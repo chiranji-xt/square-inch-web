@@ -15,11 +15,11 @@ export default function Projects() {
   const list = sector === "All" ? STORIES : STORIES.filter((s) => s.sector === sector);
 
   return (
-    <main className="bg-[#F4EDDE] text-[#1F2C46] pt-28 md:pt-32" id="main">
+    <main className="bg-[#F4EDDE] text-[#1F2C46] pt-28 md:pt-32" id="main" tabIndex={-1}>
       <div className="px-5 md:px-10 py-10">
         <p className="text-xs tracking-mega text-[#E76B46]">EVERY PROJECT · FLAT INDEX</p>
         <h1 className="display text-6xl md:text-9xl leading-[0.9]">Projects<span className="text-[#E76B46]">.</span></h1>
-        <div className="flex gap-2 mt-8" role="group" aria-label="Filter by sector">
+        <div className="flex flex-wrap gap-2 mt-8" role="group" aria-label="Filter by sector">
           {SECTORS.map((c) => (
             <button
               key={c}
@@ -48,7 +48,7 @@ export default function Projects() {
             </div>
           </Link>
         ))}
-        <div className="flex justify-between mt-10 text-sm tracking-widest">
+        <div className="flex flex-col sm:flex-row sm:justify-between gap-4 mt-10 text-sm tracking-widest">
           <Link to="/worlds" className="border-b border-[#E76B46] pb-1">← BROWSE BY WORLD</Link>
           <Link to="/begin" className="border-b border-[#E76B46] pb-1">START A PROJECT →</Link>
         </div>

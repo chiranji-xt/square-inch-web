@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useMemo, Suspense, lazy } from "react";
+import { useEffect, useState, useRef, useMemo, useCallback, Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useParams, useNavigationType } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import Lenis from "lenis";
@@ -97,7 +97,8 @@ function ScrollManager({ route }) {
 
   useEffect(() => {
     const key = route.pathname + route.search;
-    positions.current[prevPath.current] = window.scrollY;
+    // Positions are saved continuously by the scroll listener above; reading
+    // scrollY here would capture the NEW page's (possibly clamped) offset.
     if (first.current) {
       first.current = false;
       prevPath.current = key;
@@ -189,6 +190,8 @@ function Shell() {
   const reduce = useReducedMotion();
   const triggerRef = useRef(null);
   const [lenis, setLenis] = useState(null);
+  const openMenu = useCallback(() => setMenu(true), []);
+  const closeMenu = useCallback(() => setMenu(false), []);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -213,7 +216,8 @@ function Shell() {
   // can never leave a stale route or a stuck overlay.
   useEffect(() => {
     if (location.pathname === route.pathname && location.search === route.search) {
-      if (phase !== "idle") setPhase("idle");
+      // Navigated back to the current route mid-cover: drop the overlay.
+      setPhase((p) => (p === "cover" ? "idle" : p));
       return;
     }
     if (reduce) {
@@ -221,24 +225,27 @@ function Shell() {
       return;
     }
     setPhase("cover");
-    const t1 = setTimeout(() => {
+    const t = setTimeout(() => {
       setRoute(location);
       setPhase("reveal");
     }, 250);
-    const t2 = setTimeout(() => setPhase("idle"), 540);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
-  }, [location, route.pathname, route.search, reduce, phase]);
+    return () => clearTimeout(t);
+  }, [location, route.pathname, route.search, reduce]);
+
+  // The reveal wipe plays out fully, then the overlay is removed.
+  useEffect(() => {
+    if (phase !== "reveal") return;
+    const t = setTimeout(() => setPhase("idle"), 290);
+    return () => clearTimeout(t);
+  }, [phase]);
 
   return (
     <LenisCtx.Provider value={lenis}>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[80] focus:bg-accent focus:text-bone focus:px-5 focus:py-3 focus:text-xs focus:tracking-mega">
         Skip to content
       </a>
-      <Topbar ref={triggerRef} onMenu={() => setMenu(true)} menuOpen={menu} />
-      <MenuOverlay open={menu} close={() => setMenu(false)} triggerRef={triggerRef} />
+      <Topbar ref={triggerRef} onMenu={openMenu} menuOpen={menu} />
+      <MenuOverlay open={menu} close={closeMenu} triggerRef={triggerRef} />
       <ProgressDots />
       <RouteMeta route={route} />
       <ScrollManager route={route} />

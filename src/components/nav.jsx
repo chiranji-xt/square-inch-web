@@ -211,12 +211,19 @@ export function ProgressDots() {
 
   useEffect(() => {
     if (pathname !== "/") return;
-    // Home content renders after route swap; observe on next frame.
-    const raf = requestAnimationFrame(() => {
+    // Home content renders after the (delayed) route swap, so poll briefly
+    // until the room sections exist instead of checking once.
+    let io;
+    let timer;
+    let tries = 0;
+    const attach = () => {
       const els = Array.from(document.querySelectorAll("[data-room]"));
-      if (!els.length) return;
+      if (!els.length) {
+        if (tries++ < 40) timer = setTimeout(attach, 100);
+        return;
+      }
       setRooms(els.map((el) => el.getAttribute("data-room-label") || "Room"));
-      const io = new IntersectionObserver(
+      io = new IntersectionObserver(
         (entries) => {
           entries.forEach((en) => {
             if (en.isIntersecting) setActive(els.indexOf(en.target));
@@ -225,15 +232,18 @@ export function ProgressDots() {
         { rootMargin: "-40% 0px -55% 0px" }
       );
       els.forEach((el) => io.observe(el));
-      return () => io.disconnect();
-    });
-    return () => cancelAnimationFrame(raf);
+    };
+    timer = setTimeout(attach, 0);
+    return () => {
+      clearTimeout(timer);
+      io?.disconnect();
+    };
   }, [pathname]);
 
   if (pathname !== "/" || rooms.length < 2 || active === 0) return null;
   return (
     <div className="fixed bottom-5 left-5 z-40 hidden md:flex items-center gap-2 mix-blend-difference text-bone" role="status" aria-label={`Exhibition progress: ${rooms[active]}`}>
-      <span className="text-[10px] tracking-mega mr-2" aria-hidden="true">08 WORLDS</span>
+      <span className="text-[10px] tracking-mega mr-2" aria-hidden="true">ROOM {active + 1} / {rooms.length}</span>
       {rooms.map((r, i) => (
         <span key={r + i} aria-hidden="true" className={`h-2 w-2 rotate-45 ${i <= active ? "bg-accent" : "bg-bone/30"}`} />
       ))}

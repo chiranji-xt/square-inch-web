@@ -10,11 +10,12 @@ export function telHref(display) {
 }
 
 export function mailHref(subject = "", body = "") {
-  const q = new URLSearchParams();
-  if (subject) q.set("subject", subject);
-  if (body) q.set("body", body);
-  const s = q.toString();
-  return `mailto:${SITE.email}${s ? `?${s}` : ""}`;
+  // encodeURIComponent, not URLSearchParams: mailto needs %20, and "+" would
+  // show up as literal plus signs in the subject/body of most mail apps.
+  const parts = [];
+  if (subject) parts.push(`subject=${encodeURIComponent(subject)}`);
+  if (body) parts.push(`body=${encodeURIComponent(body)}`);
+  return `mailto:${SITE.email}${parts.length ? `?${parts.join("&")}` : ""}`;
 }
 
 // wa.me link only when a real WhatsApp number is configured in SITE.whatsapp.

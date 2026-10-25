@@ -52,7 +52,7 @@ export function metaFor(pathname) {
   if (p === "/studio")
     return {
       title: `Studio — 20 Years of Interior Design | ${BASE}`,
-      desc: "SI Design: two decades of residential and commercial interiors, IIID 2016 Anchor Award runner-up. Led by Siddharth Kolhapure.",
+      desc: `SI Design: two decades of residential and commercial interiors, IIID 2016 Anchor Award runner-up. Led by ${SITE.lead}.`,
       noindex: false,
       image: "/photos/studio-01.webp",
     };
