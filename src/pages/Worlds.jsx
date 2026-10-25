@@ -145,7 +145,6 @@ function FolkTraditional({ w, t }) {
       <FolkWaves color={t.ink} className="block h-7 w-full opacity-90 md:h-9" rows={4} />
       <div className="relative mx-auto -mt-1 w-fit px-8 py-2 text-center md:px-12" style={{ background: "#F3E3C2", color: "#71340F" }}>
         <h1 className="display leading-[0.9] text-[17vw] md:text-[7.5vw]">Traditional<span style={{ color: "#B25A1B" }}>.</span></h1>
-        <p className="mt-3 text-[10px] tracking-[0.3em] md:text-xs">{w.note.toUpperCase()}</p>
       </div>
       <div className="mt-5 flex items-center justify-center gap-2" aria-label={`${w.name} palette`}>
         {w.fallback.map((c) => (
@@ -172,9 +171,6 @@ function WorldHeader({ w, t, layout }) {
         <WorldDeco motif={layout.motif} color={t.accent} />
       </div>
       <div className="relative">
-        {!bare && (
-          <p className="text-xs tracking-mega" style={{ color: t.accent }}>{w.note.toUpperCase()}</p>
-        )}
         <h1 className={`display leading-[0.85] text-[15vw] md:text-[10vw]${layout.tiltTitle ? " md:-rotate-2 md:origin-left" : ""}`}>{w.name}<span style={{ color: t.accent }}>.</span></h1>
         {!bare && (
           <div className={`mt-5 flex items-center gap-2 ${center ? "justify-center" : ""}`} aria-label={`${w.name} palette`}>
@@ -196,133 +192,21 @@ function WorldHeader({ w, t, layout }) {
   );
 }
 
-function WorldHero({ w, t, layout, gallery, count }) {
-  if (layout.frame === "none") return null;
-  if (layout.frame === "arch") {
-    return (
-      <div className="px-10 md:px-0 md:mx-auto md:max-w-[60vw] overflow-hidden rounded-t-[999px]">
-        <Photo src={w.photo} label={w.name.toUpperCase() + " WORLD"} palette={w.fallback} className="h-[60vh] md:h-[82vh]" eager sizes="(max-width: 768px) 85vw, 60vw" />
-      </div>
-    );
-  }
-  if (layout.frame === "full") {
-    return (
-      <div className="relative">
-        <Photo src={w.photo} label={w.name.toUpperCase() + " WORLD"} palette={w.fallback} className="h-[66vh] md:h-[90vh]" eager sizes="100vw" />
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent px-5 md:px-10 pt-16 pb-6">
-          <p className="text-bone text-[11px] tracking-mega">{count} {count === 1 ? "STORY" : "STORIES"} INSIDE THIS WORLD</p>
-        </div>
-      </div>
-    );
-  }
-  if (layout.frame === "tilt") {
-    const second = gallery[0]?.src;
-    return (
-      <div className="relative px-5 md:px-10 pt-4 pb-14">
-        <div className="relative rotate-[-2deg] overflow-hidden shadow-2xl">
-          <Photo src={w.photo} label={w.name.toUpperCase() + " WORLD"} palette={w.fallback} className="h-[50vh] md:h-[66vh]" eager sizes="(max-width: 768px) 90vw, 80vw" />
-        </div>
-        {second && (
-          <div className="absolute right-5 md:right-16 -bottom-2 md:-bottom-4 w-[48%] md:w-[30%] rotate-[3deg] overflow-hidden shadow-xl" style={{ outline: `6px solid ${t.bg}` }}>
-            <Photo src={second} label={gallery[0]?.title.toUpperCase()} palette={w.fallback} className="h-[22vh] md:h-[32vh]" sizes="(max-width: 768px) 48vw, 30vw" />
-          </div>
-        )}
-      </div>
-    );
-  }
+// Catalog: every photograph of the world at one uniform size, no captions.
+function WorldGallery({ gallery, onAt }) {
   return (
-    <div className="px-5 md:px-10">
-      <div className="relative">
-        <div aria-hidden="true" className="absolute inset-0 translate-x-3 translate-y-3" style={{ background: t.accent, opacity: 0.85 }} />
-        <Photo src={w.photo} label={w.name.toUpperCase() + " WORLD"} palette={w.fallback} className="relative h-[56vh] md:h-[76vh]" eager sizes="(max-width: 768px) 90vw, 85vw" />
-      </div>
-    </div>
-  );
-}
-
-function LuxuryCarousel({ items, t, onAt }) {
-  const trackRef = useRef(null);
-  if (!items.length) return null;
-  const slide = (dir) => {
-    const el = trackRef.current;
-    if (el) el.scrollBy({ left: dir * el.clientWidth * 0.72, behavior: "smooth" });
-  };
-  return (
-    <div className="pt-8 md:pt-10">
-      <div className="px-5 md:px-10 flex items-end justify-between gap-4 mb-6">
-        <div>
-          <p className="text-[11px] tracking-mega" style={{ color: t.accent }}>THE LUXURY EDIT</p>
-          <h2 className="display text-3xl md:text-5xl mt-2">Plates, poured.</h2>
-        </div>
-        <div className="flex gap-2 shrink-0">
-          <button type="button" onClick={() => slide(-1)} aria-label="Previous plate" className="inline-flex h-11 w-11 items-center justify-center rounded-full border text-xl transition-opacity hover:opacity-70" style={{ borderColor: t.soft, color: t.ink }}>‹</button>
-          <button type="button" onClick={() => slide(1)} aria-label="Next plate" className="inline-flex h-11 w-11 items-center justify-center rounded-full border text-xl transition-opacity hover:opacity-70" style={{ borderColor: t.soft, color: t.ink }}>›</button>
-        </div>
-      </div>
-      <div ref={trackRef} className="flex gap-4 md:gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory px-5 md:px-10 pb-2">
-        {items.map((it, k) => (
-          <article
-            key={it.src}
-            className="snap-start shrink-0 w-[76vw] sm:w-[46vw] lg:w-[31%] rounded-2xl overflow-hidden border"
-            style={{ background: "#16294D", borderColor: "rgba(201,168,106,.35)" }}
-          >
-            <button onClick={(e) => onAt(e, k)} aria-label={`Open plate ${k + 1} of ${items.length} — ${it.title}`} className="block w-full text-left">
-              <Photo src={it.src} label={it.title.toUpperCase()} palette={it.palette} className="h-[30vh] md:h-[36vh]" sizes="(max-width: 1024px) 76vw, 31vw" />
-            </button>
-            <div className="p-5 md:p-6">
-              <p className="text-[10px] tracking-[0.22em]" style={{ color: t.accent }}>{it.no} · {it.meta.toUpperCase()}</p>
-              <h3 className="display text-2xl md:text-[1.7rem] leading-tight mt-2" style={{ color: "#EFE6D2" }}>{it.title}</h3>
-              <dl className="mt-4">
-                {it.facts.map(([k2, v]) => (
-                  <div key={k2} className="flex items-center justify-between py-2 border-t text-xs" style={{ borderColor: "rgba(239,230,210,.14)" }}>
-                    <dt className="tracking-[0.2em] opacity-60" style={{ color: "#EFE6D2" }}>{k2}</dt>
-                    <dd style={{ color: "#EFE6D2" }}>{v}</dd>
-                  </div>
-                ))}
-                <div className="flex items-center justify-between py-2 border-t border-b text-xs" style={{ borderColor: "rgba(239,230,210,.14)" }}>
-                  <dt className="tracking-[0.2em] opacity-60" style={{ color: "#EFE6D2" }}>FINISH</dt>
-                  <dd className="flex gap-1.5">
-                    {it.palette.map((c) => (
-                      <span key={c} aria-hidden="true" className="h-3.5 w-3.5 rounded-full border border-black/30" style={{ background: c }} />
-                    ))}
-                  </dd>
-                </div>
-              </dl>
-              <Link to={`/story/${it.id}`} className="inline-block mt-4 text-[11px] tracking-[0.25em] border-b pb-1" style={{ borderColor: t.accent, color: t.accent }}>VIEW STORY →</Link>
-            </div>
-          </article>
+    <div className="px-5 md:px-10 pt-10 md:pt-14">
+      <ul className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+        {gallery.map((g, k) => (
+          <li key={g.src}>
+            <RevealMask from="bottom">
+              <button onClick={(e) => onAt(e, k)} aria-label={`Open photograph ${k + 1} of ${gallery.length}`} className="block w-full text-left">
+                <Photo src={g.src} label={`${g.title} — photograph ${k + 1}`} className="aspect-[4/3] w-full" sizes="(max-width: 768px) 50vw, 33vw" />
+              </button>
+            </RevealMask>
+          </li>
         ))}
-      </div>
-    </div>
-  );
-}
-
-function WorldGallery({ gallery, stories, layout, onAt }) {
-  const stagger = layout.gallery === "stagger";
-  const wide = layout.gallery === "wide";
-  const even = layout.gallery === "even";
-  const rotate = layout.rotateItems === true;
-  return (
-    <div className="px-5 md:px-10 pt-14">
-      <p className="text-[11px] tracking-mega opacity-60 mb-4">FROM THIS WORLD — TAP TO EXPAND</p>
-      <div className={`grid grid-cols-2 ${even ? "md:grid-cols-2" : "md:grid-cols-3"} gap-3 md:gap-4`}>
-        {gallery.slice(1).map((g, k) => (
-          <RevealMask
-            key={g.src + k}
-            from={k % 2 ? "right" : "left"}
-            className={`${stagger && k % 2 ? "md:mt-14" : ""} ${wide && k === 0 ? "col-span-2 md:col-span-3" : ""} ${rotate ? (k % 2 ? "md:rotate-1" : "md:-rotate-1") : ""}`}
-          >
-            <button onClick={(e) => onAt(e, k + 1)} aria-label={`Open photograph ${k + 2} of ${gallery.length} — ${g.title}`} className="block w-full text-left">
-              <Photo
-                src={g.src}
-                label={g.title.toUpperCase()}
-                palette={stories[k % stories.length]?.palette}
-                className={wide && k === 0 ? "h-[34vh] md:h-[50vh]" : even ? "h-[30vh] md:h-[44vh]" : "h-[26vh] md:h-[34vh]"}
-              />
-            </button>
-          </RevealMask>
-        ))}
-      </div>
+      </ul>
     </div>
   );
 }
@@ -359,7 +243,7 @@ export function Worlds() {
   );
 }
 
-function ImmersiveHero({ w, t, count }) {
+function ImmersiveHero({ w, t }) {
   return (
     <div className="relative">
       <Photo src={w.photo} label={w.name.toUpperCase() + " WORLD"} palette={w.fallback} className="h-[88vh] md:h-[96vh]" eager sizes="100vw" />
@@ -369,15 +253,13 @@ function ImmersiveHero({ w, t, count }) {
         <span aria-current="page">{w.name.toUpperCase()}</span>
       </nav>
       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent px-5 md:px-10 pb-8 pt-28">
-        <p className="text-[11px] tracking-mega" style={{ color: t.accent }}>{w.note.toUpperCase()}</p>
         <h1 className="display text-bone leading-[0.85] text-[16vw] md:text-[9vw]">{w.name}<span style={{ color: t.accent }}>.</span></h1>
-        <p className="mt-3 text-[11px] tracking-mega text-bone/75">{count} {count === 1 ? "STORY" : "STORIES"} INSIDE THIS WORLD</p>
       </div>
     </div>
   );
 }
 
-function SplitHead({ w, t, layout, count }) {
+function SplitHead({ w, t, layout }) {
   return (
     <div className="grid md:grid-cols-2">
       <div className="relative overflow-hidden px-5 md:px-10 py-10 md:py-14 flex flex-col justify-center">
@@ -385,14 +267,12 @@ function SplitHead({ w, t, layout, count }) {
           <WorldDeco motif={layout.motif} color={t.accent} />
         </div>
         <div className="relative">
-          <p className="text-xs tracking-mega" style={{ color: t.accent }}>{w.note.toUpperCase()}</p>
           <h1 className="display leading-[0.85] text-[13vw] md:text-[6vw]">{w.name}<span style={{ color: t.accent }}>.</span></h1>
           <div className="mt-5 flex items-center gap-2" aria-label={`${w.name} palette`}>
             {w.fallback.map((c) => (
               <span key={c} aria-hidden="true" className="h-4 w-4 rounded-[4px] border border-black/20" style={{ background: c }} />
             ))}
           </div>
-          <p className="mt-5 text-sm opacity-70 max-w-sm">{count} stor{count === 1 ? "y" : "ies"} inside this world — tap any plate to expand it.</p>
           <Link to={`/begin?world=${w.slug}`} className="inline-block mt-5 text-xs tracking-mega border-b pb-1" style={{ borderColor: t.accent }}>START A PROJECT →</Link>
         </div>
       </div>
@@ -410,17 +290,6 @@ export function WorldDetail({ slug }) {
   if (!w) return <NotFound />;
   const stories = STORIES.filter((s) => s.world === w.slug);
   const gallery = stories.flatMap((s) => s.images.map((src) => ({ src, title: s.title })));
-  const plates = stories.flatMap((s) =>
-    s.images.map((src, ii) => ({
-      src,
-      title: s.title,
-      meta: s.meta,
-      id: s.id,
-      no: `${String(ii + 1).padStart(2, "0")} / ${String(s.images.length).padStart(2, "0")}`,
-      palette: s.palette,
-      facts: [["TYPE", s.type], ["AREA", s.area]].filter(([, v]) => v),
-    }))
-  );
   const openAt = (e, n) => {
     openerRef.current = e.currentTarget;
     setLb(n);
@@ -440,7 +309,7 @@ export function WorldDetail({ slug }) {
         </div>
       )}
       {L.composition === "immersive" ? (
-        <ImmersiveHero w={w} t={t} count={stories.length} />
+        <ImmersiveHero w={w} t={t} />
       ) : (
         <>
           <nav aria-label="Breadcrumb" className="px-5 md:px-10 pt-6 text-[11px] tracking-mega opacity-60">
@@ -449,7 +318,7 @@ export function WorldDetail({ slug }) {
             <span aria-current="page">{w.name.toUpperCase()}</span>
           </nav>
           {L.composition === "split" ? (
-            <SplitHead w={w} t={t} layout={L} count={stories.length} />
+            <SplitHead w={w} t={t} layout={L} />
           ) : (
             <>
               {w.slug === "traditional" ? (
@@ -457,31 +326,12 @@ export function WorldDetail({ slug }) {
               ) : (
                 <WorldHeader w={w} t={t} layout={L} />
               )}
-              <WorldHero w={w} t={t} layout={L} gallery={gallery} count={stories.length} />
             </>
           )}
         </>
       )}
-      {gallery.length > 1 &&
-        (w.slug === "luxury" ? (
-          <LuxuryCarousel items={plates} t={t} onAt={openAt} />
-        ) : (
-          <WorldGallery gallery={gallery} stories={stories} layout={L} onAt={openAt} />
-        ))}
+      {gallery.length > 0 && <WorldGallery gallery={gallery} onAt={openAt} />}
       <div className="px-5 md:px-10 py-16">
-        {stories.map((s, i) => (
-          <Link key={s.id} to={`/story/${s.id}`} className="grid md:grid-cols-12 gap-6 py-10 border-t group" style={{ borderColor: t.soft }}>
-            <span className="display text-6xl md:col-span-2" style={{ color: t.ink, opacity: 0.16 }}>{s.no}</span>
-            <div className="md:col-span-6">
-              <Photo src={s.images[0]} label={s.title.toUpperCase()} palette={s.palette} className={`h-[40vh] md:h-[52vh] ${i % 2 ? "md:ml-10" : "md:mr-10"}`} />
-            </div>
-            <div className="md:col-span-4 flex flex-col justify-end">
-              <p className="text-xs tracking-mega" style={{ color: t.accent }}>{s.meta.toUpperCase()}</p>
-              <h2 className="display text-3xl md:text-5xl group-hover:translate-x-2 transition-transform">{s.title}</h2>
-              <span className="mt-3 text-sm tracking-widest">OPEN →</span>
-            </div>
-          </Link>
-        ))}
         <div className="mt-14">
           <p className="text-[11px] tracking-mega opacity-60 mb-4">MORE WORLDS</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-3">
