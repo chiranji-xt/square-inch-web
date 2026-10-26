@@ -39,7 +39,7 @@ export const NAV = [
 ];
 
 export const TEAM = [
-  { name: "Siddharth Kolhapure", role: "Principal Designer & Co-Founder" },
+  { name: "Siddharth Kolhapure", role: "Principal Designer & Co-Founder", photo: "/photos/team-siddharth.webp" },
   { name: "Prachee Kolhapure", role: "Interior Consultant" },
 ];
 

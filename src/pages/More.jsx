@@ -54,6 +54,11 @@ export function Studio() {
         <div className="grid sm:grid-cols-2 gap-4 mt-8 max-w-4xl">
           {TEAM.map((m, ti) => (
             <div key={m.name} className="group border border-[#1F2C46]/15 bg-white/40 p-6 transition-colors hover:border-[#E76B46]">
+              {m.photo ? (
+                <Photo src={m.photo} label={`Portrait of ${m.name}`} className="aspect-[4/5] w-full mb-6" imgClass="object-[50%_25%]" sizes="(max-width: 640px) 90vw, 400px" />
+              ) : (
+                <div aria-hidden="true" className="aspect-[4/5] w-full mb-6 bg-[#1F2C46]/[0.06] flex items-center justify-center display text-6xl text-[#1F2C46]/25">{m.name.split(" ").map((w) => w[0]).join("")}</div>
+              )}
               <p className="text-[11px] tracking-mega text-[#E76B46]">0{ti + 1}</p>
               <p className="display text-2xl leading-tight mt-3">{m.name}</p>
               <p className="text-[11px] tracking-mega text-[#1F2C46]/60 mt-2">{m.role.toUpperCase()}</p>
