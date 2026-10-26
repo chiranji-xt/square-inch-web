@@ -41,7 +41,7 @@ export default function Spotlight({ kicker, slides, dark = true, titleClass = "t
       <AnimatePresence mode="popLayout">
         <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.9 }} className="absolute inset-0">
           <motion.div initial={{ scale: reduce ? 1 : 1.08 }} animate={{ scale: 1 }} transition={{ duration: 6, ease: "linear" }} className="h-full">
-            <Photo src={s.src} label={s.title} palette={s.palette} className="h-full" eager={i === 0} />
+            <Photo src={s.src} label={s.alt ?? s.title} palette={s.palette} className="h-full" imgClass={s.contain ? "!object-contain p-6 md:p-10 pb-40 md:pb-48" : ""} eager={i === 0} />
           </motion.div>
         </motion.div>
       </AnimatePresence>

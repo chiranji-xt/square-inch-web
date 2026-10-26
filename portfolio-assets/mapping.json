@@ -1,0 +1,508 @@
+{
+  "abstract": [
+    {
+      "published": "abstract-01.webp",
+      "pdfExtract": "abstract/abstract-p07-06.jpeg",
+      "highRes": "Abstract/DSC_5612.jpg.jpeg",
+      "width": 1600,
+      "height": 2409
+    },
+    {
+      "published": "abstract-02.webp",
+      "pdfExtract": "abstract/abstract-p07-05.jpeg",
+      "highRes": null,
+      "width": 1098,
+      "height": 670
+    },
+    {
+      "published": "abstract-03.webp",
+      "pdfExtract": "abstract/abstract-p05-01.jpeg",
+      "highRes": "Abstract/11.jpg.jpeg",
+      "width": 1600,
+      "height": 1073
+    },
+    {
+      "published": "abstract-04.webp",
+      "pdfExtract": "abstract/abstract-p05-02.jpeg",
+      "highRes": null,
+      "width": 665,
+      "height": 992
+    },
+    {
+      "published": "abstract-05.webp",
+      "pdfExtract": "abstract/abstract-p06-03.jpeg",
+      "highRes": "Abstract/27.jpg.jpeg",
+      "width": 1600,
+      "height": 1073
+    },
+    {
+      "published": "abstract-06.webp",
+      "pdfExtract": "abstract/abstract-p06-04.jpeg",
+      "highRes": "Abstract/13.jpg.jpeg",
+      "width": 1600,
+      "height": 2386
+    }
+  ],
+  "artdeco": [
+    {
+      "published": "artdeco-01.webp",
+      "pdfExtract": "art-deco/art-deco-p08-02.jpeg",
+      "highRes": null,
+      "width": 971,
+      "height": 715
+    },
+    {
+      "published": "artdeco-02.webp",
+      "pdfExtract": "art-deco/art-deco-p08-01.jpeg",
+      "highRes": "ART/CLX_7105.JPG.jpeg",
+      "width": 1600,
+      "height": 1776
+    },
+    {
+      "published": "artdeco-03.webp",
+      "pdfExtract": "art-deco/art-deco-p09-03.jpeg",
+      "highRes": "ART/IMG_0078.JPG.jpeg",
+      "width": 1600,
+      "height": 3965
+    },
+    {
+      "published": "artdeco-04.webp",
+      "pdfExtract": "art-deco/art-deco-p09-05.jpeg",
+      "highRes": "ART/IMG_0058.JPG.jpeg",
+      "width": 1600,
+      "height": 1034
+    },
+    {
+      "published": "artdeco-05.webp",
+      "pdfExtract": "art-deco/art-deco-p09-04.jpeg",
+      "highRes": null,
+      "width": 557,
+      "height": 836
+    },
+    {
+      "published": "artdeco-06.webp",
+      "pdfExtract": "art-deco/art-deco-p10-06.jpeg",
+      "highRes": null,
+      "width": 767,
+      "height": 1150
+    },
+    {
+      "published": "artdeco-07.webp",
+      "pdfExtract": "art-deco/art-deco-p10-07.jpeg",
+      "highRes": null,
+      "width": 950,
+      "height": 697
+    },
+    {
+      "published": "artdeco-08.webp",
+      "pdfExtract": "art-deco/art-deco-p11-08.jpeg",
+      "highRes": null,
+      "width": 1137,
+      "height": 531
+    },
+    {
+      "published": "artdeco-09.webp",
+      "pdfExtract": "art-deco/art-deco-p11-09.jpeg",
+      "highRes": null,
+      "width": 631,
+      "height": 1122
+    },
+    {
+      "published": "artdeco-10.webp",
+      "pdfExtract": "art-deco/art-deco-p11-10.jpeg",
+      "highRes": null,
+      "width": 757,
+      "height": 504
+    },
+    {
+      "published": "artdeco-11.webp",
+      "pdfExtract": "art-deco/art-deco-p12-11.jpeg",
+      "highRes": "ART/IMG_0083.JPG.jpeg",
+      "width": 1600,
+      "height": 673
+    },
+    {
+      "published": "artdeco-12.webp",
+      "pdfExtract": "art-deco/art-deco-p12-12.jpeg",
+      "highRes": null,
+      "width": 1257,
+      "height": 494
+    }
+  ],
+  "contemporary": [
+    {
+      "published": "contemporary-01.webp",
+      "pdfExtract": "contemporary/contemporary-p13-01.jpeg",
+      "highRes": "Contemprory/CLX_4259.jpg.jpeg",
+      "width": 1600,
+      "height": 1068
+    },
+    {
+      "published": "contemporary-02.webp",
+      "pdfExtract": "contemporary/contemporary-p13-02.jpeg",
+      "highRes": "Contemprory/CLX_4273.jpg.jpeg",
+      "width": 1600,
+      "height": 1068
+    },
+    {
+      "published": "contemporary-03.webp",
+      "pdfExtract": "contemporary/contemporary-p14-03.jpeg",
+      "highRes": "Contemprory/CLX_1152.JPG.jpeg",
+      "width": 1600,
+      "height": 1068
+    },
+    {
+      "published": "contemporary-04.webp",
+      "pdfExtract": "contemporary/contemporary-p14-04.jpeg",
+      "highRes": "Contemprory/CLX_7105.JPG.jpeg",
+      "width": 1600,
+      "height": 1068
+    }
+  ],
+  "fusion": [
+    {
+      "published": "fusion-01.webp",
+      "pdfExtract": "fusion/fusion-p15-02.jpeg",
+      "highRes": "Fusion/DSC09209.jpg.jpeg",
+      "width": 1600,
+      "height": 1069
+    },
+    {
+      "published": "fusion-02.webp",
+      "pdfExtract": "fusion/fusion-p15-01.jpeg",
+      "highRes": "Fusion/DSC09201.jpg.jpeg",
+      "width": 1600,
+      "height": 1068
+    },
+    {
+      "published": "fusion-03.webp",
+      "pdfExtract": "fusion/fusion-p16-03.jpeg",
+      "highRes": "Fusion/DSC09210.jpg.jpeg",
+      "width": 1600,
+      "height": 1069
+    },
+    {
+      "published": "fusion-04.webp",
+      "pdfExtract": "fusion/fusion-p16-04.jpeg",
+      "highRes": "Fusion/DSC09205.jpg.jpeg",
+      "width": 1600,
+      "height": 1069
+    }
+  ],
+  "traditional": [
+    {
+      "published": "traditional-01.webp",
+      "pdfExtract": "traditional/traditional-p17-02.jpeg",
+      "highRes": "rustic/5.jpg.jpeg",
+      "width": 1600,
+      "height": 1024
+    },
+    {
+      "published": "traditional-02.webp",
+      "pdfExtract": "traditional/traditional-p18-04.jpeg",
+      "highRes": "rustic/38.jpg.jpeg",
+      "width": 1600,
+      "height": 1073
+    },
+    {
+      "published": "traditional-03.webp",
+      "pdfExtract": "traditional/traditional-p19-06.jpeg",
+      "highRes": null,
+      "width": 1100,
+      "height": 737
+    },
+    {
+      "published": "traditional-04.webp",
+      "pdfExtract": "traditional/traditional-p18-03.jpeg",
+      "highRes": "rustic/34.jpg.jpeg",
+      "width": 1600,
+      "height": 2386
+    },
+    {
+      "published": "traditional-05.webp",
+      "pdfExtract": "traditional/traditional-p19-05.jpeg",
+      "highRes": null,
+      "width": 779,
+      "height": 1162
+    },
+    {
+      "published": "traditional-06.webp",
+      "pdfExtract": "traditional/traditional-p17-01.jpeg",
+      "highRes": null,
+      "width": 995,
+      "height": 664
+    },
+    {
+      "published": "traditional-07.webp",
+      "pdfExtract": "traditional/traditional-p22-12.jpeg",
+      "highRes": null,
+      "width": 1111,
+      "height": 741
+    },
+    {
+      "published": "traditional-08.webp",
+      "pdfExtract": "traditional/traditional-p22-13.jpeg",
+      "highRes": null,
+      "width": 1087,
+      "height": 725
+    },
+    {
+      "published": "traditional-09.webp",
+      "pdfExtract": "traditional/traditional-p23-14.jpeg",
+      "highRes": null,
+      "width": 1110,
+      "height": 708
+    },
+    {
+      "published": "traditional-10.webp",
+      "pdfExtract": "traditional/traditional-p20-08.jpeg",
+      "highRes": null,
+      "width": 1133,
+      "height": 756
+    },
+    {
+      "published": "traditional-11.webp",
+      "pdfExtract": "traditional/traditional-p20-07.jpeg",
+      "highRes": null,
+      "width": 1093,
+      "height": 729
+    },
+    {
+      "published": "traditional-12.webp",
+      "pdfExtract": "traditional/traditional-p21-09.jpeg",
+      "highRes": null,
+      "width": 795,
+      "height": 1137
+    },
+    {
+      "published": "traditional-13.webp",
+      "pdfExtract": "traditional/traditional-p21-10.jpeg",
+      "highRes": null,
+      "width": 689,
+      "height": 1033
+    },
+    {
+      "published": "traditional-14.webp",
+      "pdfExtract": "traditional/traditional-p21-11.jpeg",
+      "highRes": null,
+      "width": 497,
+      "height": 745
+    },
+    {
+      "published": "traditional-15.webp",
+      "pdfExtract": "traditional/traditional-p23-15.jpeg",
+      "highRes": null,
+      "width": 1087,
+      "height": 726
+    },
+    {
+      "published": "traditional-16.webp",
+      "pdfExtract": "traditional/traditional-p37-16.jpeg",
+      "highRes": null,
+      "width": 1143,
+      "height": 762
+    },
+    {
+      "published": "traditional-17.webp",
+      "pdfExtract": "traditional/traditional-p38-18.jpeg",
+      "highRes": null,
+      "width": 644,
+      "height": 1146
+    },
+    {
+      "published": "traditional-18.webp",
+      "pdfExtract": "traditional/traditional-p38-19.jpeg",
+      "highRes": null,
+      "width": 766,
+      "height": 1146
+    }
+  ],
+  "luxury": [
+    {
+      "published": "luxury-01.webp",
+      "pdfExtract": "luxury/luxury-p24-01.jpeg",
+      "highRes": "Luxury/008.jpg.jpeg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "published": "luxury-02.webp",
+      "pdfExtract": "luxury/luxury-p25-04.jpeg",
+      "highRes": "Luxury/009.jpg.jpeg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "published": "luxury-03.webp",
+      "pdfExtract": "luxury/luxury-p24-02.jpeg",
+      "highRes": "Luxury/006.jpg.jpeg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "published": "luxury-04.webp",
+      "pdfExtract": "luxury/luxury-p25-03.jpeg",
+      "highRes": null,
+      "width": 1102,
+      "height": 735
+    },
+    {
+      "published": "luxury-05.webp",
+      "pdfExtract": "luxury/luxury-p26-06.jpeg",
+      "highRes": "Luxury/002.jpg.jpeg",
+      "width": 1600,
+      "height": 2400
+    },
+    {
+      "published": "luxury-06.webp",
+      "pdfExtract": "luxury/luxury-p26-07.jpeg",
+      "highRes": null,
+      "width": 1115,
+      "height": 743
+    },
+    {
+      "published": "luxury-07.webp",
+      "pdfExtract": "luxury/luxury-p27-08.jpeg",
+      "highRes": null,
+      "width": 1118,
+      "height": 745
+    },
+    {
+      "published": "luxury-08.webp",
+      "pdfExtract": "luxury/luxury-p27-09.jpeg",
+      "highRes": null,
+      "width": 1198,
+      "height": 798
+    },
+    {
+      "published": "luxury-09.webp",
+      "pdfExtract": "luxury/luxury-p28-10.jpeg",
+      "highRes": null,
+      "width": 758,
+      "height": 1138
+    },
+    {
+      "published": "luxury-10.webp",
+      "pdfExtract": "luxury/luxury-p28-11.jpeg",
+      "highRes": null,
+      "width": 1115,
+      "height": 743
+    },
+    {
+      "published": "luxury-11.webp",
+      "pdfExtract": "luxury/luxury-p29-12.jpeg",
+      "highRes": null,
+      "width": 1128,
+      "height": 752
+    },
+    {
+      "published": "luxury-12.webp",
+      "pdfExtract": "luxury/luxury-p29-13.jpeg",
+      "highRes": null,
+      "width": 1107,
+      "height": 738
+    }
+  ],
+  "minimal": [
+    {
+      "published": "minimal-01.webp",
+      "pdfExtract": "minimalistic/minimalistic-p30-01.jpeg",
+      "highRes": "Minimalistic/CLX_2604.JPG.jpeg",
+      "width": 1600,
+      "height": 1068
+    },
+    {
+      "published": "minimal-02.webp",
+      "pdfExtract": "minimalistic/minimalistic-p30-02.jpeg",
+      "highRes": "Minimalistic/CLX_2602.JPG.jpeg",
+      "width": 1600,
+      "height": 1068
+    },
+    {
+      "published": "minimal-03.webp",
+      "pdfExtract": "minimalistic/minimalistic-p31-04.jpeg",
+      "highRes": null,
+      "width": 1135,
+      "height": 757
+    },
+    {
+      "published": "minimal-04.webp",
+      "pdfExtract": "minimalistic/minimalistic-p31-03.jpeg",
+      "highRes": null,
+      "width": 1230,
+      "height": 820
+    },
+    {
+      "published": "minimal-05.webp",
+      "pdfExtract": "minimalistic/minimalistic-p32-05.jpeg",
+      "highRes": null,
+      "width": 1133,
+      "height": 756
+    },
+    {
+      "published": "minimal-06.webp",
+      "pdfExtract": "minimalistic/minimalistic-p32-06.jpeg",
+      "highRes": "Minimalistic/CLX_2605.JPG.jpeg",
+      "width": 1600,
+      "height": 2397
+    },
+    {
+      "published": "minimal-07.webp",
+      "pdfExtract": "minimalistic/minimalistic-p33-07.jpeg",
+      "highRes": null,
+      "width": 784,
+      "height": 1175
+    },
+    {
+      "published": "minimal-08.webp",
+      "pdfExtract": "minimalistic/minimalistic-p33-08.jpeg",
+      "highRes": "Minimalistic/CLX_2598.JPG.jpeg",
+      "width": 1600,
+      "height": 1068
+    }
+  ],
+  "rustic": [
+    {
+      "published": "rustic-01.webp",
+      "pdfExtract": "rustic/rustic-p35-03.jpeg",
+      "highRes": null,
+      "width": 1128,
+      "height": 753
+    },
+    {
+      "published": "rustic-02.webp",
+      "pdfExtract": "rustic/rustic-p34-01.jpeg",
+      "highRes": null,
+      "width": 1130,
+      "height": 754
+    },
+    {
+      "published": "rustic-03.webp",
+      "pdfExtract": "rustic/rustic-p36-05.jpeg",
+      "highRes": null,
+      "width": 1143,
+      "height": 763
+    },
+    {
+      "published": "rustic-04.webp",
+      "pdfExtract": "rustic/rustic-p35-04.jpeg",
+      "highRes": null,
+      "width": 786,
+      "height": 1177
+    },
+    {
+      "published": "rustic-05.webp",
+      "pdfExtract": "rustic/rustic-p34-02.jpeg",
+      "highRes": null,
+      "width": 785,
+      "height": 1176
+    },
+    {
+      "published": "rustic-06.webp",
+      "pdfExtract": "rustic/rustic-p36-06.jpeg",
+      "highRes": null,
+      "width": 786,
+      "height": 1179
+    }
+  ]
+}

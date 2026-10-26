@@ -54,14 +54,14 @@ export function metaFor(pathname) {
       title: `Studio — 20 Years of Interior Design | ${BASE}`,
       desc: `SI Design: two decades of residential and commercial interiors, IIID 2016 Anchor Award runner-up. Led by ${SITE.lead}.`,
       noindex: false,
-      image: "/photos/studio-01.webp",
+      image: "/photos/traditional-07.webp",
     };
   if (p === "/how-we-build")
     return {
       title: `Our Process | ${BASE}`,
       desc: "Enquiry to finalization in six steps — how Square Inch Design builds interiors.",
       noindex: false,
-      image: "/photos/process-01.webp",
+      image: "/photos/traditional-01.webp",
     };
   if (p === "/begin")
     return {

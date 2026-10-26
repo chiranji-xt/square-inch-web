@@ -220,7 +220,7 @@ function Twenty() {
           {/* main arch */}
           <div className="absolute left-0 top-0 w-[62%] md:w-[44%] h-[86%] md:h-[94%] overflow-hidden rounded-t-[999px]">
             <Cinematic className="h-full">
-              <Photo src="/photos/traditional-01.webp" label="COURTYARD HOUSE" palette={["#4A5E3A", "#D9C9A3"]} className="h-full" sizes="(max-width: 768px) 62vw, 35vw" />
+              <Photo src="/photos/traditional-01.webp" label="BLUE DOOR ENTRANCE" palette={["#4A5E3A", "#D9C9A3"]} className="h-full" sizes="(max-width: 768px) 62vw, 35vw" />
             </Cinematic>
             <div className="absolute top-6 md:top-10 right-4 md:right-6 text-right">
               <p className="text-[9px] md:text-[10px] tracking-[0.25em] leading-[1.9] text-bone drop-shadow-md">SPACES<br />PEOPLE<br />BELONG<br />TO</p>
@@ -235,13 +235,13 @@ function Twenty() {
           </div>
           {/* dark texture chip */}
           <div className="absolute left-[52%] md:left-[55%] bottom-[2%] md:bottom-[4%] w-[30%] md:w-[19%] h-[24%] md:h-[26%] overflow-hidden border-[5px] md:border-[7px] border-[#EEE7D6]">
-            <Photo src="/photos/rustic-01.webp" label="RUSTIC DOORWAY" palette={["#101418", "#2E4A6B"]} className="h-full" sizes="(max-width: 768px) 30vw, 18vw" />
+            <Photo src="/photos/rustic-01.webp" label="RUSTIC LOUNGE" palette={["#101418", "#2E4A6B"]} className="h-full" sizes="(max-width: 768px) 30vw, 18vw" />
           </div>
           {/* beige detail card */}
           <div className="hidden md:flex absolute right-0 top-[16%] w-[24%] flex-col">
             <p className="text-[10px] tracking-[0.25em] leading-[2] text-ink/55">DESIGN<br />MATERIAL<br />PEOPLE<br />PLACE</p>
             <div className="mt-6 overflow-hidden">
-              <Photo src="/photos/artdeco-01.webp" label="STUDIO DETAIL" palette={["#3A3A38", "#C9BFAE"]} className="h-[30vh]" sizes="20vw" />
+              <Photo src="/photos/artdeco-01.webp" label="OFFICE INTERIOR" palette={["#3A3A38", "#C9BFAE"]} className="h-[30vh]" sizes="20vw" />
             </div>
             <div className="mt-6 flex items-center gap-4">
               <span aria-hidden="true" className="h-px w-10 bg-ink/40" />
@@ -441,10 +441,10 @@ function ProcessTease() {
 
 function Award() {
   const slides = [
-    { src: "/photos/award-01.webp", title: "Runner Up.", meta: "01 · IIID 2016 ANCHOR AWARD · THE CERTIFICATE", sub: "Zone Z2 Regional Awards — Commercial Workspace, Small. Presented to Square Inch Design.", tag: "ACHIEVEMENT — CERTIFICATE", to: "/studio", cta: "READ THE STORY", palette: ["#111", "#E88932"] },
-    { src: "/photos/award-03.webp", title: "Honoured.", meta: "02 · NATIONAL STAGE · ANCHOR BY PANASONIC", sub: "Instituted by the Institute of Indian Interior Designers — design excellence, recognised.", tag: "ACHIEVEMENT — THE HONOUR", to: "/studio", cta: "READ THE STORY", palette: ["#111", "#C9A86A"] },
-    { src: "/photos/studio-01.webp", title: "The Space That Won.", meta: "03 · 1055 SQ FT STUDIO · SATARA", sub: "Free-flowing plan with no partitions. Timber stair to an attic library. Honest local material.", tag: "ACHIEVEMENT — THE WINNING SPACE", to: "/studio", cta: "READ THE STORY", palette: ["#3A3A38", "#C9BFAE"] },
-    { src: "/photos/award-04.webp", title: "Local Flavour.", meta: "04 · JURY NOTE · HONEST MATERIALS", sub: "“Compact and friendly planning with an honest use of natural materials. A nice local flavour.”", tag: "ACHIEVEMENT — JURY NOTE", to: "/studio", cta: "READ THE STORY", palette: ["#2B2E33", "#E8E4DA"] },
+    { src: "/photos/award-certificate.webp", contain: true, alt: "IIID Design Excellence Awards 2016 certificate, Square Inch Design, Runner Up", title: "Runner Up.", meta: "01 · IIID 2016 ANCHOR AWARD · THE CERTIFICATE", sub: "Zone Z2 Regional Awards — Commercial Workspace, Small. Presented to Square Inch Design.", tag: "ACHIEVEMENT — CERTIFICATE", to: "/studio", cta: "READ THE STORY", palette: ["#111", "#E88932"] },
+    { src: "/photos/award-feature.webp", contain: true, alt: "IIID awardees feature with the Portal trophy", title: "Honoured.", meta: "02 · IIID DESIGN EXCELLENCE · ANCHOR BY PANASONIC", sub: "Zone Z2 Regional Awards by the Institute of Indian Interior Designers, presented with Anchor by Panasonic.", tag: "ACHIEVEMENT — THE HONOUR", to: "/studio", cta: "READ THE STORY", palette: ["#111", "#C9A86A"] },
+    { src: "/photos/traditional-07.webp", alt: "Interior of the Square Inch Design studio, Satara", title: "The Space That Won.", meta: "03 · 1055 SQ FT STUDIO · SATARA", sub: "Free-flowing plan with no partitions. Timber stair to an attic library. Honest local material.", tag: "ACHIEVEMENT — THE WINNING SPACE", to: "/studio", cta: "READ THE STORY", palette: ["#3A3A38", "#C9BFAE"] },
+    { src: "/photos/award-article.webp", contain: true, alt: "Published feature on the Satara studio with the jury comment", title: "Local Flavour.", meta: "04 · JURY NOTE · HONEST MATERIALS", sub: "“Compact and friendly planning with an honest use of natural materials. A nice local flavour.”", tag: "ACHIEVEMENT — JURY NOTE", to: "/studio", cta: "READ THE STORY", palette: ["#2B2E33", "#E8E4DA"] },
   ];
   return (
     <section data-room="5" data-room-label="Recognition" className="bg-night text-bone">

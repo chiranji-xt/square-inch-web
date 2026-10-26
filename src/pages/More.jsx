@@ -50,7 +50,7 @@ export function Studio() {
       </section>
       <section className="px-5 md:px-10 pt-16 pb-24 md:pb-28 border-t border-[#1F2C46]/10">
         <p className="text-[11px] tracking-mega text-[#E76B46] mb-2">THE TEAM</p>
-        <h2 className="display text-4xl md:text-6xl leading-[0.95]">Two people,<br /><span className="italic text-[#E76B46]">one cornerstone.</span></h2>
+        <h2 className="display text-4xl md:text-6xl leading-[0.95]">The people<br /><span className="italic text-[#E76B46]">behind the work.</span></h2>
         <div className="grid sm:grid-cols-2 gap-4 mt-8 max-w-4xl">
           {TEAM.map((m, ti) => (
             <div key={m.name} className="group border border-[#1F2C46]/15 bg-white/40 p-6 transition-colors hover:border-[#E76B46]">
@@ -105,12 +105,14 @@ export function Studio() {
         </div>
       </section>
       <section className="bg-[#1F2C46] text-[#F4EDDE] px-5 md:px-10 py-20">
-        <p className="text-[#E76B46] text-xs tracking-mega">AWARD · IIID 2016 ANCHOR</p>
+        <p className="text-[#E76B46] text-xs tracking-mega">ACHIEVEMENT · IIID DESIGN EXCELLENCE AWARDS 2016</p>
         <h2 className="display text-4xl md:text-6xl mt-3 max-w-4xl leading-[1.02]">Commercial Workspace — Small. <span className="italic text-[#E76B46]">Runner Up.</span> 1055 sq ft of honest local material.</h2>
-        <div className="grid md:grid-cols-2 gap-6 mt-8">
-          <Photo src="/photos/award-01.webp" label="CERTIFICATE" palette={["#111", "#E88932"]} className="h-[40vh]" />
-          <Photo src="/photos/award-02.webp" label="PUBLISHED FEATURE" palette={["#2B2E33", "#E8E4DA"]} className="h-[40vh]" />
+        <div className="flex flex-wrap items-start gap-6 md:gap-8 mt-10">
+          <Photo src="/photos/award-certificate.webp" label="IIID Design Excellence 2016, Zone Z2 Regional Awards — certificate for Square Inch Design, Commercial Workspace Small, Runner Up" palette={["#111", "#E88932"]} className="w-[72vw] max-w-[300px] aspect-[570/567] border border-[#F4EDDE]/20 shadow-xl" imgClass="!object-contain" />
+          <Photo src="/photos/award-article.webp" label="Published feature on the Square Inch Design studio in Satara, marked Z2 Runner-up, Commercial Workspace Small" palette={["#2B2E33", "#E8E4DA"]} className="w-[72vw] max-w-[300px] aspect-[745/1089] border border-[#F4EDDE]/20 shadow-xl" imgClass="!object-contain" />
+          <Photo src="/photos/award-feature.webp" label="IIID awardees feature with the 'The Portal' trophy" palette={["#2B2E33", "#E8E4DA"]} className="w-[72vw] max-w-[300px] aspect-[859/1246] border border-[#F4EDDE]/20 shadow-xl" imgClass="!object-contain" />
         </div>
+        <p className="mt-6 max-w-2xl text-sm text-[#F4EDDE]/70">Zone Z2 Regional Awards, presented with Anchor by Panasonic by the Institute of Indian Interior Designers. Jury comment: “Compact and friendly planning with an honest use of natural materials. It has a nice local flavour.”</p>
         <Link to="/begin" className="inline-block mt-8 bg-[#E76B46] text-[#1F2C46] px-7 py-3 text-sm tracking-widest hover:bg-[#F4EDDE] transition-colors">WORK WITH THE STUDIO →</Link>
       </section>
       <Footer />
@@ -133,13 +135,12 @@ export function HowWeBuild() {
           <motion.div style={{ scaleY: scrollYProgress }} className="absolute left-3 top-0 bottom-0 w-px bg-[#E76B46] origin-top" aria-hidden="true" />
           {PROCESS.map((p, i) => (
             <RevealMask key={p.n} from={i % 2 ? "right" : "left"}>
-              <div className="py-10 border-b border-ink/10 grid md:grid-cols-2 gap-4 items-center">
+              <div className="py-8 md:py-10 border-b border-ink/10 grid md:grid-cols-[8rem_1fr] gap-x-6 items-baseline">
+                <p className="display text-6xl md:text-7xl text-[#E76B46]/80 leading-none">{p.n}</p>
                 <div>
-                  <p className="display text-7xl md:text-8xl text-[#1F2C46]/10">{p.n}</p>
-                  <h2 className="display text-4xl md:text-5xl -mt-6">{p.t}</h2>
-                  <p className="text-[#1F2C46]/65 mt-2 max-w-sm">{p.d}</p>
+                  <h2 className="display text-3xl md:text-5xl leading-tight">{p.t}</h2>
+                  <p className="text-[#1F2C46]/65 mt-2 max-w-md">{p.d}</p>
                 </div>
-                <Photo src={`/photos/process-0${i + 1}.webp`} label={p.t.toUpperCase()} palette={["#222", "#E88932"]} className="h-[30vh]" />
               </div>
             </RevealMask>
           ))}

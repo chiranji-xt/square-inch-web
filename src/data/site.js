@@ -7,7 +7,7 @@ export const SITE = {
   email: "squareinchedesign@yahoo.com",
   pune: "Plot No 11, Prabha Co-operative Housing Society, Mayur Colony, Paud Road, Pune 411038.",
   satara: "'Parijat', 509 A Camp, Satara.",
-  lead: "Siddhart Kolhapure",
+  lead: "Siddharth Kolhapure",
   // WhatsApp number in full international format WITHOUT "+" (e.g. "919823333400").
   // Set this only after the studio confirms which number takes WhatsApp.
   // Leave null and every WhatsApp option in the UI stays hidden.
@@ -33,13 +33,13 @@ export const NAV = [
   { label: "Home", to: "/", photo: "/photos/luxury-01.webp", preview: "Luxury" },
   { label: "Worlds", to: "/worlds", photo: "/photos/abstract-01.webp", preview: "Abstract" },
   { label: "Projects", to: "/projects", photo: "/photos/fusion-01.webp", preview: "Fusion" },
-  { label: "Studio", to: "/studio", photo: "/photos/studio-01.webp", preview: "Studio" },
-  { label: "Process", to: "/how-we-build", photo: "/photos/process-01.webp", preview: "Process" },
+  { label: "Studio", to: "/studio", photo: "/photos/traditional-07.webp", preview: "Studio" },
+  { label: "Process", to: "/how-we-build", photo: "/photos/traditional-01.webp", preview: "Process" },
   { label: "Start a Project", to: "/begin", photo: "/photos/traditional-02.webp", preview: "Begin" },
 ];
 
 export const TEAM = [
-  { name: "Siddhart Kolhapure", role: "Principal Designer & Co-Founder" },
+  { name: "Siddharth Kolhapure", role: "Principal Designer & Co-Founder" },
   { name: "Prachee Kolhapure", role: "Interior Consultant" },
 ];
 
@@ -97,7 +97,7 @@ export const STORIES = [
     title: "Stone, Colour & Gilded Light",
     meta: "Luxury · Residential · 4255 sqft",
     desc: "Residence of 4255 sqft — an interesting interplay of stone textures & colours in combination with gilded fixtures creates a sense of luxury & refinement without seeming to be overdone.",
-    images: ["/photos/luxury-01.webp", "/photos/luxury-02.webp", "/photos/luxury-03.webp", "/photos/luxury-04.webp", "/photos/luxury-05.webp"],
+    images: ["/photos/luxury-01.webp", "/photos/luxury-02.webp", "/photos/luxury-03.webp", "/photos/luxury-04.webp", "/photos/luxury-05.webp", "/photos/luxury-06.webp", "/photos/luxury-07.webp", "/photos/luxury-08.webp", "/photos/luxury-09.webp", "/photos/luxury-10.webp", "/photos/luxury-11.webp", "/photos/luxury-12.webp"],
     palette: ["#0E1E3A", "#C9A86A"],
   },
   {
@@ -113,7 +113,7 @@ export const STORIES = [
     title: "A 1000 sqft Coffee Journey",
     meta: "Abstract · Commercial · 1000 sqft",
     desc: "A 1000 sqft coffee house that redefines the out-of-home coffee experience — plush seating, warm ambient lighting, artisanal brewing stations and curated lounge spaces.",
-    images: ["/photos/abstract-01.webp", "/photos/abstract-02.webp", "/photos/abstract-03.webp", "/photos/abstract-04.webp"],
+    images: ["/photos/abstract-01.webp", "/photos/abstract-02.webp", "/photos/abstract-03.webp", "/photos/abstract-04.webp", "/photos/abstract-05.webp", "/photos/abstract-06.webp"],
     palette: ["#D8A24A", "#111111"],
   },
   {
@@ -161,7 +161,7 @@ export const STORIES = [
     title: "Courtyard, Blue Door, Light",
     meta: "Traditional · Courtyard House",
     desc: "Verandahs, gabion walls, timber posts and a blue door — a house that breathes with its courtyard.",
-    images: ["/photos/traditional-01.webp", "/photos/traditional-02.webp", "/photos/traditional-03.webp"],
+    images: ["/photos/traditional-01.webp", "/photos/traditional-02.webp", "/photos/traditional-03.webp", "/photos/traditional-04.webp", "/photos/traditional-05.webp", "/photos/traditional-06.webp", "/photos/traditional-07.webp", "/photos/traditional-08.webp", "/photos/traditional-09.webp", "/photos/traditional-10.webp", "/photos/traditional-11.webp", "/photos/traditional-12.webp", "/photos/traditional-13.webp", "/photos/traditional-14.webp", "/photos/traditional-15.webp", "/photos/traditional-16.webp", "/photos/traditional-17.webp", "/photos/traditional-18.webp"],
     palette: ["#4A5E3A", "#D9C9A3"],
   },
   {
@@ -177,7 +177,7 @@ export const STORIES = [
     title: "Honest Minimalism",
     meta: "Minimalistic · Residential",
     desc: "An example of interiors done with honest design. A sense of unstructured, unexpected artistic concepts — and that is what makes it all more soothing.",
-    images: ["/photos/minimal-01.webp", "/photos/minimal-02.webp", "/photos/minimal-03.webp", "/photos/minimal-04.webp", "/photos/minimal-05.webp"],
+    images: ["/photos/minimal-01.webp", "/photos/minimal-02.webp", "/photos/minimal-03.webp", "/photos/minimal-04.webp", "/photos/minimal-05.webp", "/photos/minimal-06.webp", "/photos/minimal-07.webp", "/photos/minimal-08.webp"],
     palette: ["#EDE9E0", "#8A867F"],
   },
   {
@@ -193,7 +193,7 @@ export const STORIES = [
     title: "Rustic Indigo Night",
     meta: "Rustic · Lounge",
     desc: "Dark stone, timber pole, indigo seating — low light and raw texture.",
-    images: ["/photos/rustic-01.webp", "/photos/rustic-02.webp", "/photos/rustic-03.webp"],
+    images: ["/photos/rustic-01.webp", "/photos/rustic-02.webp", "/photos/rustic-03.webp", "/photos/rustic-04.webp", "/photos/rustic-05.webp", "/photos/rustic-06.webp"],
     palette: ["#101418", "#2E4A6B"],
   },
   {
@@ -204,12 +204,12 @@ export const STORIES = [
     type: "Studio",
     area: "1055 sqft",
     city: "Satara",
-    award: "IIID 2016 Anchor Award — Runner Up",
+    award: "IIID Design Excellence Awards 2016 · Zone Z2 Regional · Runner Up",
     no: "08",
     title: "The Awarded Studio — 1055 sqft",
     meta: "Art-Deco · Studio · 1055 sqft · IIID 2016 Runner-Up",
     desc: "Built-up studio space of 1055 sq ft in Satara — free-flowing spaces, timber stair to attic library, forgotten heritage in contemporary minimal language. Jury: compact, honest, local flavour.",
-    images: ["/photos/artdeco-01.webp", "/photos/artdeco-02.webp", "/photos/artdeco-03.webp", "/photos/artdeco-04.webp"],
+    images: ["/photos/artdeco-01.webp", "/photos/artdeco-02.webp", "/photos/artdeco-03.webp", "/photos/artdeco-04.webp", "/photos/artdeco-05.webp", "/photos/artdeco-06.webp", "/photos/artdeco-07.webp", "/photos/artdeco-08.webp", "/photos/artdeco-09.webp", "/photos/artdeco-10.webp", "/photos/artdeco-11.webp", "/photos/artdeco-12.webp"],
     palette: ["#3A3A38", "#C9BFAE"],
   },
 ];

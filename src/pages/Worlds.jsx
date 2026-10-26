@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Photo from "../components/Photo.jsx";
 import Footer from "../components/Footer.jsx";
@@ -201,7 +202,7 @@ function WorldGallery({ gallery, onAt }) {
           <li key={g.src}>
             <RevealMask from="bottom">
               <button onClick={(e) => onAt(e, k)} aria-label={`Open photograph ${k + 1} of ${gallery.length}`} className="block w-full text-left">
-                <Photo src={g.src} label={`${g.title} — photograph ${k + 1}`} className="aspect-[4/3] w-full" sizes="(max-width: 768px) 50vw, 33vw" />
+                <Photo src={g.src} label={`${g.title} — photograph ${k + 1}`} className="aspect-[4/3] w-full bg-black/15" imgClass="!object-contain" sizes="(max-width: 768px) 50vw, 33vw" />
               </button>
             </RevealMask>
           </li>
@@ -212,32 +213,54 @@ function WorldGallery({ gallery, onAt }) {
 }
 
 export function Worlds() {
+  const rows = WORLDS.map((w, i) => {
+    const stories = STORIES.filter((s) => s.world === w.slug);
+    const photos = stories.reduce((n, s) => n + s.images.length, 0);
+    return { w, i, photos, t: WORLD_THEMES[w.slug] ?? WORLD_THEMES.contemporary };
+  });
   return (
     <main className="bg-[#F4EDDE] text-[#1F2C46] pt-28 md:pt-32" id="main" tabIndex={-1}>
-      <div className="px-5 md:px-10 py-10">
+      <div className="px-5 md:px-10 pt-6 md:pt-8 pb-8 md:pb-10">
         <p className="text-xs tracking-mega text-[#E76B46]">EIGHT WORLDS · CHOOSE ONE TO ENTER</p>
-        <h1 className="display text-6xl md:text-9xl leading-[0.9]">Eight<br /><span className="italic text-[#E76B46]">worlds.</span></h1>
+        <h1 className="display text-6xl md:text-8xl leading-[0.95] mt-2">Eight <span className="italic text-[#E76B46]">worlds.</span></h1>
       </div>
-      {WORLDS.map((w, i) => {
-        const stories = STORIES.filter((s) => s.world === w.slug);
-        return (
-          <Link key={w.slug} to={`/world/${w.slug}`} className="block border-t border-line/10 group">
-            <div className="grid md:grid-cols-12 gap-0 items-stretch">
-              <div className="md:col-span-7">
-                <RevealMask from={i % 2 ? "right" : "left"}>
-                  <Photo src={w.photo} label={w.name.toUpperCase()} palette={w.fallback} className={`h-[42vh] md:h-[62vh] ${i % 3 === 1 ? "md:ml-16" : ""} ${i % 3 === 2 ? "md:mr-16" : ""}`} />
-                </RevealMask>
-              </div>
-              <div className="md:col-span-5 p-6 md:p-12 flex flex-col justify-center">
-                <p className="display text-8xl text-[#1F2C46]/10 leading-none">0{i + 1}</p>
-                <h2 className="display text-5xl md:text-7xl -mt-6 group-hover:text-[#E76B46] transition-colors">{w.name}</h2>
-                <p className="text-[#1F2C46]/65 mt-2 text-sm tracking-widest">{w.note.toUpperCase()}</p>
-                <p className="mt-4 text-sm">{stories.length ? `${stories.length} stor${stories.length > 1 ? "ies" : "y"} inside` : "Portfolio plates inside"} →</p>
-              </div>
-            </div>
-          </Link>
-        );
-      })}
+
+      <ul className="border-b border-[#1F2C46]/15">
+        {rows.map(({ w, i, photos, t }) => (
+          <li key={w.slug} className="border-t border-[#1F2C46]/15">
+            <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
+              <Link
+                to={`/world/${w.slug}`}
+                aria-label={`${w.name} — ${w.note}`}
+                style={{ "--w-bg": t.bg, "--w-ink": t.ink, "--w-accent": t.accent }}
+                className="group relative grid grid-cols-[auto_1fr_auto] md:grid-cols-12 items-center gap-x-4 md:gap-x-6 gap-y-2 px-5 md:px-10 py-5 md:py-7 transition-colors duration-300 hover:bg-[var(--w-bg)] hover:text-[var(--w-ink)] focus-visible:bg-[var(--w-bg)] focus-visible:text-[var(--w-ink)]"
+              >
+                <span aria-hidden="true" className="absolute left-0 top-0 h-full w-1.5 bg-[var(--w-accent)] scale-y-0 origin-top transition-transform duration-300 group-hover:scale-y-100 group-focus-visible:scale-y-100" />
+                <span className="md:col-span-1 text-xs tracking-mega text-[#E76B46] transition-colors group-hover:text-[var(--w-accent)]">{String(i + 1).padStart(2, "0")}</span>
+                <span className="md:col-span-7 display text-4xl min-[420px]:text-5xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl leading-none transition-transform duration-300 group-hover:translate-x-3">{w.name}</span>
+                <span aria-hidden="true" className="md:col-span-1 md:order-last md:justify-self-end inline-flex h-11 w-11 md:h-14 md:w-14 items-center justify-center rounded-full border border-current/40 text-lg transition-all duration-300 group-hover:bg-[var(--w-accent)] group-hover:border-[var(--w-accent)] group-hover:text-[var(--w-bg)] group-hover:-rotate-45">→</span>
+                <span className="col-start-2 col-span-2 md:col-start-auto md:col-span-3 flex flex-col gap-3">
+                  <span className="text-xs md:text-sm tracking-widest opacity-70">{w.note.toUpperCase()}</span>
+                  <span className="flex items-center gap-3">
+                    {w.fallback.map((col) => (
+                      <span key={col} aria-hidden="true" className="h-3.5 w-3.5 rounded-full border border-black/20" style={{ background: col }} />
+                    ))}
+                    <span className="text-[11px] tracking-mega opacity-60">{photos} PHOTOGRAPHS</span>
+                  </span>
+                </span>
+              </Link>
+            </motion.div>
+          </li>
+        ))}
+      </ul>
+
+      <section className="px-5 md:px-10 py-12 md:py-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <h2 className="display text-4xl md:text-6xl leading-[0.95]">Found your<br /><span className="italic text-[#E76B46]">world?</span></h2>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Link to="/projects" className="inline-flex items-center justify-center border border-[#1F2C46]/40 px-7 py-3.5 min-h-[52px] text-xs tracking-mega transition-colors hover:border-[#E76B46] hover:text-[#E76B46]">SEE ALL PROJECTS</Link>
+          <Link to="/begin" className="inline-flex items-center justify-center bg-[#E76B46] text-bone px-7 py-3.5 min-h-[52px] text-xs tracking-mega transition-colors hover:bg-[#1F2C46]">START A PROJECT →</Link>
+        </div>
+      </section>
       <Footer />
     </main>
   );

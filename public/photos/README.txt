@@ -1,3 +1,12 @@
-Drop real Square Inch portfolio WebP files here with exact names:
-photos list: abstract-01/02/03, artdeco-01/02, contemporary-01/02, fusion-01/02/03, traditional-01/02/03, luxury-01/02/03/04, minimal-01/02, rustic-01/02, studio-01/02/03, award-01/02, process-01..06
-No stock images. Recommended: 1600px wide, WebP quality 78, lazy-loaded by default.
+Published portfolio photos (WebP). Generated - do not edit by hand.
+
+Source of truth:
+  portfolio-assets/                images extracted from the client's portfolio PDF + inventory.csv, mapping.json
+  src/8 world/                     higher-resolution originals supplied by the client
+
+Rebuild:
+  python scripts/extract-pdf-images.py "<portfolio.pdf>" portfolio-assets
+  node scripts/build-site-images.mjs
+  node scripts/make-responsive-images.mjs
+
+Naming: <world>-NN.webp (NN = order on the page, 01 = cover); award-*.webp = achievement section.

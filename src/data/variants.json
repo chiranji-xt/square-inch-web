@@ -15,6 +15,14 @@
     800,
     1200
   ],
+  "/photos/abstract-05.webp": [
+    800,
+    1200
+  ],
+  "/photos/abstract-06.webp": [
+    800,
+    1200
+  ],
   "/photos/artdeco-01.webp": [
     800,
     1200
@@ -31,19 +39,47 @@
     800,
     1200
   ],
-  "/photos/award-01.webp": [
+  "/photos/artdeco-05.webp": [
     800,
     1200
   ],
-  "/photos/award-02.webp": [
+  "/photos/artdeco-06.webp": [
     800,
     1200
   ],
-  "/photos/award-03.webp": [
+  "/photos/artdeco-07.webp": [
     800,
     1200
   ],
-  "/photos/award-04.webp": [
+  "/photos/artdeco-08.webp": [
+    800,
+    1200
+  ],
+  "/photos/artdeco-09.webp": [
+    800,
+    1200
+  ],
+  "/photos/artdeco-10.webp": [
+    800,
+    1200
+  ],
+  "/photos/artdeco-11.webp": [
+    800,
+    1200
+  ],
+  "/photos/artdeco-12.webp": [
+    800,
+    1200
+  ],
+  "/photos/award-article.webp": [
+    800,
+    1200
+  ],
+  "/photos/award-certificate.webp": [
+    800,
+    1200
+  ],
+  "/photos/award-feature.webp": [
     800,
     1200
   ],
@@ -99,6 +135,34 @@
     800,
     1200
   ],
+  "/photos/luxury-06.webp": [
+    800,
+    1200
+  ],
+  "/photos/luxury-07.webp": [
+    800,
+    1200
+  ],
+  "/photos/luxury-08.webp": [
+    800,
+    1200
+  ],
+  "/photos/luxury-09.webp": [
+    800,
+    1200
+  ],
+  "/photos/luxury-10.webp": [
+    800,
+    1200
+  ],
+  "/photos/luxury-11.webp": [
+    800,
+    1200
+  ],
+  "/photos/luxury-12.webp": [
+    800,
+    1200
+  ],
   "/photos/minimal-01.webp": [
     800,
     1200
@@ -119,27 +183,15 @@
     800,
     1200
   ],
-  "/photos/process-01.webp": [
+  "/photos/minimal-06.webp": [
     800,
     1200
   ],
-  "/photos/process-02.webp": [
+  "/photos/minimal-07.webp": [
     800,
     1200
   ],
-  "/photos/process-03.webp": [
-    800,
-    1200
-  ],
-  "/photos/process-04.webp": [
-    800,
-    1200
-  ],
-  "/photos/process-05.webp": [
-    800,
-    1200
-  ],
-  "/photos/process-06.webp": [
+  "/photos/minimal-08.webp": [
     800,
     1200
   ],
@@ -155,15 +207,15 @@
     800,
     1200
   ],
-  "/photos/studio-01.webp": [
+  "/photos/rustic-04.webp": [
     800,
     1200
   ],
-  "/photos/studio-02.webp": [
+  "/photos/rustic-05.webp": [
     800,
     1200
   ],
-  "/photos/studio-03.webp": [
+  "/photos/rustic-06.webp": [
     800,
     1200
   ],
@@ -176,6 +228,66 @@
     1200
   ],
   "/photos/traditional-03.webp": [
+    800,
+    1200
+  ],
+  "/photos/traditional-04.webp": [
+    800,
+    1200
+  ],
+  "/photos/traditional-05.webp": [
+    800,
+    1200
+  ],
+  "/photos/traditional-06.webp": [
+    800,
+    1200
+  ],
+  "/photos/traditional-07.webp": [
+    800,
+    1200
+  ],
+  "/photos/traditional-08.webp": [
+    800,
+    1200
+  ],
+  "/photos/traditional-09.webp": [
+    800,
+    1200
+  ],
+  "/photos/traditional-10.webp": [
+    800,
+    1200
+  ],
+  "/photos/traditional-11.webp": [
+    800,
+    1200
+  ],
+  "/photos/traditional-12.webp": [
+    800,
+    1200
+  ],
+  "/photos/traditional-13.webp": [
+    800,
+    1200
+  ],
+  "/photos/traditional-14.webp": [
+    800,
+    1200
+  ],
+  "/photos/traditional-15.webp": [
+    800,
+    1200
+  ],
+  "/photos/traditional-16.webp": [
+    800,
+    1200
+  ],
+  "/photos/traditional-17.webp": [
+    800,
+    1200
+  ],
+  "/photos/traditional-18.webp": [
     800,
     1200
   ]
