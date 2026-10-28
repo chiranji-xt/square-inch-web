@@ -164,7 +164,7 @@ export function HowWeBuild() {
 const TYPES = ["Residential", "Commercial", "Hospitality", "Other"];
 const BUDGETS = ["Under ₹5L", "₹5–15L", "₹15–35L", "₹35L+", "Prefer to discuss"];
 
-const emptyForm = { name: "", phone: "", email: "", type: "", location: "", area: "", budget: "", stage: "", message: "" };
+const emptyForm = { name: "", phone: "", email: "", type: "", location: "", area: "", budget: "", stage: "", message: "", mapLink: "" };
 
 function CopyEnquiry({ values }) {
   const [copied, setCopied] = useState(false);
@@ -194,7 +194,7 @@ function EnquiryForm({ initialMessage = "", source = "" }) {
   const [v, setV] = useState({ ...emptyForm, message: initialMessage });
   const [company, setCompany] = useState(""); // honeypot — humans never fill this
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | handoff | error
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | handoff | whatsapp | error
   const [errorMsg, setErrorMsg] = useState("");
   const sending = useRef(false);
   const resultRef = useRef(null);

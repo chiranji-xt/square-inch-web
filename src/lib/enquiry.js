@@ -1,10 +1,13 @@
-import { mailHref } from "./contact.js";
+import { mailHref, whatsappHref } from "./contact.js";
+import { SITE } from "../data/site.js";
 
 // Backend-ready enquiry submission.
 // - If VITE_ENQUIRY_ENDPOINT is set (a Formspree / Getform / custom endpoint
 //   whose ID is public by design), the enquiry POSTs there as JSON.
-// - Otherwise the visitor's email app opens with everything pre-filled and
-//   the UI reports a HANDOFF, never a "received" success.
+// - Otherwise the enquiry is sent to the studio's WhatsApp number as a
+//   pre-filled message (if configured), or the visitor's email app opens with
+//   everything pre-filled and the UI reports a HANDOFF, never a "received"
+//   success.
 // To connect a provider later: set VITE_ENQUIRY_ENDPOINT in .env (see
 // .env.example). NEVER put secrets in VITE_* vars — they ship in the bundle.
 
@@ -50,6 +53,8 @@ export function enquirySummary(v) {
     v.stage ? `Property stage: ${v.stage}` : null,
     v.source ? `Interested in: ${v.source}` : null,
     v.message ? `Requirements: ${v.message}` : null,
+    v.attachmentCount > 0 ? `📎 ${v.attachmentCount} image(s)/reference(s) to share` : null,
+    v.mapLink ? `📍 Map: ${v.mapLink}` : null,
   ]
     .filter(Boolean)
     .join("\n");
@@ -67,6 +72,8 @@ export async function submitEnquiry(values) {
     stage: values.stage || "",
     message: (values.message || "").trim(),
     source: values.source || "",
+    attachmentCount: values.attachmentCount || 0,
+    mapLink: (values.mapLink || "").trim(),
     page: window.location.href,
   };
 
@@ -90,7 +97,16 @@ export async function submitEnquiry(values) {
     }
   }
 
-  // No backend: hand the composed enquiry to the studio's inbox via the
+  // Primary: send enquiry via WhatsApp to the studio number (9921895264).
+  const summary = enquirySummary(payload);
+  const waText = `🏠 *New Project Enquiry*\n\n${summary}`;
+  const waUrl = whatsappHref(waText);
+  if (waUrl) {
+    window.open(waUrl, "_blank", "noopener,noreferrer");
+    return { channel: "whatsapp", payload };
+  }
+
+  // Fallback: hand the composed enquiry to the studio's inbox via the
   // visitor's own email app. Caller must show the HANDOFF state, not success.
   window.location.href = mailHref(
     `Project enquiry — ${payload.name} (${payload.type}, ${payload.location})`,

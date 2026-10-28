@@ -11,7 +11,7 @@ export const SITE = {
   // WhatsApp number in full international format WITHOUT "+" (e.g. "919823333400").
   // Set this only after the studio confirms which number takes WhatsApp.
   // Leave null and every WhatsApp option in the UI stays hidden.
-  whatsapp: null,
+  whatsapp: "919921895264",
   // Shown under the enquiry submit button. Plain wording only.
   privacyNote: "We use these details only to respond to your enquiry.",
   // Optional single sentence shown after a successful endpoint submission
