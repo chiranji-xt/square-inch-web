@@ -1,6 +1,6 @@
 # Square Inch Design — EVERY INCH SPEAKS
 
-Image-first exhibition site for the interior design studio (Pune & Satara).
+Image-first exhibition site for the interior design studio (Pune & Satara)...
 
 ## Run
 
