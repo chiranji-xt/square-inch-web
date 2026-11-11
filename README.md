@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/readme-banner.svg" alt="Square-Inch-Web" width="100%"/>
+</p>
+
 # Square Inch Design — EVERY INCH SPEAKS
 
 Image-first exhibition site for the interior design studio (Pune & Satara)...
